@@ -60,7 +60,7 @@ export default function NavigationCollapseTypeButton(
             <Icon
               color="action"
               sx={{
-                fontSize: "16px !important",
+                fontSize: "18px !important",
                 marginTop: "-3px",
               }}
             >

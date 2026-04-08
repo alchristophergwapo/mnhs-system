@@ -5,6 +5,10 @@ export type NavigationItemType = {
   type: string;
   children: Array<NavigationItemType>;
   icon: string;
+  url?: string;
+  disabled?: boolean;
+  end?: boolean;
+  exact?: boolean;
 };
 
 export type FlatNavigationItemType = Omit<
