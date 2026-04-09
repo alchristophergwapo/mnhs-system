@@ -1,5 +1,6 @@
 "use client";
 
+import GlobalStyles from "@mui/material/GlobalStyles";
 import MuiTable, { TableProps } from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
@@ -20,6 +21,17 @@ type TableComponentProps = TableProps & {
   onTableRowClick?: (obj: object) => void | undefined;
   otherProps?: any;
 };
+
+const tableGlobalStyles = (
+  <GlobalStyles
+    styles={() => ({
+      "&.MuiTableCell-root": {
+        borderBottom: "none!important",
+        padding: "10px 16px!important",
+      },
+    })}
+  />
+);
 
 export default function Table(props: TableComponentProps) {
   const {
@@ -42,12 +54,13 @@ export default function Table(props: TableComponentProps) {
   if (childrenArray?.length) {
     for (let index = 0; index < childrenArray.length; index++) {
       const childElement: any = childrenArray[index];
+
       const clonedHeaderElement = cloneElement(childElement, {
         key: `table-header-${index}`,
         index,
         _isheader: true,
       });
-      console.log(clonedHeaderElement.props);
+
       tableHeaders.push(clonedHeaderElement);
     }
   }
@@ -64,7 +77,7 @@ export default function Table(props: TableComponentProps) {
           index,
           _rowdata: rowElement,
         });
-        console.log(clonedTableRow.props);
+
         tableColumns.push(clonedTableRow);
       }
 
@@ -98,6 +111,7 @@ export default function Table(props: TableComponentProps) {
 
   return (
     <TableContainer>
+      {tableGlobalStyles}
       <MuiTable className="w-full" stickyHeader {...otherProps}>
         <TableHead>
           <TableRow>{tableHeaders}</TableRow>
