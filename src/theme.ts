@@ -4,9 +4,9 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   cssVariables: true,
   palette: {
-    mode: 'dark', // Tells MUI to use white text by default
+    mode: "dark", // Tells MUI to use white text by default
     primary: {
-      main: "#006666", 
+      main: "#006666",
       light: "#338484",
       dark: "#004747",
       contrastText: "#ffffff",
@@ -14,7 +14,7 @@ const theme = createTheme({
     background: {
       // The main "canvas" of your app
       default: "#006666",
-      paper: "#fff"
+      paper: "#fff",
     },
     text: {
       primary: "#000000",
@@ -32,23 +32,31 @@ const theme = createTheme({
   },
   components: {
     MuiButton: {
-      styleOverrides: {
-        containedPrimary: {
-          // Since background is #006666, we add a subtle border 
-          // to buttons so they don't blend into the background
-          backgroundColor: "#006666",
-          border: "1px solid rgba(255, 255, 255, 0.3)",
-          "&:hover": {
-            backgroundColor: "#008080", // Lightens on hover for feedback
-            borderColor: "#ffffff",
-          },
-        },
-      },
+      styleOverrides: {},
     },
     MuiAppBar: {
       styleOverrides: {
         colorDefault: "#004d4d",
         colorTransparent: "#ffffff",
+      },
+    },
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          border: "1px solid gray",
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          border: "1px solid rgba(0, 0, 0, 0.15)",
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: { color: "black" },
       },
     },
   },
