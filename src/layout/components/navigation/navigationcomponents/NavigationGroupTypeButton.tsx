@@ -9,6 +9,7 @@ type ListItemButtonComponentProps = ListItemButtonProps & {
   _itempadding: number;
 };
 
+// A styled root component. We use styled from @mui/material/styles and pass ListItem as the base component 
 const RootComponent = styled(ListItem)<ListItemButtonComponentProps>(
   ({ theme, ...props }) => ({
     width: "100%",
@@ -21,11 +22,19 @@ const RootComponent = styled(ListItem)<ListItemButtonComponentProps>(
   }),
 );
 
+/**
+ * A component that renders a navigation group type button.
+ * It takes a navigation item as a prop and renders it as a button.
+ * If the item has children, it renders them as a list.
+ * The onItemClick function is called when an item is clicked, and it logs the item to the console.
+ * @param {NavigationItemProps} props - The props for the component.
+ * @returns {JSX.Element} - The JSX element for the component.
+ */
 export default function NavigationGroupTypeButton(props: NavigationItemProps) {
   const { item, nestedLevel = 0, onItemClick } = props;
   const itempadding = nestedLevel > 0 ? 38 + nestedLevel * 16 : 16;
-  console.log(nestedLevel);
 
+  // Memoize the navigation items
   const memoizedContent = useMemo(() => {
     let items = null;
     if (item.children) {
@@ -39,6 +48,7 @@ export default function NavigationGroupTypeButton(props: NavigationItemProps) {
         />
       ));
     }
+
     return (
       <>
         <RootComponent

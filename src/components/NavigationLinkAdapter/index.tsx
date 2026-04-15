@@ -14,6 +14,18 @@ type NavigationLinkAdapterProps = {
   activeClassName?: string;
 };
 
+/**
+ * A component that wraps the Link component from @mui/material.
+ * It takes the children, role, to, href, className, exact, and activeClassName props, and passes them to the Link component.
+ * It also passes any other props to the Link component.
+ * If the exact prop is true, it will check if the current pathname matches the targetUrl.
+ * Otherwise, it will check if the current pathname starts with the targetUrl.
+ * If the pathname matches or starts with the targetUrl, it will add the activeClassName class to the Link component.
+ * @example
+ * <NavigationLinkAdapter to="/admin" exact activeClassName="active">
+ *   Admin
+ * </NavigationLinkAdapter>
+ */
 export default function NavigationLinkAdapter(
   props: NavigationLinkAdapterProps,
 ) {
@@ -34,32 +46,26 @@ export default function NavigationLinkAdapter(
     ? pathname === targetUrl
     : pathname.startsWith(targetUrl);
 
+  /**
+   * Handles the click event on the navigation link.
+   * Prevents the default link behavior and navigates to the targetUrl instead.
+   */
   function handleClick(e: MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
     navigate(targetUrl);
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      navigate(targetUrl);
-    }
-  };
-
   return (
-    <Link legacyBehavior>
-      <a
-        role={role}
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
-        className={clsx(
-          className,
-          isActive ? activeClassName : "",
-          pathname === targetUrl && "pointer-events-none",
-        )}
-      >
-        {children}
-      </a>
+    <Link
+      role={role}
+      onClick={handleClick}
+      className={clsx(
+        className,
+        isActive ? activeClassName : "",
+        pathname === targetUrl && "pointer-events-none",
+      )}
+    >
+      {children}
     </Link>
   );
 }

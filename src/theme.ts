@@ -1,6 +1,12 @@
 "use client";
+
 import { createTheme } from "@mui/material/styles";
 
+/**
+ * A custom theme for this app
+ * You can also override default components from MUI
+ * @see https://mui.com/customization/default-theme/
+ */
 const theme = createTheme({
   cssVariables: true,
   palette: {
@@ -49,14 +55,29 @@ const theme = createTheme({
     },
     MuiOutlinedInput: {
       styleOverrides: {
-        root: {
+        notchedOutline: {
           border: "1px solid rgba(0, 0, 0, 0.15)",
         },
       },
     },
     MuiSvgIcon: {
       styleOverrides: {
-        root: { color: "black" },
+        root: { color: "black!important" },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: "rgba(0, 0, 0, 0.7)",
+          padding: "0 4px",
+        },
+      },
+    },
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          color: "rgba(0, 0, 0, 0.7)",
+        },
       },
     },
   },

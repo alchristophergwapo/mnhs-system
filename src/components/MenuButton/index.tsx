@@ -11,6 +11,17 @@ type MenuButtonProps = {
   className?: string;
 };
 
+/**
+ * A component that renders a MenuItem with a label and an optional icon.
+ * The icon can be positioned on the left or right side of the label.
+ * The component also accepts a className prop to style the MenuItem.
+ * @param {MenuButtonProps} props - The props for the component.
+ * @returns {JSX.Element} - The JSX element for the component.
+ * @example
+ * <MenuButton label="Home" iconPosition="left">
+ *   <HomeIcon />
+ * </MenuButton>
+ */
 export default function MenuButton(props: MenuButtonProps) {
   const { children, label, iconPosition = "left", className= "" } = props;
 

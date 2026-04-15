@@ -6,12 +6,13 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import NavigationItem, { NavigationItemProps } from "../NavigationItem";
 import { useMemo, useState } from "react";
-import Icon from "@/src/components/Icon";
+import Icon from "@mui/material/Icon";
 
 type ListComponentProps = ListProps & {
   _itempadding: number;
 };
 
+// A styled root component. We use styled from @mui/material/styles and pass List as the base component
 const RootComponent = styled(List)<ListComponentProps>(
   ({ theme, ...props }) => ({
     padding: 0,
@@ -23,6 +24,36 @@ const RootComponent = styled(List)<ListComponentProps>(
   }),
 );
 
+/**
+ * A component that renders a navigation item of type "collapse".
+ * It takes a navigation item as a prop and renders it as a button.
+ * If the item has children, it renders them as a list.
+ * The onItemClick function is called when an item is clicked, and it logs the item to the console.
+ * @param {NavigationItemProps} props - The props for the component.
+ * @returns {JSX.Element} - The JSX element for the component.
+ * @example
+ * const item = {
+ *   id: "1",
+ *   title: "Home",
+ *   type: "collapse",
+ *   children: [
+ *     {
+ *       id: "1.1",
+ *       title: "Submenu 1",
+ *       url: "/submenu1",
+ *       type: "item",
+ *     },
+ *     {
+ *       id: "1.2",
+ *       title: "Submenu 2",
+ *       url: "/submenu2",
+ *       type: "item",
+ *     },
+ *   ],
+ * };
+ * const onItemClick = (item: NavigationItemType) => console.log(item.title);
+ * <NavigationCollapseTypeButton item={item} onItemClick={onItemClick} />
+ */
 export default function NavigationCollapseTypeButton(
   props: NavigationItemProps,
 ) {
@@ -30,6 +61,7 @@ export default function NavigationCollapseTypeButton(
   const [open, setOpen] = useState(false);
   const itempadding = nestedLevel > 0 ? 38 + nestedLevel * 16 : 16;
 
+  // Memoize the navigation items to prevent unnecessary re-renders
   const memoizedContent = useMemo(() => {
     let items = null;
     if (item.children) {

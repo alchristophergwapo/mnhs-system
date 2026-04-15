@@ -1,21 +1,48 @@
 "use client";
 
-import { ReactNode, useMemo } from "react";
+import { useMemo } from "react";
 import {
   MaterialReactTable,
   MaterialReactTableProps,
   useMaterialReactTable,
   type MRT_ColumnDef, //if using TypeScript (optional, but recommended)
+  type MRT_Column,
+  MRT_TableInstance,
+  MRT_TableState,
 } from "material-react-table";
 import { Theme } from "@mui/material/styles";
-import MenuItem from "@mui/material/MenuItem";
+import _ from "lodash";
 
 type MaterialTableProps<T extends Record<string, any>> = {
   tableColumns: MRT_ColumnDef<T>[];
   tableRows: T[];
-  renderRowActions: (t: object) => ReactNode;
+} & Partial<MaterialReactTableProps<T>>;
+
+type TData = {
+  [key: string]: any;
 };
 
+export const mrtTableInitialState: Partial<MRT_TableState<TData>> = {
+  density: "compact",
+  showColumnFilters: false,
+  showGlobalFilter: false,
+  columnPinning: {
+    left: ["mrt-row-select"],
+    right: ["mrt-row-actions"],
+  },
+};
+
+/**
+ * A Material UI table component that uses MaterialReactTable component from material-react-table.
+ * It provides a set of default table options and allows props to override them.
+ * The component also provides a set of default CSS classes to style the table.
+ *
+ * @param {MaterialTableProps<T>} props - The props for the component.
+ * @param {MRT_ColumnDef<T>[]} tableColumns - The column definitions for the table.
+ * @param {T[]} tableRows - The data for the table.
+ * @param {Partial<MaterialReactTableProps<T>>} otherProps - The other props for the component.
+ * @returns {JSX.Element} - The rendered MaterialReactTable component.
+ */
 export default function MaterialTable<T extends Record<string, any>>(
   props: MaterialTableProps<T>,
 ) {
@@ -29,24 +56,14 @@ export default function MaterialTable<T extends Record<string, any>>(
     [tableColumns],
   );
 
+  // Default table options. Can be overridden by props. We memoize this for performance
   const defaults = useMemo((): Partial<MaterialReactTableProps<T>> => {
-    return {
-      initialState: {
-        density: "compact",
-        showColumnFilters: false,
-        showGlobalFilter: true,
-        columnPinning: {
-          left: ["mrt-row-select"],
-          right: ["mrt-row-actions"],
-        },
-        pagination: {
-          pageIndex: 0,
-          pageSize: 10,
-        },
-      },
-      enableGlobalFilter: true,
+    return _.defaults(otherProps, {
+      initialState: mrtTableInitialState,
+      enableDensityToggle: false,
+      enableGlobalFilter: false,
       enableFullScreenToggle: false,
-      enableColumnFilterModes: true,
+      enableColumnFilterModes: false,
       enableColumnOrdering: false,
       enableGrouping: false,
       enableColumnPinning: true,
@@ -76,29 +93,12 @@ export default function MaterialTable<T extends Record<string, any>>(
       },
       enableStickyHeader: true,
       enableStickyFooter: true,
-      paginationDisplayMode: "pages",
       positionToolbarAlertBanner: "top",
       muiPaginationProps: {
         color: "secondary",
         rowsPerPageOptions: [10, 20, 30],
         shape: "rounded",
         showRowsPerPage: false,
-      },
-      muiSearchTextFieldProps: {
-        placeholder: "Search",
-        className: "rounded-lg",
-        size: "small",
-      },
-      muiFilterTextFieldProps: {
-        variant: "outlined",
-        size: "small",
-        sx: {
-          "& .MuiInputBase-root": {
-            padding: "0px 8px",
-            height: "32px!important",
-            minHeight: "32px!important",
-          },
-        },
       },
       muiSelectAllCheckboxProps: {
         className: "w-12",
@@ -112,7 +112,12 @@ export default function MaterialTable<T extends Record<string, any>>(
           color: "gray",
         },
       },
-      muiTableBodyRowProps: ({ table }) => {
+      muiSearchTextFieldProps: {
+        slotProps: {
+          input: {},
+        },
+      },
+      muiTableBodyRowProps: ({ table }: { table: MRT_TableInstance<T> }) => {
         const { density } = table.getState();
 
         if (density === "compact") {
@@ -138,7 +143,7 @@ export default function MaterialTable<T extends Record<string, any>>(
           borderBottom: "1px solid rgba(0, 0, 0, 0.15)",
         },
       },
-      muiTableHeadCellProps: ({ column }) => ({
+      muiTableHeadCellProps: ({ column }: { column: MRT_Column<T> }) => ({
         sx: {
           "& .Mui-TableHeadCell-Content-Labels": {
             flex: 1,
@@ -169,19 +174,15 @@ export default function MaterialTable<T extends Record<string, any>>(
         pinnedRowBackgroundColor: "theme.palette.background.paper",
         pinnedColumnBackgroundColor: theme.palette.background.paper,
       }),
-      // renderTopToolbar: (_props) => <></>,
-      // icons: tableIcons,
-      ...otherProps,
-    };
+    });
   }, [otherProps]);
-
-  console.log(defaults.muiSearchTextFieldProps, otherProps);
 
   //pass table options to useMaterialReactTable
   const table = useMaterialReactTable({
     columns,
     data, //must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
-    ...defaults,
+    ...defaults, //allow props to override defaults
+    ...otherProps,
   });
 
   //note: you can also pass table options as props directly to <MaterialReactTable /> instead of using useMaterialReactTable

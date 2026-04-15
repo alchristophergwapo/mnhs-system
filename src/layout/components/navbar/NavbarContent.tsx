@@ -16,10 +16,14 @@ const StyledContent = styled("div")(({theme}) => ({
   backgroundColor: theme.palette.background.default,
 }));
 
+/**
+ * A component that renders the content of the navbar.
+ * It includes the logo, a divider, and a navigation menu.
+ * The navigation menu is rendered using the Navigation component and the navigationConfig object.
+ * @returns {JSX.Element} - The JSX element for the component.
+ */
 function NavbarContent() {
   const navigation = navigationConfig;
-  const theme = useTheme();
-  console.log(theme)
 
   return (
     <>

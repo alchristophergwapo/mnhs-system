@@ -5,6 +5,15 @@ import Toolbar from "@mui/material/Toolbar";
 import NavbarToggleButton from "./navbar/NavbarToggleButton";
 import UserMenu from "../../components/UserMenu";
 
+/**
+ * A custom toolbar component for the application.
+ * It includes a navbar toggle button, the Next.js logo, and a user menu.
+ * The toolbar is sticky and has a z-index of 20 to ensure it is always on top of other elements.
+ * The toolbar also has a default color and a static position with an elevation of 0.
+ * The inner toolbar component is a flex container with a max width of 1280px and a horizontal padding of 2px on mobile devices and 4px on larger devices.
+ * The user menu is a flex container with a horizontal overflow and a padding of 2px on mobile devices and 4px on larger devices.
+ * There is also a gap of 1.5 between each item in the user menu.
+ */
 function ToolbarLayout() {
   return (
     <AppBar

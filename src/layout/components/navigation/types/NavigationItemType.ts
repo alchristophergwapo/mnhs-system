@@ -3,8 +3,8 @@ export type NavigationItemType = {
   title?: string;
   subtitle?: string;
   type: string;
-  children: Array<NavigationItemType>;
-  icon: string;
+  children?: Array<NavigationItemType>;
+  icon?: string;
   url?: string;
   disabled?: boolean;
   end?: boolean;

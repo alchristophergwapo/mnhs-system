@@ -4,6 +4,11 @@ import AppBar from "@mui/material/AppBar";
 import Image from "next/image";
 import { teal } from "@mui/material/colors";
 
+/**
+ * Footer component for the layout.
+ * It displays a sticky footer at the bottom of the page with a logo.
+ * @returns {JSX.Element} - The JSX element for the component.
+ */
 function FooterLayout() {
   return (
     <AppBar

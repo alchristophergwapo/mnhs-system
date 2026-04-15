@@ -14,6 +14,16 @@ type AdminLayoutProps = {
   children: React.ReactNode;
 };
 
+/**
+ * A layout component for the admin page.
+ * It includes a navbar, a toolbar, and a main content area.
+ * The main content area is divided into three sections: a top section with a background color of teal, a middle section for the main content, and a bottom section for the footer.
+ * The top section is absolutely positioned and has a height of 200px.
+ * The middle section is a flex container and takes up the remaining space.
+ * The bottom section is for the footer and is also a flex container.
+ * @param {AdminLayoutProps} props - The props for the component.
+ * @returns {JSX.Element} - The JSX element for the component.
+ */
 function AdminLayout(props: AdminLayoutProps) {
   const { children } = props;
 

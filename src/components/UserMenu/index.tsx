@@ -4,8 +4,14 @@ import Popover from "@mui/material/Popover";
 import { useState } from "react";
 import MenuList from "@mui/material/MenuList";
 import MenuButton from "../MenuButton";
-import Icon from "../Icon";
+import Icon from "@mui/material/Icon";
 
+/**
+ * A component that renders a user menu with some options like profile and logout. You can add more options to the menu.
+ * It uses a Popover from @mui/material to render the menu.
+ * The component is a button that contains an avatar and the user's name and role.
+ * When the button is clicked, the menu is rendered.
+ */
 export default function UserMenu() {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
