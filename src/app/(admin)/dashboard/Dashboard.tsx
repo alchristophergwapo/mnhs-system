@@ -3,6 +3,12 @@ import Image from "next/image";
 import SchoolYearOverview from "./_schoolyearoverview/SchoolYearOverview";
 import Courses from "./_courses/Courses";
 
+/**
+ * The dashboard page for the application.
+ * It displays a welcome message and some other information.
+ * It also includes a school year overview and a list of courses.
+ * @returns {JSX.Element} - The JSX element for the component.
+ */
 export default function Dashboard() {
   return (
     <div className="w-full flex flex-col flex-1 p-8 bg-zinc-200 font-sans">

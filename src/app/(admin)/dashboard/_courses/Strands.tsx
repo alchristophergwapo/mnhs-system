@@ -21,6 +21,10 @@ const DUMMY_STRANDS = [
     }
 ]
 
+/**
+ * Renders a component that displays a list of strands.
+ * To be implemented later
+ */
 export default function Strands() {
     return <div>
 
