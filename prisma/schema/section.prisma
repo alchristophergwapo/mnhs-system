@@ -1,0 +1,10 @@
+model Section {
+  id            Int        @id @default(autoincrement())
+  name          String
+  gradeLevelId  Int
+  totalStudents Int
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  gradeLevel    GradeLevel @relation(fields: [gradeLevelId], references: [id])
+  adviser       Teacher?
+}

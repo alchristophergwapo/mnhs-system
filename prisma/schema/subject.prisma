@@ -1,0 +1,10 @@
+model Subject {
+  id           Int         @id @default(autoincrement())
+  name         String
+  gradeLevelId Int?        @unique
+  teacherId    Int?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  gradeLevel   GradeLevel? @relation(fields: [gradeLevelId], references: [id])
+  teacher      Teacher?    @relation(fields: [teacherId], references: [id])
+}

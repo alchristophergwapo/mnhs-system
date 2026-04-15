@@ -1,0 +1,11 @@
+model Benefits {
+    id                   Int      @unique @default(autoincrement())
+    umidIdNumber         String?
+    sssIdNumber          String?
+    pagIbigIdNumber      String?
+    philHealthIdNumber   String?
+    philSysNumber        String?
+    tinNumber            String?
+    agencyEmployeeNumber String?
+    teacher              Teacher?
+}
