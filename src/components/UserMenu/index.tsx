@@ -26,7 +26,7 @@ export default function UserMenu() {
         className="flex flex-row space-x-2 items-center cursor-pointer hover:text-zinc-200 hover:bg-teal-700 rounded-sm px-2 py-1"
         onClick={handleClick}
       >
-        <Avatar src="/next.svg" sx={{ width: 32, height: 32 }} />
+        <Avatar sx={{ width: 32, height: 32 }} >K</Avatar>
         <div className="flex flex-col">
           <div className="font-bold text-sm">Kryzstof A</div>
           <div className="text-[12px]">Administrator</div>
