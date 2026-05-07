@@ -1,5 +1,6 @@
 import Button, { ButtonProps } from "@mui/material/Button";
 import ArrowBack from "@mui/icons-material/ArrowBack";
+import { memo } from "react";
 
 type PreviousButtonProps = Partial<ButtonProps> & {
     isVisible: boolean;
@@ -13,7 +14,7 @@ type PreviousButtonProps = Partial<ButtonProps> & {
  * @param {PreviousButtonProps} props - The props for the component.
  * @returns {JSX.Element} - The JSX element for the component.
  */
-export default function PreviousButton(props: PreviousButtonProps) {
+function PreviousButton(props: PreviousButtonProps) {
   const { onClick, isVisible } = props;
 
   if (!isVisible) return null;
@@ -22,18 +23,21 @@ export default function PreviousButton(props: PreviousButtonProps) {
     <Button
       variant="contained"
       color="inherit"
-      sx={{ color: "white!important" }}
+      sx={{ color: "black!important" }}
       startIcon={
         <ArrowBack
           sx={{
-            color: "white!important",
+            color: "black!important",
             fontSize: "18px!important",
           }}
         />
       }
       onClick={onClick}
+      disableRipple
     >
       Previous
     </Button>
   );
 }
+
+export default memo(PreviousButton);
