@@ -1,4 +1,7 @@
-import prisma from "@/lib/prisma";
+import prisma from "@/src/lib/prisma";
+import { CivilStatus, Gender, Role } from "@/src/prisma/src/generated/prisma";
+import { UserType } from "../../(admin)/teachers/_types";
+import bcrypt from "bcrypt";
 
 /**
  * GET /api/teachers
@@ -30,6 +33,7 @@ export async function GET(request: Request) {
   const q = searchParams.get("q") || "";
   const page = parseInt(searchParams.get("page") || "0", 10);
   const limit = parseInt(searchParams.get("limit") || "10", 10);
+  const gradeLevel = parseInt(searchParams.get("gradeLevel") || "0", 10);
 
   try {
     let queryConditions = {};
@@ -60,62 +64,186 @@ export async function GET(request: Request) {
       };
     }
 
+    if (gradeLevel) {
+      defaultQueryConditions = {
+        teacher: {
+          gradeLevel: {
+            id: Number(gradeLevel)
+          }
+        }
+      };
+    }
+
     if (type === "advisory") { // Check if type is "advisory"
       queryConditions = {
-        advisorySection: {
-          isNot: null,
-        },
-        isOjt: { // Exclude OJT teachers
-          equals: false,
+        teacher: {
+          advisorySectionId: {
+            not: null
+          },
+          isOjt: { // Exclude OJT teachers
+            equals: false,
+          },
         },
       };
     } else if (type === "non-advisory") { // Check if type is "non-advisory"
       queryConditions = {
-        AND: {
-          advisorySection: {
-            is: null,
-          },
-          isOjt: {
-            equals: false,
-          },
+        teacher: {
+          advisorySectionId: null,
+          isOjt: false,
         }, // Exclude advisory teachers that are also not OJT
       };
     } else { // Else if type is "ojt"
       queryConditions = {
-        AND: {
-          advisorySection: {
-            is: null,
-          },
+        teacher: {
+          advisorySectionId: null,
+          isOjt: true,
         },
-        isOjt: true,
       };
     }
 
     // Fetch teachers with query conditions default and from parameters
-    const teachers = await prisma.teacher.findMany({
+    const teachers = await prisma.user.findMany({
       where: {
-        ...defaultQueryConditions,
-        ...queryConditions,
+        AND: [
+          {
+            role: {
+              in: [Role.TEACHER, Role.ADMIN, Role.SUPERADMIN],
+            }
+          },
+          defaultQueryConditions,
+          queryConditions,
+        ],
+      },
+      include: {
+        teacher: {
+          include: {
+            position: {
+              select: {
+                name: true,
+              },
+            },
+            advisorySection: {
+              select: {
+                name: true,
+              },
+            },
+            gradeLevel: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+        citizenship: true,
+      },
+      omit: {
+        password: true,
       },
       skip: page * limit, // Calculate the skip value
       take: limit, // Limit the number of teachers per page
     });
 
     // Fetch the total number of teachers
-    const totalTeachers = await prisma.teacher.count({
+    const totalTeachers = await prisma.user.count({
       where: {
-        ...defaultQueryConditions,
-        ...queryConditions,
+        AND: [
+          {
+            role: {
+              in: [Role.TEACHER, Role.ADMIN, Role.SUPERADMIN],
+            }
+          },
+          defaultQueryConditions,
+          queryConditions,
+        ],
       },
     });
 
-    return new Response(JSON.stringify({ teachers, totalTeachers }), {
+    return new Response(JSON.stringify({ teachers, totalTeachers }, (_, value) =>
+      typeof value === "bigint" ? value.toString() : value
+    ), {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    return new Response(JSON.stringify({ error: "Failed to fetch teachers" }), {
+    console.error(error);
+    return new Response(JSON.stringify({ error }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
+  }
+}
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const teacherData = body as UserType;
+
+    const salt = await bcrypt.genSalt(10);
+    const password = await bcrypt.hash(`${teacherData.firstName}${teacherData.lastName}${new Date(teacherData.dateOfBirth).getMonth()}${new Date(teacherData.dateOfBirth).getDate()}${new Date(teacherData.dateOfBirth).getFullYear()}`, salt);
+
+    const user = await prisma.$transaction(async (tx) => {
+      const [permanentAddress, residentialAddress, citizenship] = await Promise.all([
+        tx.address.create({ data: { ...teacherData?.permanentAddress, zipCode: Number(teacherData?.permanentAddress?.zipCode) } as any }),
+        teacherData?.residentialAddress ? tx.address.create({ data: { ...teacherData.residentialAddress, zipCode: Number(teacherData.residentialAddress.zipCode) } as any }) : Promise.resolve(null),
+        tx.citizenship.create({ data: teacherData.citizenship as any }),
+      ]);
+
+      const user = await tx.user.create({
+        data: {
+          role: Role.TEACHER,
+          firstName: teacherData.firstName,
+          lastName: teacherData.lastName,
+          middleName: teacherData.middleName,
+          dateOfBirth: new Date(teacherData.dateOfBirth),
+          gender: teacherData.gender as Gender,
+          contactNumber: teacherData.contactNumber,
+          email: teacherData.email,
+          avatar: teacherData.avatar,
+          height: teacherData.height,
+          weight: teacherData.weight,
+          religion: teacherData.religion,
+          username: `${teacherData.firstName.toLowerCase()}.${teacherData.lastName.toLowerCase()}_${new Date(teacherData.dateOfBirth).getMonth()}_${new Date(teacherData.dateOfBirth).getDate()}_${new Date(teacherData.dateOfBirth).getFullYear()}`,
+          password, // hash this before saving
+          permanentAddressId: permanentAddress?.id,
+          residentialAddressId: residentialAddress?.id,
+          citizenshipId: citizenship.id,
+        }
+      });
+
+      await tx.teacher.create({
+        data: {
+          positionId: Number(teacherData.positionId || teacherData.position),
+          licenseNumber: teacherData.licenseNumber,
+          licenseExpiryDate: new Date(teacherData.licenseExpiryDate),
+          userId: user.id,
+          civilStatus: teacherData.civilStatus.toUpperCase() as CivilStatus,
+          civilStatusOther: teacherData.civilStatusOther,
+          dateHired: teacherData.dateHired
+            ? new Date(teacherData.dateHired)
+            : new Date(),
+          isOjt: teacherData.isOjt,
+          bloodType: teacherData.bloodType,
+          gradeLevelId: Number(teacherData.gradeLevelId),
+        }
+      });
+
+      const newUser = await tx.user.findUnique({
+        where: { id: user.id },
+        include: {
+          teacher: true,
+          citizenship: true,
+          permanentAddress: true,
+          residentialAddress: true,
+        },
+        omit: {
+          password: true,
+        },
+      });
+
+      return newUser;
+    })
+    return new Response(JSON.stringify(user, (_, value) => typeof value === "bigint" ? value.toString() : value), { status: 201 });
+  } catch (error) {
+    console.error("Error creating teacher:", error);
+    return new Response("Error creating teacher", { status: 500 });
   }
 }
