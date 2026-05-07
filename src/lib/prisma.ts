@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/prisma/src/generated/prisma/client";
+import { PrismaClient } from "@/src/prisma/src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 /** 
@@ -14,7 +14,7 @@ const globalForPrisma = global as unknown as {
  * @returns {PrismaClient}
  */
 const prisma =
-  globalForPrisma.prisma ||
+  globalForPrisma.prisma ??
   new PrismaClient({
     adapter: new PrismaPg({
       connectionString: process.env.DATABASE_URL,
@@ -25,5 +25,9 @@ const prisma =
  * Check if the environment is not production and set the prisma client to the global variable
  */
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+
+process.on("beforeExit", async () => {
+  await prisma.$disconnect();
+})
 
 export default prisma;

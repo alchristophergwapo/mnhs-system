@@ -1,0 +1,11 @@
+model GradeLevel {
+  id               BigInt       @id @default(autoincrement())
+  name             String       @unique
+  gradeLevelNumber Int
+  enrollments      Enrollment[]
+  sections         Section[]
+  subjects         Subject[]
+  teachers         Teacher[]
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+}

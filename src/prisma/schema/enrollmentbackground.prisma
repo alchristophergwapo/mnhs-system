@@ -1,0 +1,18 @@
+model EnrollmentBackground {
+    id                BigInt      @id @default(autoincrement())
+    entryType StudentEntryType
+    lastGradeLevel    BigInt?
+    lastSchoolID      String?
+    lastSchoolName    String?
+    lastSchoolAddress String?
+    lastSchoolYear    String?
+    studentId         BigInt @unique
+    student           Student  @relation(fields: [studentId], references: [id])
+    createdAt         DateTime @default(now())
+    updatedAt         DateTime @updatedAt
+}
+
+enum StudentEntryType {
+    TRANSFER
+    BALIK_ARAL
+}

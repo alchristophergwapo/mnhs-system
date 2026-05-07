@@ -1,0 +1,16 @@
+model Course {
+    id          BigInt       @id @default(autoincrement())
+    name        String // "STEM", "ABM", "HE", "ICT", "Agriculture"
+    code        String?      @unique // "STEM", "ABM", "TVL-HE" etc.
+    description String?
+    courseType  CourseType // to differentiate strand vs elective vs track
+    enrollments Enrollment[]
+    createdAt   DateTime     @default(now())
+    updatedAt   DateTime     @updatedAt
+}
+
+enum CourseType {
+    ACADEMIC_TRACK // Grade 11-12 (STEM, ABM, HUMSS, GAS)
+    TVL_TRACK // Grade 11-12 TVL (HE, ICT, AFA, IA)
+    ELECTIVE // Grade 9-10 TLE
+}

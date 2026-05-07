@@ -1,0 +1,12 @@
+model Address {
+  id                     BigInt  @id @default(autoincrement())
+  city                   String
+  province               String
+  barangay               String
+  houseNumber            String?
+  street                 String?
+  subdivision            String?
+  zipCode                Int
+  permanentAddressUser   User?   @relation("PermanentAddress")
+  residentialAddressUser User?   @relation("ResidentialAddress")
+}

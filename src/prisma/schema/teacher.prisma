@@ -1,0 +1,28 @@
+model Teacher {
+  id                    BigInt      @id @default(autoincrement())
+  dateHired             DateTime
+  isOjt                 Boolean     @default(false)
+  bloodType             String?
+  advisorySectionId     BigInt?     @unique
+  civilStatusOther      String?
+  licenseExpiryDate     DateTime
+  licenseNumber         String      @unique
+  positionId            BigInt
+  subjectSpecialization String?
+  userId                BigInt      @unique
+  civilStatus           CivilStatus
+  subjects              Subject[]
+  advisorySection       Section?    @relation(fields: [advisorySectionId], references: [id])
+  gradeLevel            GradeLevel[]
+  position              Position    @relation(fields: [positionId], references: [id])
+  user                  User        @relation(fields: [userId], references: [id])
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
+}
+
+enum CivilStatus {
+  SINGLE
+  MARRIED
+  WIDOWED
+  SEPARATED
+}

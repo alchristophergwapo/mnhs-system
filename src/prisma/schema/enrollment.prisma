@@ -1,0 +1,33 @@
+model Enrollment {
+    id                BigInt           @id @default(autoincrement())
+    enrollmentStatus  EnrollmentStatus @default(RECEIVED)
+    enrollmentRemarks String?
+    cardImage         String
+    schoolYearStart   DateTime
+    schoolYearEnd     DateTime
+    gradeLevelId      BigInt
+    semester          Semester?
+    studentId         BigInt
+    sectionId         BigInt?
+    courseId          BigInt?
+    gradeLevel        GradeLevel?       @relation(fields: [gradeLevelId], references: [id])
+    student           Student          @relation(fields: [studentId], references: [id])
+    section           Section?          @relation(fields: [sectionId], references: [id])
+    course            Course?          @relation(fields: [courseId], references: [id])
+    createdAt         DateTime         @default(now())
+    updatedAt         DateTime         @updatedAt
+
+    @@unique([studentId, schoolYearStart])
+}
+
+enum EnrollmentStatus {
+    RECEIVED
+    VERIFIED
+    ENROLLED
+    ASSIGNED
+}
+
+enum Semester {
+    FIRST
+    SECOND
+}

@@ -1,0 +1,20 @@
+model Family {
+    id            BigInt             @id @default(autoincrement())
+    lastName      String
+    firstName     String
+    middleName    String?
+    nameExtension String?
+    maidenName    String?
+    contactNumber String
+    userId        BigInt
+    relationship  FamilyRelationShip
+    user          User               @relation(fields: [userId], references: [id])
+    createdAt     DateTime           @default(now())
+    updatedAt     DateTime           @updatedAt
+}
+
+enum FamilyRelationShip {
+    MOTHER
+    FATHER
+    GUARDIAN
+}

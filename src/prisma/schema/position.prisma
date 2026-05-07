@@ -1,0 +1,7 @@
+model Position {
+  id        BigInt    @id @default(autoincrement())
+  name      String
+  teachers  Teacher[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}

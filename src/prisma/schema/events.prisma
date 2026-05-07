@@ -1,0 +1,13 @@
+model Events {
+    id          BigInt      @id @default(autoincrement())
+    title       String
+    description String?
+    startDate   DateTime
+    endDate     DateTime
+    location    String
+    tags        String[]    // e.g. "enrollment", "school event", "holiday", etc.
+    createdAt   DateTime     @default(now())
+    updatedAt   DateTime     @updatedAt
+
+    @@unique([startDate, endDate]) // Prevent duplicate events with the same date range
+}
