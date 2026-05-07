@@ -1,7 +1,7 @@
 "use client";
 
 import { styled } from "@mui/material/styles";
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import Box from "@mui/material/Box";
 
 import NavbarLayout from "./components/NavbarLayout";
@@ -26,13 +26,14 @@ type AdminLayoutProps = {
  */
 function AdminLayout(props: AdminLayoutProps) {
   const { children } = props;
+  const [open, setOpen] = useState(true);
 
   return (
     <RootComponent className="flex flex-auto w-full">
       <div className="w-full flex flex-auto">
-        <NavbarLayout />
+        <NavbarLayout open={open} onClose={() => setOpen(false)}/>
         <main className="relative flex min-h-full min-w-0 flex-col w-full">
-          <ToolbarLayout />
+          <ToolbarLayout open={open} onOpen={() => setOpen(true)} />
           <Box
             className="relative w-full h-full z-10 flex min-h-0 flex-auto flex-col"
             sx={{
