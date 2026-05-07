@@ -1,8 +1,0 @@
-model Address {
-    id       Int      @id @default(autoincrement())
-    address  String
-    city     String
-    province String
-    zipCode  String
-    teacher  Teacher?
-}

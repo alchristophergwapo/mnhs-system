@@ -14,7 +14,7 @@ import UserMenu from "../../components/UserMenu";
  * The user menu is a flex container with a horizontal overflow and a padding of 2px on mobile devices and 4px on larger devices.
  * There is also a gap of 1.5 between each item in the user menu.
  */
-function ToolbarLayout() {
+function ToolbarLayout({open, onOpen}: {open: boolean; onOpen: () => void}) {
   return (
     <AppBar
       className="sticky top-0 z-20 flex"
@@ -23,13 +23,14 @@ function ToolbarLayout() {
       elevation={0}
     >
       <Toolbar >
-        <div className="flex flex-1 space-x-2">
-          <NavbarToggleButton />
+        <div className="flex flex-1 items-center space-x-2">
+          <NavbarToggleButton open={open} onClick={onOpen} />
           <Image
             src="/next.svg"
             alt="Next.js logo"
             width={100}
             height={20}
+            style={{width: 100, height: 20}}
             priority
           />
         </div>

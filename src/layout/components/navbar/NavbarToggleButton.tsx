@@ -13,10 +13,14 @@ import IconButton, { IconButtonProps } from "@mui/material/IconButton";
  *   <Icon>menu</Icon>
  * </NavbarToggleButton>
  */
-function NavbarToggleButton(props: IconButtonProps) {
+function NavbarToggleButton(props: IconButtonProps & {open?: boolean}) {
   const { children = <Icon>menu</Icon> } = props;
+console.log(props)
+  if (props.open) {
+    return null;
+  }
 
-  return <IconButton>{children}</IconButton>;
+  return <IconButton {...props}>{children}</IconButton>;
 }
 
 export default NavbarToggleButton;

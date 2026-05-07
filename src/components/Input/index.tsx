@@ -1,7 +1,5 @@
 import TextField, { TextFieldProps } from "@mui/material/TextField";
-import { memo } from "react";
-
-type CustomInputProps = TextFieldProps & {};
+import { memo, useState } from "react";
 
 /**
  * A custom input component that wraps the Material-UI TextField component.
@@ -10,16 +8,45 @@ type CustomInputProps = TextFieldProps & {};
  * @param {CustomInputProps} props - The props for the component.
  * @returns {JSX.Element} - The JSX element for the component.
  */
-function Input({ value, onChange, ...otherProps }: CustomInputProps) {
+function Input({
+  value,
+  type = "text",
+  errors,
+  slotProps = {},
+  ...otherProps
+}: TextFieldProps & { errors?: { message: string }[] }) {
+  if (type === "date") {
+    slotProps.inputLabel = { shrink: true };
+  }
+
   return (
-    <TextField
-      value={value}
-      onChange={onChange}
-      variant="outlined"
-      fullWidth
-      size="small"
-      {...otherProps}
-    />
+    <div className="flex flex-col">
+      <TextField
+        value={value}
+        variant="outlined"
+        fullWidth
+        size="small"
+        slotProps={{
+          ...slotProps,
+          inputLabel: {
+            ...slotProps.inputLabel,
+            sx: {
+              "& .MuiInputLabel-asterisk": {
+                color: "red",
+                fontSize: "16px!important",
+              },
+            },
+          },
+        }}
+        type={type}
+        {...otherProps}
+      />
+      {errors?.map((error, index) => (
+        <p key={index} className="text-red-500 text-xs mt-1">
+          •{error?.message}
+        </p>
+      ))}
+    </div>
   );
 }
 

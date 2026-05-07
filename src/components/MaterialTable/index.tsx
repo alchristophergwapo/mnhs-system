@@ -62,16 +62,21 @@ export default function MaterialTable<T extends Record<string, any>>(
       initialState: mrtTableInitialState,
       enableDensityToggle: false,
       enableGlobalFilter: false,
+      enableGlobalFilterModes: false,
       enableFullScreenToggle: false,
       enableColumnFilterModes: false,
+      enablecolumnFilters: false,
+      enableColumnVirtualization: false,
       enableColumnOrdering: false,
       enableGrouping: false,
       enableColumnPinning: true,
       enableFacetedValues: true,
       enableRowActions: true,
-      enableRowSelection: true,
+      enableRowSelection: false,
       enableRowDragging: false,
       enableFilters: false,
+      enableHiding: false,
+      enableTopToolbar: false,
       muiBottomToolbarProps: {
         className: "flex items-center min-h-14 h-14 border-b-lg",
       },
@@ -99,18 +104,6 @@ export default function MaterialTable<T extends Record<string, any>>(
         rowsPerPageOptions: [10, 20, 30],
         shape: "rounded",
         showRowsPerPage: false,
-      },
-      muiSelectAllCheckboxProps: {
-        className: "w-12",
-        sx: {
-          color: "gray",
-        },
-      },
-      muiSelectCheckboxProps: {
-        className: "w-12",
-        sx: {
-          color: "gray",
-        },
       },
       muiSearchTextFieldProps: {
         slotProps: {

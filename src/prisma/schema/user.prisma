@@ -1,0 +1,43 @@
+model User {
+  id                   BigInt      @id @default(autoincrement())
+  avatar               String?
+  firstName            String
+  middleName           String?
+  lastName             String
+  nameExtension        String?
+  email                String?     @unique
+  contactNumber        String      @unique
+  dateOfBirth          DateTime
+  placeOfBirth         String?
+  religion             String?
+  gender               Gender
+  height               Int?
+  weight               Int?
+  username             String      @unique
+  password             String
+  role                 Role        @default(STUDENT)
+  permanentAddressId   BigInt      @unique
+  residentialAddressId BigInt?     @unique
+  citizenshipId        BigInt      @unique
+  family               Family[]
+  student              Student?
+  teacher              Teacher?
+  news                 News[]
+  citizenship          Citizenship @relation(fields: [citizenshipId], references: [id])
+  permanentAddress     Address     @relation("PermanentAddress", fields: [permanentAddressId], references: [id])
+  residentialAddress   Address?    @relation("ResidentialAddress", fields: [residentialAddressId], references: [id])
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum Role {
+  STUDENT
+  TEACHER
+  SUPERADMIN
+  ADMIN
+}

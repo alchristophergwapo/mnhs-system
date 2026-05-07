@@ -1,13 +1,13 @@
-/**
- * Define App as a client side component
- */
 "use client";
 
 import React, { useMemo } from "react";
 import AppContext from "../contexts/AppContext";
 import MainThemeProvider from "../contexts/MainThemeProvider";
+import { SnackbarProvider } from "notistack";
 import { Provider } from "react-redux";
 import store from "../store/store";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 type AppProps = {
   children?: React.ReactNode;
@@ -28,7 +28,21 @@ export default function App(props: AppProps) {
   return (
     <AppContext value={contextValue}>
       <Provider store={store}>
-        <MainThemeProvider>{children}</MainThemeProvider>
+        <MainThemeProvider>
+          <SnackbarProvider
+            maxSnack={3}
+            autoHideDuration={5000}
+            preventDuplicate
+            anchorOrigin={{
+              horizontal: "right",
+              vertical: "bottom",
+            }}
+          >
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              {children}
+            </LocalizationProvider>
+          </SnackbarProvider>
+        </MainThemeProvider>
       </Provider>
     </AppContext>
   );

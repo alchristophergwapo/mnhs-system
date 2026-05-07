@@ -1,0 +1,11 @@
+model Section {
+  id           BigInt       @id @default(autoincrement())
+  name         String       @unique
+  gradeLevelId BigInt
+  maxCapacity  Int
+  gradeLevel   GradeLevel   @relation(fields: [gradeLevelId], references: [id])
+  enrollments  Enrollment[]
+  adviser      Teacher?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}

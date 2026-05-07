@@ -54,9 +54,20 @@ const baseQuery: BaseQueryFn<
   return result;
 };
 
+const tagTypes = [
+  "teachers_list",
+  "teacher_details",
+  "positions_list",
+  "gradelevels_list",
+  "student_details",
+  "students_list",
+  "sections_list",
+  "courses_list",
+];
+
 export const apiService = createApi({
   baseQuery,
   endpoints: () => ({}),
-  tagTypes: ["teachers_list"],
+  tagTypes,
   reducerPath: "apiService",
 });

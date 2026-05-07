@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { FlatNavigationItemType, NavigationItemType } from "../types/NavigationItemType";
 import { RootState } from "@/src/store/store";
-import { navigationConfig } from "@/src/configs/navigationConfig";
+import { adminNavigationConfig } from "@/src/configs/adminNavigationConfig";
 import NavigationHelper from "@/src/utils/navigationHelper";
 
 const navigationAdapter = createEntityAdapter<FlatNavigationItemType>();
@@ -10,7 +10,7 @@ const emptyInitialState = navigationAdapter.getInitialState();
 
 const initialState = navigationAdapter.upsertMany(
         emptyInitialState,
-        NavigationHelper.flattenNavigationItems(navigationConfig)
+        NavigationHelper.flattenNavigationItems(adminNavigationConfig)
     )
 
 export const {
@@ -20,7 +20,7 @@ export const {
 /**
  * Navigation slice for managing navigation state in the application.
  * This slice uses createEntityAdapter to manage a collection of navigation items.
- * The initial state is populated with flattened navigation items from the navigationConfig.
+ * The initial state is populated with flattened navigation items from the adminNavigationConfig.
  */
 export const navigationSlice = createSlice({
     name: "navigation",

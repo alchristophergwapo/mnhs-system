@@ -1,0 +1,21 @@
+model StudentGrade {
+  id        BigInt   @id @default(autoincrement())
+  studentId BigInt
+  subjectId BigInt
+  quarter   Quarter
+  grade     Float
+  remarks   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  student   Student  @relation(fields: [studentId], references: [id])
+  subject   Subject  @relation(fields: [subjectId], references: [id])
+
+  @@unique([studentId, subjectId, quarter])
+}
+
+enum Quarter {
+  Q1
+  Q2
+  Q3
+  Q4
+}

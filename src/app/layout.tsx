@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import App from "./App";
-
+import { SessionProvider } from "next-auth/react";
+import { auth } from "../../auth";
+import { StyledEngineProvider } from "@mui/material/styles";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,16 +18,15 @@ export const metadata: Metadata = {
  * @param children The children of the component, which is the entire application.
  * @returns The root layout component.
  */
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+
   return (
-    <html
-      lang="en"
-      className={`h-full antialiased`}
-    >
+    <html lang="en" className={`h-full antialiased light`}>
       <head>
         <meta charSet="utf-8" />
         <meta
@@ -42,7 +43,9 @@ export default function RootLayout({
         <noscript id="emotion-insertion-point" />
       </head>
       <body id="root" className="min-h-full flex flex-col">
-        <App>{children}</App>
+        <SessionProvider session={session}>
+          <StyledEngineProvider injectFirst><App>{children}</App></StyledEngineProvider>
+        </SessionProvider>
       </body>
     </html>
   );

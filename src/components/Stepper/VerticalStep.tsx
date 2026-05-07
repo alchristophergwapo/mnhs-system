@@ -1,6 +1,7 @@
 import StepLabel from "@mui/material/StepLabel";
-import Typography from "@mui/material/Typography";
 import { teal } from "@mui/material/colors";
+import { memo } from "react";
+import { StepContentStyled } from "./styledComponents";
 
 type VerticalStepProps = {
   label: string;
@@ -20,28 +21,30 @@ type VerticalStepProps = {
  * @param {React.ReactNode} [props.icon] - The icon for the step.
  * @returns {JSX.Element} - The JSX element for the component.
  */
-export default function VerticalStep(props: VerticalStepProps) {
-  const { label, description, icon } = props;
+function VerticalStep(props: VerticalStepProps & { active: boolean, completed: boolean }) {
+  const { label, description, icon, active = false, completed = false } = props;
 
   return (
-    <StepLabel
-      icon={icon}
-      sx={{
-        "& .MuiSvgIcon-root": {
-          background: teal[800],
-          borderRadius: "50%",
-          padding: "8px",
-          color: "white!important",
-          height: "40px",
-          width: "40px",
-        },
-        padding: 0,
-      }}
-    >
-      <div className="text-black font-bold text-[16px]">{label}</div>
-      <Typography variant="subtitle2" className="text-black">
-        {description}
-      </Typography>
-    </StepLabel>
+    <>
+      <StepLabel
+        icon={icon}
+        sx={{
+          "& .MuiSvgIcon-root": {
+            background: active || completed ? teal[800] : "gray",
+            borderRadius: "50%",
+            padding: "8px",
+            color: "white!important",
+            height: "40px",
+            width: "40px",
+          },
+          padding: 0,
+        }}
+      >
+        <div className="text-black font-bold text-[15px]">{label}</div>
+      </StepLabel>
+      <StepContentStyled>{description}</StepContentStyled>
+    </>
   );
 }
+
+export default memo(VerticalStep);

@@ -1,0 +1,16 @@
+model Student {
+  id                   BigInt               @id @default(autoincrement())
+  LRN                  String?
+  belongsToIP          Boolean              @default(false)
+  motherTongue         String?
+  IPCommunity          String?
+  userId               BigInt               @unique
+  enrollment           Enrollment[]
+  user                 User                 @relation(fields: [userId], references: [id])
+  grades               StudentGrade[]
+  enrollmentBackground EnrollmentBackground?
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+
+  @@unique([LRN])
+}

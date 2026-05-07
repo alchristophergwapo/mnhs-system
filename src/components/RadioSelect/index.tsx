@@ -2,10 +2,14 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import RadioGroup, { RadioGroupProps } from "@mui/material/RadioGroup";
+import FormHelperText from "@mui/material/FormHelperText";
 import { memo } from "react";
 
 type RadioSelectProps = Partial<RadioGroupProps> & {
   label: string;
+  required?: boolean;
+  error?: boolean;
+  errors?: { message: string; [key: string]: string }[];
 };
 
 /**
@@ -20,13 +24,18 @@ function RadioSelect({
   row = true,
   defaultValue,
   value,
+  required = false,
   children,
+  error,
+  errors,
   onChange,
 }: RadioSelectProps) {
   return (
     <FormGroup>
-      <FormControl>
-        <FormLabel id="radio-buttons-group-label">{label}</FormLabel>
+      <FormControl required={required} error={error}>
+        <FormLabel id="radio-buttons-group-label" required={required}>
+          {label}
+        </FormLabel>
         <RadioGroup
           aria-labelledby="radio-buttons-group-label"
           defaultValue={defaultValue}
@@ -37,6 +46,14 @@ function RadioSelect({
         >
           {children}
         </RadioGroup>
+
+        {errors && errors?.length > 0
+          ? errors.map((error, index) => (
+              <FormHelperText key={index} error={errors && errors?.length > 0} sx={{mb: 1}}>
+                {error.message}
+              </FormHelperText>
+            ))
+          : null}
       </FormControl>
     </FormGroup>
   );
