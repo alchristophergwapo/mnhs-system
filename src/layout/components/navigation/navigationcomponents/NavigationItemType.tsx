@@ -23,8 +23,9 @@ const RootComponent = styled(ListItemButton)<ListItemButtonStyleProps>(
     paddingTop: 10,
     paddingBottom: 10,
     borderRadius: "8px",
+    color: "white",
     "&.active": {
-      color: theme.palette.text.primary,
+      color: "white",
       backgroundColor:
         theme.palette.mode === "light"
           ? "rgba(0, 0, 0, .05)!important"
@@ -85,7 +86,6 @@ export default function NavigationItemTypeButton(props: NavigationItemProps) {
       >
         {item.icon && (
           <Icon
-            color="action"
             sx={{
               fontSize: "18px !important",
               marginTop: "-3px",
@@ -95,7 +95,7 @@ export default function NavigationItemTypeButton(props: NavigationItemProps) {
             {item.icon}
           </Icon>
         )}
-        <ListItemText primary={item.title} sx={{ margin: "0!important" }} />
+        <ListItemText primary={item.title} sx={{ margin: "0!important", paddingLeft: "6px" }} />
       </RootComponent>
     ),
     [item, itempadding],

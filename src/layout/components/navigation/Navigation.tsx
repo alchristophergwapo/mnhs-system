@@ -27,7 +27,7 @@ type NavigationProps = {
 };
 
 const StyledList = styled(List)(() => ({
-  padding: "8px 12px 0",
+  padding: "8px 8px 0",
 }));
 
 /**
@@ -53,7 +53,7 @@ export default function Navigation(props: NavigationProps) {
     }
 
     return (
-      <StyledList className="flex min-h-0 flex-col whitespace-nowrap px-3 pt-1 ">
+      <StyledList className="flex min-h-0 flex-col whitespace-nowrap px-2 pt-1 ">
         {navigation?.map((item) => (
           <NavigationItem
             key={item.id}
