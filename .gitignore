@@ -42,5 +42,6 @@ next-env.d.ts
 
 package-lock.json
 
-/prisma/src/generated/prisma
+/node_modules/.prisma
+/src/generated/prisma
 /.vscode
