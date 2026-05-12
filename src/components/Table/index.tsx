@@ -12,11 +12,11 @@ import TablePagination, {
 import React, { Children, cloneElement } from "react";
 
 export type CustomTableRowProps = {
-  id: string;
+  id: number;
 };
 
 type TableComponentProps = TableProps & {
-  tableRows?: Array<CustomTableRowProps>;
+  tableRows: Array<CustomTableRowProps>;
   pagination?: TablePaginationProps;
   onTableRowClick?: (obj: object) => void | undefined;
   otherProps?: any;

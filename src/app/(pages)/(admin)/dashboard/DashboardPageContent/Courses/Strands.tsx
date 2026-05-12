@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { blue, brown } from "@mui/material/colors";
 import clsx from "clsx";

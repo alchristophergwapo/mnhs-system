@@ -1,4 +1,4 @@
-import Button from "@/src/components/Button";
+import Button from "@components/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 

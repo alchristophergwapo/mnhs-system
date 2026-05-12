@@ -43,5 +43,8 @@ next-env.d.ts
 package-lock.json
 
 /node_modules/.prisma
-/src/generated/prisma
+/src/prisma/generated/prisma
 /.vscode
+
+# this prevent from commiting the passwordHelper.ts file for public repo
+/src/utils/passwordHelper.ts

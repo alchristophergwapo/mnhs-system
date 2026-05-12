@@ -6,7 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { NavigationItemProps } from "../NavigationItem";
 import { useMemo } from "react";
 import Icon from "@mui/material/Icon";
-import NavigationLinkAdapter from "@/src/components/NavigationLinkAdapter";
+import NavigationLinkAdapter from "@components/NavigationLinkAdapter";
 
 type ListItemButtonStyleProps = ListItemButtonProps & {
   _itempadding: number;
@@ -87,7 +87,6 @@ export default function NavigationItemTypeButton(props: NavigationItemProps) {
         {item.icon && (
           <Icon
             sx={{
-              fontSize: "18px !important",
               marginTop: "-3px",
             }}
             className="nav-list-item-icon"

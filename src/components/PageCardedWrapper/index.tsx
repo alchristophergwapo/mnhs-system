@@ -9,7 +9,7 @@ import Loading from "../Loading";
 export type SharedPropsType<T> = {
   data?: T;
   total?: number;
-  isLoading: boolean;
+  isLoading?: boolean;
 };
 
 type PageWrapperProps<T> = SharedPropsType<T> & {
@@ -27,7 +27,7 @@ type PageWrapperProps<T> = SharedPropsType<T> & {
  * @param {PageWrapperProps<T>} props
  * @returns {JSX.Element}
  */
-function PageWrapper<T>(props: PageWrapperProps<T>) {
+function PageCardedWrapper<T>(props: PageWrapperProps<T>) {
   const {
     children,
     header,
@@ -35,7 +35,7 @@ function PageWrapper<T>(props: PageWrapperProps<T>) {
     className,
     data,
     total,
-    isLoading,
+    isLoading = false,
     displayBreadcrumbs = false,
   } = props;
 
@@ -62,7 +62,7 @@ function PageWrapper<T>(props: PageWrapperProps<T>) {
   return (
     <div className={clsx(className, "w-full z-10 p-8")}>
       <div className="flex flex-row justify-between">
-        <div>{headerWithData}</div>
+        <div className={clsx("", !displayBreadcrumbs && "w-full")}>{headerWithData}</div>
         <div>{displayBreadcrumbs && <PageBreadcrumbs />}</div>
       </div>
       <Paper className="w-full mt-8 flex flex-col py-2 z-10 gap-6 bg-white min-h-40">
@@ -74,4 +74,4 @@ function PageWrapper<T>(props: PageWrapperProps<T>) {
 }
 
 // Memoize the PageWrapper component to prevent unnecessary re-renders
-export default memo(PageWrapper);
+export default memo(PageCardedWrapper);

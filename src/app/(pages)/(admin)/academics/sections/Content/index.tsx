@@ -2,11 +2,11 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import GradeLevelFilter from "./GradeLevelFilter";
 import { GetSectionsApiResponse } from "../SectionsApi";
-import { SharedPropsType } from "@/src/components/PageWrapper";
+import { SharedPropsType } from "@components/PageCardedWrapper";
 import Section from "./Section";
 import CreateSection from "../CreateSection";
 import { useState } from "react";
-import Loading from "@/src/components/Loading";
+import Loading from "@components/Loading";
 
 function Content({
   data,

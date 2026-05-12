@@ -1,7 +1,7 @@
-import RadioSelect from "@/src/components/RadioSelect";
+import RadioSelect from "@components/RadioSelect";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
-import Input from "@/src/components/Input";
+import Input from "@components/Input";
 import { ChangeEvent } from "react";
 import { useFormContext } from "@/src/hooks/useTanstack";
 import z from "zod";

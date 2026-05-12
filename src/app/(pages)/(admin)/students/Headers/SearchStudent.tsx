@@ -1,4 +1,4 @@
-import SearchBox from "@/src/components/SearchBox";
+import SearchBox from "@components/SearchBox";
 import Search from "@mui/icons-material/Search";
 import { CircularProgress } from "@mui/material";
 import IconButton from "@mui/material/IconButton";

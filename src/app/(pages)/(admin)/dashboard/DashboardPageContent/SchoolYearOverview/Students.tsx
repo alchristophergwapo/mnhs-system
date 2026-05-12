@@ -2,9 +2,9 @@ import { TrendingDownOutlined, TrendingUpRounded } from "@mui/icons-material";
 import Typography from "@mui/material/Typography";
 import LinearProgress from "@mui/material/LinearProgress";
 import Paper from "@mui/material/Paper";
-import prisma from "@/src/lib/prisma";
+import prisma from "@lib/prisma";
 import clsx from "clsx";
-import { EnrollmentStatus } from "@/src/prisma/src/generated/prisma";
+import { EnrollmentStatus } from "@/prisma/generated/prisma";
 
 async function Students() {
   const [

@@ -1,15 +1,21 @@
-import prisma from "@/src/lib/prisma";
-import { EnrollmentStatus } from "@/src/prisma/src/generated/prisma";
+import prisma from "@lib/prisma";
+import { EnrollmentStatus } from "@/prisma/generated/prisma";
 import {
   AddHomeWorkOutlined,
   AssuredWorkloadOutlined,
   BadgeOutlined,
   FactCheckOutlined,
-  TaskOutlined,
 } from "@mui/icons-material";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
+/**
+ * Asynchronous React component that renders the Admissions Pipeline dashboard.
+ * It fetches and displays the total and weekly new counts for various enrollment 
+ * statuses (Received, Verified, Enrolled, Assigned) for the current school year.
+ * 
+ * @returns {Promise<JSX.Element>} A Promise resolving to the admissions dashboard Paper component.
+ */
 async function Admissions() {
   
   const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); // 7 days ago

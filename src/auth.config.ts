@@ -1,6 +1,6 @@
 import Credentials from "next-auth/providers/credentials";
 import type { Session } from "next-auth";
-import { Role } from "@/src/prisma/src/generated/prisma";
+import { Role } from "./prisma/generated/prisma";
 
 export const authConfig = {
     session: {
@@ -46,8 +46,8 @@ export const authConfig = {
         // Edge-safe route protection
         authorized({ auth, request: { nextUrl } }: { auth: Session | null, request: { nextUrl: URL } }) {
             const isLoggedIn = !!auth?.user
-            const isPublic = ["/", "/login", "/register"].includes(nextUrl.pathname)
-            const isAuthRoute = ["/login", "/register"].includes(nextUrl.pathname)
+            const isPublic = ["/", "/auth/login"].includes(nextUrl.pathname)
+            const isAuthRoute = ["/auth/login"].includes(nextUrl.pathname)
 
             if (isAuthRoute && isLoggedIn) {
                 return Response.redirect(new URL("/dashboard", nextUrl))

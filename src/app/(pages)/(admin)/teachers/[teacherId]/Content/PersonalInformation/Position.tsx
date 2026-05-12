@@ -1,6 +1,6 @@
 import MenuItem from "@mui/material/MenuItem";
 import { memo, useMemo } from "react";
-import Select from "@/src/components/Select";
+import Select from "@components/Select";
 import { useFormContext } from "@/src/hooks/useTanstack";
 import z from "zod";
 import { useGetPositionsQuery } from "../../../TeachersApi";

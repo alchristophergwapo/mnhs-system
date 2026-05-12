@@ -1,5 +1,5 @@
-import { PrismaClient } from "@/src/prisma/src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "../prisma/generated/prisma";
 
 /** 
  * Define a global prisma variable so that it can be accessed from anywhere
@@ -21,13 +21,6 @@ const prisma =
     }),
   });
 
-/** 
- * Check if the environment is not production and set the prisma client to the global variable
- */
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
-
-process.on("beforeExit", async () => {
-  await prisma.$disconnect();
-})
+globalForPrisma.prisma = prisma;
 
 export default prisma;

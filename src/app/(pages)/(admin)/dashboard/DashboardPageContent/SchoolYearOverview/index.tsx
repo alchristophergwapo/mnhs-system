@@ -3,7 +3,8 @@ import OverviewData from "./OverviewData";
 import Students from "./Students";
 import SchoolEvents from "./SchoolEvents";
 import { People, SyncAltRounded } from "@mui/icons-material";
-import prisma from "@/src/lib/prisma";
+import prisma from "@lib/prisma";
+import { Suspense } from "react";
 
 /**
  * SchoolYearOverview component.
@@ -16,25 +17,28 @@ import prisma from "@/src/lib/prisma";
  */
 export default async function SchoolYearOverview() {
   const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); // 7 days ago
-  const [totalTransfereeStudents, totalTeachers, totalNewTeachers] = await Promise.all([
-    prisma.enrollment.count({
-      where: {
-        schoolYearStart: new Date(new Date().getFullYear(), 5, 1), // June 1st of the current year
-        schoolYearEnd: new Date(new Date().getFullYear() + 1, 4, 31), // May 31st of the next year
-        student: {
-          isTransferee: true,
+  const [totalTransfereeStudents, totalTeachers, totalNewTeachers] =
+    await Promise.all([
+      prisma.enrollment.count({
+        where: {
+          schoolYearStart: new Date(new Date().getFullYear(), 5, 1), // June 1st of the current year
+          schoolYearEnd: new Date(new Date().getFullYear() + 1, 4, 31), // May 31st of the next year
+          student: {
+            enrollmentBackground: {
+              entryType: "TRANSFER",
+            },
+          },
         },
-      },
-    }),
-    prisma.teacher.count(),
-    prisma.teacher.count({
-      where: {
-        createdAt: {
-          gte: weekAgo, // Teachers added in the last 7 days
+      }),
+      prisma.teacher.count(),
+      prisma.teacher.count({
+        where: {
+          createdAt: {
+            gte: weekAgo, // Teachers added in the last 7 days
+          },
         },
-      }
-    }),
-  ]);
+      }),
+    ]);
 
   return (
     <div className="z-10 grid grid-cols-3 gap-4">
@@ -44,7 +48,9 @@ export default async function SchoolYearOverview() {
         </h4>
         <div className="w-full grid grid-cols-3 gap-3">
           <div className="col-span-1">
-            <Students />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Students />
+            </Suspense>
           </div>
           <OverviewData
             total={totalTransfereeStudents}
@@ -57,13 +63,19 @@ export default async function SchoolYearOverview() {
               />
             }
           />
-          <OverviewData total={totalTeachers} title="Teachers" icon={
+          <OverviewData
+            total={totalTeachers}
+            title="Teachers"
+            icon={
               <SyncAltRounded
                 fontSize="large"
                 color="inherit"
                 sx={{ color: "#006666!important" }}
               />
-            }>+{totalNewTeachers} new staff(s)</OverviewData>
+            }
+          >
+            +{totalNewTeachers} new staff(s)
+          </OverviewData>
         </div>
       </Paper>
       <Paper className="w-full mt-8 flex flex-col z-10 gap-6 col-span-1">

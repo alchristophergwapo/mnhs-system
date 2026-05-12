@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import UserMenu from "@/src/components/UserMenu";
+import UserMenu from "@components/UserMenu";
 import NavbarToggleButton from "../navbar/NavbarToggleButton";
 
 type AppBarLayoutProps = {
@@ -12,7 +12,6 @@ type AppBarLayoutProps = {
 
 function AppBarLayout({ open, onOpen }: AppBarLayoutProps) {
   const [isMobile, setIsMobile] = useState(false);
-  console.log(isMobile);
 
   useEffect(() => {
     // Standard mobile breakpoint is often 768px

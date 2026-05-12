@@ -1,6 +1,6 @@
 import { useFormContext } from "@/src/hooks/useTanstack";
 import { houseNumber } from "./addressValidators";
-import Input from "@/src/components/Input";
+import Input from "@components/Input";
 import { memo } from "react";
 import { AddressInputProps } from ".";
 

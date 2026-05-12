@@ -1,4 +1,4 @@
-import AutocompleteSearch from "@/src/components/AutocompleteSearch";
+import AutocompleteSearch from "@components/AutocompleteSearch";
 import { useGetTeachersQuery } from "../../../teachers/TeachersApi";
 import { useState } from "react";
 import { UserType } from "../../../teachers/_types";

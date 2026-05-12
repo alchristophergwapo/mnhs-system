@@ -1,4 +1,4 @@
-import Button from "@/src/components/Button";
+import Button from "@components/Button";
 import { ExperienceType } from "../../../_types";
 import InputField from "../InputField";
 import { Delete } from "@mui/icons-material";

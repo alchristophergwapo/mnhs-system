@@ -7,6 +7,9 @@ import {
 } from "@reduxjs/toolkit/query";
 import { API_BASE_URL, globalHeaders } from "../utils/apiFetch";
 
+// Helper to check if we are on the server
+const isServer = typeof window === "undefined";
+
 /**
  * A base query function for use with `createApi` from `@reduxjs/toolkit/query/react`.
  * This function will be used to generate the underlying fetch logic for the API endpoints.
@@ -25,6 +28,12 @@ const baseQuery: BaseQueryFn<
   object,
   FetchBaseQueryMeta
 > = async (args, api, extraOptions) => {
+  // If we are on the server, abort immediately with empty data
+  // This prevents the error during SSR
+  if (isServer) {
+    return { data: {} };
+  }
+
   const result = await fetchBaseQuery({
     baseUrl: API_BASE_URL,
     /**
@@ -63,6 +72,7 @@ const tagTypes = [
   "students_list",
   "sections_list",
   "courses_list",
+  "user_session",
 ];
 
 export const apiService = createApi({

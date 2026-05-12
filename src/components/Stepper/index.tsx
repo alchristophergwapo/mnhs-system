@@ -25,7 +25,6 @@ type CustomStepperProps<T> = Partial<StepperProps> & {
   defaultActiveStep?: number; // Optional prop to set the default active step
   isLoading?: boolean; // Optional prop to indicate loading state
   onCancel?: () => void; // Optional callback for cancel action
-  onSubmitData?: (data: T) => void | Promise<void>; // Callback for submit action with collected data
 };
 
 /**
@@ -42,7 +41,6 @@ function Stepper<T>(props: CustomStepperProps<T>) {
     defaultActiveStep = 0, // Default to the first step if not provided
     isLoading = false,
     onCancel,
-    onSubmitData,
     orientation = "vertical", // Default orientation set to vertical
     className,
     ...muiStepperProps
@@ -96,7 +94,7 @@ function Stepper<T>(props: CustomStepperProps<T>) {
       setIsBusy(false);
       setActiveStep((prev) => prev + 1);
     }
-  }, [onSubmitData, steps.length]);
+  }, [steps.length]);
 
   return (
     <div className="w-full flex flex-col gap-4">
