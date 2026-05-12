@@ -4,7 +4,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Paper from "@mui/material/Paper";
 import prisma from "@lib/prisma";
 import clsx from "clsx";
-import { EnrollmentStatus } from "@/src/prisma/generated/prisma";
+import { EnrollmentStatus } from "@/prisma/generated/prisma";
 
 async function Students() {
   const [

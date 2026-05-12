@@ -84,7 +84,7 @@ describe("GET handler", () => {
     const request = createRequest();
 
     // Execute the GET request
-    const response = await GET(request);
+    const response = await GET(request).catch((error) => error);
     // Parse the response data as JSON
     const data = await response.json();
 

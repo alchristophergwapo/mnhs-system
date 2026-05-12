@@ -21,14 +21,14 @@ jest.mock("@/src/auth", () => ({
 }));
 
 // Mock the getUserById function
-jest.mock("@/src/lib/service/userService", () => ({
+jest.mock("@lib/service/userService", () => ({
   getUserById: jest.fn(),
 }));
 
 import { render, screen } from "@testing-library/react";
 import DashboardPage from "./DashboardPage";
 import { auth } from "@/src/auth";
-import { getUserById } from "@/src/lib/service/userService";
+import { getUserById } from "@lib/service/userService";
 
 describe("Dasboard page", () => {
   const mockUser = {

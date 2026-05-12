@@ -1,5 +1,5 @@
 import { Prisma, Role } from "@/prisma/generated/prisma";
-import prisma from "../prisma";
+import prisma from "@lib/prisma";
 
 const baseCitizenshipSelect = {
   countryOfDualCitizenship: true,

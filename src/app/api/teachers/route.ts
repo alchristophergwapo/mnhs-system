@@ -130,7 +130,7 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     console.error(error);
-    return new Response(JSON.stringify({ error }), {
+    return new Response(JSON.stringify({ error: (error as Error).message ?? "Internal Server Error" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });

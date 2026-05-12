@@ -7,11 +7,11 @@ import type { Config } from "jest";
 
 const sharedConfig = {
   moduleNameMapper: {
-    "^@prisma/(.*)$": "@prisma/$1",
+    "^@/prisma/(.*)$": "<rootDir>/src/prisma/$1", 
     "^@components/(.*)$": "<rootDir>/src/components/$1",
     "^@lib/(.*)$": "<rootDir>/src/lib/$1",
     "^@api/(.*)$": "<rootDir>/src/app/api/$1",
-    "^@/(.*)$": "<rootDir>/src/$1",
+    "^@/src/(.*)$": "<rootDir>/src/$1",
   },
   transform: {
     "^.+\\.(ts|tsx|js|jsx)$": [
@@ -131,7 +131,7 @@ const config: Config = {
       displayName: "client",
       testEnvironment: "jsdom",
       testRegex: [
-        // "/src/app/\\(pages\\)/\\(admin\\)/.*\\.test\\.(ts|tsx)$",
+        "/src/app/\\(pages\\)/\\(admin\\)/.*\\.test\\.(ts|tsx)$",
         "/src/app/\\(pages\\)/student/*\\.test\\.(tsx?)$",
         "/src/components/*\\.test\\.(tsx?)$",
       ],
