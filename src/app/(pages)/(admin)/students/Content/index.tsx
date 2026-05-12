@@ -3,7 +3,7 @@ import MaterialTable, {
   mrtTableInitialState,
 } from "@/src/components/MaterialTable";
 import { Fragment, useEffect, useState } from "react";
-import { SharedPropsType } from "@/src/components/PageWrapper";
+import { SharedPropsType } from "@components/PageCardedWrapper";
 import { MRT_PaginationState, MRT_TableState } from "material-react-table";
 import { UserType } from "../../teachers/_types";
 import { GetStudentsApiArg } from "../StudentsApi";

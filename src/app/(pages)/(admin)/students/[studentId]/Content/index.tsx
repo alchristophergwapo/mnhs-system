@@ -1,7 +1,7 @@
-import Stepper from "@/src/components/Stepper";
+import Stepper from "@components/Stepper";
 import Typography from "@mui/material/Typography";
 import { getSteps } from "./steps";
-import { SharedPropsType } from "@/src/components/PageWrapper";
+import { SharedPropsType } from "@components/PageCardedWrapper";
 import { StudentDataType } from "..";
 
 /**

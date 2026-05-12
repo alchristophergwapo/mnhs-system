@@ -1,11 +1,11 @@
 import { amber, teal } from "@mui/material/colors";
-import { SharedPropsType } from "@/src/components/PageWrapper";
+import { SharedPropsType } from "@components/PageCardedWrapper";
 import useNavigate from "@/src/hooks/useNavigate";
 import { PlusOne } from "@mui/icons-material";
 import { GetStudentsApiArg } from "../StudentsApi";
 import { UserType } from "../../teachers/_types";
 import SearchStudent from "./SearchStudent";
-import Button from "@/src/components/Button";
+import Button from "@components/Button";
 
 /**
  * Properties for the Headers component, which displays the header section of the Non-Advisory Teachers page.

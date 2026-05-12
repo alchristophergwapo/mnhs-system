@@ -1,6 +1,6 @@
 "use client";
 
-import PageWrapper from "@/src/components/PageWrapper";
+import PageWrapper from "@components/PageCardedWrapper";
 import Content from "./Content";
 import Header from "./Header";
 import { UserType } from "../_types";
@@ -68,21 +68,28 @@ export default function TeacherForm() {
 
   const [teacherData, setTeacherData] = useState(defaultValues);
 
+  const isNew = teacherId === "new";
+  const isReady = isNew || !!teacherDetails;
+
   useEffect(() => {
-    if (teacherId !== "new" && teacherDetails) {
+    if (!isNew && teacherDetails) {
       const restructuredData = ObjectHelper.restructure(
         teacherDetails,
         defaultValues,
       );
       setTeacherData(restructuredData);
     }
-  }, [teacherDetails, teacherId]);
+  }, [teacherDetails, isNew]);
 
   const form = useAppForm({
     defaultValues: teacherData as UserType,
     onSubmit: async ({ value }) => {
+      // Make sure to validate form data before submitting the data to the database
       await form.validateAllFields("submit");
-      if (teacherId !== "new") {
+
+      // Check if data is an existing one
+      if (!isNew) {
+        // Update the existing data with the new values
         await updateTeacher({
           teacher: value as UserType,
           teacherId: Number(teacherId),
@@ -98,6 +105,7 @@ export default function TeacherForm() {
             enqueueSnackbar("An error occurred", { variant: "error" });
           });
       } else {
+        // Add/Create new teacher data if teacherId from route params is equal to "new"
         await createTeacher(value as UserType)
           .unwrap()
           .then((teacher) => {
@@ -113,7 +121,7 @@ export default function TeacherForm() {
     },
   });
 
-  if (isLoading || isFetching) {
+  if (isLoading || isFetching || !isReady) {
     return <div>Loading...</div>;
   }
 

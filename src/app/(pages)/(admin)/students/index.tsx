@@ -1,6 +1,6 @@
 "use client";
 
-import PageWrapper from "@/src/components/PageWrapper";
+import PageWrapper from "@components/PageCardedWrapper";
 import { GetStudentsApiArg, useGetStudentsQuery } from "./StudentsApi";
 import { useState } from "react";
 import Headers from "./Headers";
