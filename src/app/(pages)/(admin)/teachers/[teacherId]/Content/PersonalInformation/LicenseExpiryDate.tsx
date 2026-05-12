@@ -1,4 +1,4 @@
-import Input from "@/src/components/Input";
+import Input from "@components/Input";
 import { useFormContext } from "@/src/hooks/useTanstack";
 import { format, parseISO } from "date-fns";
 import { memo } from "react";

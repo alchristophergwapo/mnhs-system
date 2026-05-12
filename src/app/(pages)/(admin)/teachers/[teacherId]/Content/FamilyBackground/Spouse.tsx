@@ -1,4 +1,4 @@
-import { ContentProps } from "@/src/components/Stepper";
+import { ContentProps } from "@components/Stepper";
 import InputField from "../InputField";
 import { NameInputType, UserType } from "../../../_types";
 import NameInput from "../NameInput";

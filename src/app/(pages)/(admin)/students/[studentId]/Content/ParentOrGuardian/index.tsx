@@ -1,8 +1,4 @@
-import Input from "@/src/components/Input";
 import Family from "./Family";
-import { useFormContext } from "@/src/hooks/useTanstack";
-import z from "zod";
-import { FieldAsyncValidateOrFn } from "@tanstack/react-form";
 
 /**
  * Component for the family background section of the teacher form.
@@ -11,7 +7,6 @@ import { FieldAsyncValidateOrFn } from "@tanstack/react-form";
  * @returns {JSX.Element} - The JSX element for the component.
  */
 function ParentOrGuardian() {
-  const form = useFormContext();
 
   return (
     <div className="flex flex-col gap-4 my-2">

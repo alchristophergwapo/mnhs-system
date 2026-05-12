@@ -1,4 +1,4 @@
-import Input from "@/src/components/Input";
+import Input from "@components/Input";
 import { useFormContext } from "@/src/hooks/useTanstack";
 import { FieldAsyncValidateOrFn } from "@tanstack/react-form";
 import z from "zod";

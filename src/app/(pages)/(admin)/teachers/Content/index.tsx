@@ -1,14 +1,14 @@
 import Avatar from "@mui/material/Avatar";
 import MaterialTable, {
   mrtTableInitialState,
-} from "@/src/components/MaterialTable";
+} from "@components/MaterialTable";
 import { Fragment, useEffect, useState } from "react";
 import ActionsColumn from "./columns/ActionsColumn";
 import { UserType } from "../_types";
-import { SharedPropsType } from "@/src/components/PageWrapper";
+import { SharedPropsType } from "@components/PageCardedWrapper";
 import { MRT_PaginationState, MRT_TableState } from "material-react-table";
 import TeacherTypeFilter from "./TeacherTypeFilter";
-import Loading from "@/src/components/Loading";
+import Loading from "@components/Loading";
 import GradeLevelFilter from "./GradeLevelFilter";
 import { GetTeachersApiArg } from "../TeachersApi";
 

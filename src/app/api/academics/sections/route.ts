@@ -1,5 +1,5 @@
 import prisma from "@/src/lib/prisma";
-import { EnrollmentStatus, Gender, Role } from "@/src/prisma/src/generated/prisma";
+import { EnrollmentStatus, Gender, Role } from "@/src/prisma/generated/prisma";
 
 export async function GET(_: Request) {
     try {

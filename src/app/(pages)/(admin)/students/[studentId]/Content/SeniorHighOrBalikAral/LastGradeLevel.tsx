@@ -1,5 +1,5 @@
-import { useGetGradeLevelsQuery } from "@/src/app/(admin)/GradeLevelApi";
-import Select from "@/src/components/Select";
+import { useGetGradeLevelsQuery } from "@/src/app/(pages)/(admin)/GradeLevelApi";
+import Select from "@components/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useFormContext } from "@/src/hooks/useTanstack";
 import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";

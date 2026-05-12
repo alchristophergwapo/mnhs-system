@@ -1,4 +1,4 @@
-import { SharedPropsType } from "@/src/components/PageCardedWrapper";
+import { SharedPropsType } from "@components/PageCardedWrapper";
 import { UserType } from "../../teachers/_types";
 
 /**

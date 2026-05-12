@@ -1,4 +1,4 @@
-import { ContentProps } from "@/src/components/Stepper";
+import { ContentProps } from "@components/Stepper";
 import { NameInputType, UserType } from "../../../_types";
 import { useCallback, useRef } from "react";
 import Spouse from "./Spouse";

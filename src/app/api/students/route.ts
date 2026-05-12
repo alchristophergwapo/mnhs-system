@@ -1,8 +1,9 @@
 import prisma from "@/src/lib/prisma";
 import { createClient } from "@/src/lib/supabase/server";
-import { EnrollmentStatus, FamilyRelationShip, Gender } from "@/src/prisma/src/generated/prisma";
+import { EnrollmentStatus, FamilyRelationShip, Gender } from "@/src/prisma/generated/prisma";
 import { AddressType, CitizenshipType, EnrollmentBackgroundType, EnrollmentType, FamilyType, GradeLevelType, StudentType, UserType } from "@/src/types";
-import bcrypt from "bcrypt";
+import { generateSecurePassword } from "@/src/utils/passwordHelper";
+import { generateUsername, normalizeAddressData } from "@/src/utils/userDataHelper";
 import { cookies } from "next/headers";
 
 export async function GET(_: Request) {
@@ -235,26 +236,4 @@ export async function POST(_: Request) {
         console.error(error);
         return new Response(JSON.stringify({ message: "Error creating student" }), { status: 500 });
     }
-}
-
-async function generateSecurePassword(firstName: string, lastName: string, dateOfBirth: Date): Promise<string> {
-    const salt = await bcrypt.genSalt(12); // Increased salt rounds
-    const passwordString = `${firstName}${lastName}${dateOfBirth.getMonth() + 1}${dateOfBirth.getDate()}${dateOfBirth.getFullYear()}`;
-    return bcrypt.hash(passwordString, salt);
-}
-
-function generateUsername(firstName: string, lastName: string, dateOfBirth: Date): string {
-    return `${firstName.toLowerCase()}.${lastName.toLowerCase()}_${dateOfBirth.getMonth() + 1}_${dateOfBirth.getDate()}_${dateOfBirth.getFullYear()}`;
-}
-
-function normalizeAddressData(address: any) {
-    return {
-        barangay: address.barangay,
-        city: address.city,
-        province: address.province,
-        zipCode: Number(address.zipCode),
-        houseNumber: address.houseNumber,
-        street: address.street,
-        subdivision: address.subdivision,
-    };
 }

@@ -1,7 +1,8 @@
-import prisma from "@/src/lib/prisma";
-import { CivilStatus, Gender, Role } from "@/src/prisma/src/generated/prisma";
-import { UserType } from "../../(admin)/teachers/_types";
+import prisma from "@lib/prisma";
+import { CivilStatus, Gender, Prisma, Role } from "@/prisma/generated/prisma";
+import { UserType } from "../../(pages)/(admin)/teachers/_types";
 import bcrypt from "bcrypt";
+import { getTeacherById, getTeachers } from "@lib/service/teacherService";
 
 /**
  * GET /api/teachers
@@ -36,8 +37,8 @@ export async function GET(request: Request) {
   const gradeLevel = parseInt(searchParams.get("gradeLevel") || "0", 10);
 
   try {
-    let queryConditions = {};
-    let defaultQueryConditions = {};
+    let queryConditions: Prisma.UserWhereInput = {};
+    let defaultQueryConditions: Prisma.UserWhereInput = {};
 
     if (q) {
       defaultQueryConditions = {
@@ -61,16 +62,6 @@ export async function GET(request: Request) {
             },
           },
         ],
-      };
-    }
-
-    if (gradeLevel) {
-      defaultQueryConditions = {
-        teacher: {
-          gradeLevel: {
-            id: Number(gradeLevel)
-          }
-        }
       };
     }
 
@@ -101,47 +92,21 @@ export async function GET(request: Request) {
       };
     }
 
-    // Fetch teachers with query conditions default and from parameters
-    const teachers = await prisma.user.findMany({
-      where: {
-        AND: [
-          {
-            role: {
-              in: [Role.TEACHER, Role.ADMIN, Role.SUPERADMIN],
-            }
-          },
-          defaultQueryConditions,
-          queryConditions,
-        ],
-      },
-      include: {
+    if (gradeLevel) {
+      queryConditions = {
         teacher: {
-          include: {
-            position: {
-              select: {
-                name: true,
-              },
+          ...(queryConditions?.teacher as Prisma.TeacherWhereInput),
+          gradeLevel: {
+            some: {
+              id: Number(gradeLevel),
             },
-            advisorySection: {
-              select: {
-                name: true,
-              },
-            },
-            gradeLevel: {
-              select: {
-                name: true,
-              },
-            },
-          },
-        },
-        citizenship: true,
-      },
-      omit: {
-        password: true,
-      },
-      skip: page * limit, // Calculate the skip value
-      take: limit, // Limit the number of teachers per page
-    });
+          }
+        }
+      };
+    }
+
+    // Fetch teachers with query conditions default and from parameters
+    const teachers = await getTeachers({...defaultQueryConditions, ...queryConditions}, page * limit, limit);
 
     // Fetch the total number of teachers
     const totalTeachers = await prisma.user.count({
@@ -226,18 +191,7 @@ export async function POST(request: Request) {
         }
       });
 
-      const newUser = await tx.user.findUnique({
-        where: { id: user.id },
-        include: {
-          teacher: true,
-          citizenship: true,
-          permanentAddress: true,
-          residentialAddress: true,
-        },
-        omit: {
-          password: true,
-        },
-      });
+      const newUser = await getTeacherById(user.id);
 
       return newUser;
     })

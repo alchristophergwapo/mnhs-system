@@ -3,15 +3,15 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import { memo, useRef, useState } from "react";
-import RadioSelect from "@/src/components/RadioSelect";
+import RadioSelect from "@components/RadioSelect";
 import Radio from "@mui/material/Radio";
-import Select from "@/src/components/Select";
+import Select from "@components/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { useGetCoursesQuery } from "@/src/app/(admin)/academics/courses/CoursesApi";
+import { useGetCoursesQuery } from "@/src/app/(pages)/(admin)/academics/courses/CoursesApi";
 import EntryType from "./EntryType";
 import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 import z from "zod";
-import { CourseType } from "@/src/prisma/src/generated/prisma";
+import { CourseType } from "@/prisma/generated/prisma";
 
 function SeniorHighOrBalikAral() {
   const form = useFormContext();
@@ -234,5 +234,3 @@ function SeniorHighOrBalikAral() {
     </div>
   );
 }
-
-export default memo(SeniorHighOrBalikAral);

@@ -6,10 +6,10 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useAppForm } from "@/src/hooks/useTanstack";
-import Input from "@/src/components/Input";
+import Input from "@components/Input";
 import { UpdaterFn } from "@tanstack/react-form";
-import Link from "@/src/components/Link";
-import Button from "@/src/components/Button";
+import Link from "@components/Link";
+import Button from "@components/Button";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -24,12 +24,14 @@ function Login() {
     username: "christoff.al_0_1_2000",
     password: "ChristoffAl012000",
   };
-  const {data: session, status} = useSession();
+  const { data: session, status } = useSession();
   const navigate = useNavigate();
-  
-  if (session && status === 'authenticated') {
-    if (session.user.role === 'STUDENT') {
-      navigate('/student/dashboard');
+
+  if (session && status === "authenticated") {
+    if (session.user.role === "STUDENT") {
+      navigate("/student/dashboard");
+    } else if (session.user.role === "ADMIN") {
+      navigate("/dashboard");
     }
   }
 
@@ -48,10 +50,11 @@ function Login() {
         credentials.username = values.username;
       }
 
-      signIn("credentials", credentials).then().catch(err => {
-       console.log(err) 
-      }
-      );
+      signIn("credentials", credentials)
+        .then()
+        .catch((err) => {
+          console.log(err);
+        });
       // console.log(result)
 
       // if (result?.error) {

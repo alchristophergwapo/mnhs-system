@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
-import Stepper from "@/src/components/Stepper";
+import Stepper from "@components/Stepper";
 import getFormSteps from "./steps";
-import { JSX, useCallback, useMemo, useRef } from "react";
-import { UserType } from "../../_types";
+import { JSX, useMemo } from "react";
 
 /**
  * Component for the teacher form content.
@@ -13,25 +12,9 @@ import { UserType } from "../../_types";
  * @return {JSX.Element} - The JSX element for the component.
  */
 function Content(): JSX.Element {
-  const inputsDataRef = useRef({} as UserType); // Create a mutable ref to store the current inputsData and prevent re-renders
-  inputsDataRef.current = {} as UserType; // Update the mutable ref with the current inputsData
 
   // Create a memoized version of the form steps
   const stepperSteps = useMemo(() => getFormSteps(), []);
-
-  // Handle input data changes and update the state. We use useCallback to prevent unnecessary re-renders
-  const handleInputDataChange = useCallback((data: UserType) => {
-    // onInputDataChange(data);
-  }, []);
-
-  // Handle form submission.
-  const handleFormSubmit = useCallback((data: UserType) => {
-    try {
-      // Handle form submission logic here
-    } catch (error) {
-      console.error("Unhandled exception:", error);
-    }
-  }, []);
 
   return (
     <div className="w-full px-8 py-6">
@@ -61,7 +44,6 @@ function Content(): JSX.Element {
       <div className="w-full flex flex-col mt-8">
         <Stepper
           steps={stepperSteps}
-          onSubmitData={handleFormSubmit}
           defaultActiveStep={0}
         />
       </div>

@@ -1,5 +1,5 @@
 import prisma from "@/src/lib/prisma";
-import { FamilyRelationShip } from "@/src/prisma/src/generated/prisma";
+import { FamilyRelationShip } from "@/src/prisma/generated/prisma";
 
 /**
  * Get student by id

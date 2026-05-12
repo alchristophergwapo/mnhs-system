@@ -1,12 +1,12 @@
-import RadioSelect from "@/src/components/RadioSelect";
+import RadioSelect from "@components/RadioSelect";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import { useFormContext } from "@/src/hooks/useTanstack";
 import z from "zod";
 import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 import LastGradeLevel from "./LastGradeLevel";
-import Input from "@/src/components/Input";
-import { StudentEntryType } from "@/src/prisma/src/generated/prisma";
+import Input from "@components/Input";
+import { StudentEntryType } from "@/prisma/generated/prisma";
 
 function EntryType({ required }: { required: boolean }) {
   const form = useFormContext();

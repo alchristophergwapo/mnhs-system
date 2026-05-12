@@ -1,12 +1,12 @@
-import Input from "@/src/components/Input";
-import RadioSelect from "@/src/components/RadioSelect";
+import Input from "@components/Input";
+import RadioSelect from "@components/RadioSelect";
 import { useFormContext } from "@/src/hooks/useTanstack";
 import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import { memo } from "react";
 import z from "zod";
-import GradeLevel from "@/src/app/(admin)/academics/sections/CreateSection/GradeLevel";
+import GradeLevel from "@/src/app/(pages)/(admin)/academics/sections/CreateSection/GradeLevel";
 import Citizenship from "./Citizenship";
 import { format, parseISO } from "date-fns";
 

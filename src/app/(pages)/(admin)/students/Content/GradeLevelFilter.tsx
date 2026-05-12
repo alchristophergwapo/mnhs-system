@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { useGetGradeLevelsQuery } from "../../GradeLevelApi";
-import BaseGradeLevelFilter from "@/components/Filters/GradeLevelFilter";
+import BaseGradeLevelFilter from "@components/Filters/GradeLevelFilter";
 
 type GradeLevelFilterProps = {
   gradeLvlId?: number;

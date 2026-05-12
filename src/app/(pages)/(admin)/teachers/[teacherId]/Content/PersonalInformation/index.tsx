@@ -4,7 +4,7 @@ import CivilStatus from "./BirthRelatedInputs/CivilStatus";
 import Citizenship from "./BirthRelatedInputs/Citizenship";
 import NameInput from "../NameInput";
 import { useFormContext } from "@/src/hooks/useTanstack";
-import Input from "@/src/components/Input";
+import Input from "@components/Input";
 import z from "zod";
 import { format, parseISO } from "date-fns";
 import BloodType from "./BloodType";
