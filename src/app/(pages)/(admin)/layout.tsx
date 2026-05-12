@@ -1,7 +1,5 @@
-import React, { useMemo } from "react";
 import AdminLayout from "@/src/layout/AdminLayout";
-import { redirect } from "next/navigation";
-import { useSession } from "next-auth/react";
+import AuthGuard from "@components/AuthGuard";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -16,15 +14,12 @@ type LayoutProps = {
  *   <div>Content</div>
  * </Layout>
  */
-export default async function Layout(props: LayoutProps) {
+export default function Layout(props: LayoutProps) {
   const { children } = props;
-  const { data, status } = useSession();
 
-  const session = useMemo(() => data, [data, status]);
-
-  if (!session) {
-    redirect("/auth/login");
-  }
-
-  return <AdminLayout>{children}</AdminLayout>;
+  return (
+    <AuthGuard>
+      <AdminLayout>{children}</AdminLayout>
+    </AuthGuard>
+  );
 }

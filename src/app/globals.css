@@ -24,7 +24,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-roboto);
-  font-size: 0.8125rem;
+  font-size: 12px;
 }
 
 .MuiInputBase-root.MuiInput-root.MuiSelect-root {

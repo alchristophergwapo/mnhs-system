@@ -117,7 +117,7 @@ const theme = createTheme({
     },
     MuiSvgIcon: {
       styleOverrides: {
-        root: { color: "black!important" },
+        root: { color: "black" },
       },
     },
     MuiInputLabel: {
@@ -159,6 +159,13 @@ const theme = createTheme({
           "& .MuiAlert-icon": {
             padding: 0,
           },
+        }
+      }
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        primary: {
+          fontSize: "14px",
         }
       }
     }
