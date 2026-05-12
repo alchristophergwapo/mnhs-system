@@ -1,4 +1,4 @@
-import prisma from "@/src/lib/prisma";
+import prisma from "@lib/prisma";
 
 export async function GET(_: Request, props: { params: Promise<{ query: string }> }) {
     try {

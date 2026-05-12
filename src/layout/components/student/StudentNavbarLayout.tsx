@@ -2,8 +2,6 @@ import Drawer from "@mui/material/Drawer";
 
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 import NavbarContent from "../navbar/NavbarContent";
-import Box from "@mui/material/Box";
-import { useEffect, useState } from "react";
 import Toolbar from "@mui/material/Toolbar";
 
 const drawerWidth = 280;
@@ -66,25 +64,8 @@ export default function StudentNavbarLayout(props: {
   onClose: () => void;
   onOpen: () => void;
 }) {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const { open, onClose, onOpen } = props;
-  const [container, setContainer] = useState<(() => HTMLElement) | undefined>(
-    undefined,
-  );
-  console.log(container, open);
 
-  useEffect(() => {
-    // This code only runs on the client side
-    console.log(window)
-    setContainer(() => window.document.body);
-  }, []);
-
-  const handleDrawerClose = () => {
-    setMobileOpen(false);
-    onOpen();
-  };
-
-  console.log(props);
   return (
     <StyledNavbar
       variant="permanent"

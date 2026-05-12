@@ -3,7 +3,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import React from "react";
 import theme from "../theme";
 import CssBaseline from "@mui/material/CssBaseline";
-import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 
 type MainThemeProviderProps = {
   children: React.ReactNode;
@@ -28,7 +27,6 @@ export default function MainThemeProvider(props: MainThemeProviderProps) {
         enableCssLayer: true,
       }}
     >
-      <InitColorSchemeScript attribute="class" />
       <ThemeProvider
         theme={theme}
         modeStorageKey="mnhs-themeMode"

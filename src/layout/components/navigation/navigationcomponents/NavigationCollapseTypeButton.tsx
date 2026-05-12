@@ -18,7 +18,7 @@ const RootComponent = styled(List)<ListComponentProps>(
     padding: 0,
     "& .nav-list-item": {
       paddingLeft: props._itempadding > 80 ? 80 : props._itempadding,
-      margin: "0 0 4px 0"
+      margin: "0 0 4px 0",
     },
     borderRadius: "8px!important",
   }),
@@ -90,16 +90,21 @@ export default function NavigationCollapseTypeButton(
         >
           {item.icon && (
             <Icon
-              color="action"
+              color="inherit"
               sx={{
-                fontSize: "18px !important",
+                // fontSize: "20px !important",
                 marginTop: "-3px",
+                color: "white",
               }}
             >
               {item.icon}
             </Icon>
           )}
-          <ListItemText primary={item.title} secondary={item.subtitle} />
+          <ListItemText
+            primary={item.title}
+            secondary={item.subtitle}
+            sx={{ color: "white" }}
+          />
           <IconButton
             disableRipple
             onClick={(event) => {
@@ -111,7 +116,9 @@ export default function NavigationCollapseTypeButton(
               paddingY: 0,
             }}
           >
-            <Icon>{open ? "keyboard_arrow_down" : "keyboard_arrow_up"}</Icon>
+            <Icon sx={{ color: "white" }}>
+              {open ? "keyboard_arrow_down" : "keyboard_arrow_up"}
+            </Icon>
           </IconButton>
         </ListItemButton>
         {items}

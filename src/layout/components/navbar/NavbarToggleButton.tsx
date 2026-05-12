@@ -15,7 +15,7 @@ import IconButton, { IconButtonProps } from "@mui/material/IconButton";
  */
 function NavbarToggleButton(props: IconButtonProps & {open?: boolean}) {
   const { children = <Icon>menu</Icon> } = props;
-console.log(props)
+
   if (props.open) {
     return null;
   }

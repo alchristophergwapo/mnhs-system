@@ -1,10 +1,10 @@
-import MenuItem from "@mui/material/MenuItem";
+import MenuItem, { MenuItemProps } from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import React, { JSX } from "react";
 import clsx from "clsx";
 
-type MenuButtonProps = {
+type MenuButtonProps = Partial<MenuItemProps> & {
   children?: JSX.Element;
   label: string;
   iconPosition?: string;
@@ -23,13 +23,19 @@ type MenuButtonProps = {
  * </MenuButton>
  */
 export default function MenuButton(props: MenuButtonProps) {
-  const { children, label, iconPosition = "left", className= "" } = props;
+  const {
+    children,
+    label,
+    iconPosition = "left",
+    className = "",
+    onClick,
+  } = props;
 
   return (
-    <MenuItem className={clsx(className, "flex space-x-2")}>
-      {iconPosition === 'left' && children}
+    <MenuItem className={clsx(className, "flex space-x-2")} onClick={onClick}>
+      {iconPosition === "left" && children}
       <ListItemText className="text-[12px]">{label}</ListItemText>
-      {iconPosition === 'right' && <Typography>{children}</Typography>}
+      {iconPosition === "right" && <Typography>{children}</Typography>}
     </MenuItem>
   );
 }
