@@ -21,7 +21,12 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@/components/*": ["./src/components/*"]
+      "@components/*": ["./src/components/*"],
+      "@store/*": ["./src/store/*"],
+      "@types": ["./src/types"],
+      "@lib/*": ["./src/lib/*"],
+      "@api/*": ["./src/app/api/*"],
+      "@/prisma/*": ["./src/prisma/*"],
     }
   },
   "include": [

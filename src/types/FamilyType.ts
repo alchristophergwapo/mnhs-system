@@ -1,4 +1,4 @@
-import { FamilyRelationShip } from "@/src/prisma/src/generated/prisma";
+import { FamilyRelationShip } from "@/prisma/generated/prisma";
 
 export type FamilyType = {
     id?: number;
