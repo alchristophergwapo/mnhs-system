@@ -27,6 +27,7 @@ function NextButton(props: NextButtonProps) {
       endIcon={
         <ArrowForward
           sx={{ color: "white!important", fontSize: "18px!important" }}
+          className="dark:text-black!"
         />
       }
       onClick={onClick}

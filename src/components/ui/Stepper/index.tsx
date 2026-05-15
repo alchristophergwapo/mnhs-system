@@ -1,12 +1,12 @@
 import { JSX, memo, ReactNode, useCallback, useRef, useState } from "react";
 
 import MuiStepper, { StepperProps } from "@mui/material/Stepper";
-import VerticalStep from "./VerticalStep";
+import StepperVerticalStep from "./StepperVerticalStep";
 import Step from "@mui/material/Step";
 import Divider from "@mui/material/Divider";
 import clsx from "clsx";
-import NextButton from "./NextButton";
-import PreviousButton from "./PreviousButton";
+import StepperNextButton from "./StepperNextButton";
+import StepperPreviousButton from "./StepperPreviousButton";
 import { StepperConnector } from "./styledComponents";
 import { useFormContext } from "@/src/hooks/useTanstack";
 
@@ -114,7 +114,7 @@ function Stepper<T>(props: CustomStepperProps<T>) {
           {orientation === "vertical" &&
             stepsRef.current.map((step, index) => (
               <Step key={index}>
-                <VerticalStep
+                <StepperVerticalStep
                   {...step}
                   active={activeStep === index}
                   completed={activeStep > index}
@@ -129,11 +129,11 @@ function Stepper<T>(props: CustomStepperProps<T>) {
       </div>
       <Divider />
       <div className="flex flex-row justify-end mt-2 gap-4">
-        <PreviousButton
+        <StepperPreviousButton
           onClick={handleClickPrevious}
           isVisible={activeStep > 0}
         />
-        <NextButton
+        <StepperNextButton
           label={nextLabel}
           onClick={handleClickNext}
           loading={isBusy}
