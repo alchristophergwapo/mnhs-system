@@ -33,7 +33,17 @@ function RadioSelect({
   return (
     <FormGroup>
       <FormControl required={required} error={error}>
-        <FormLabel id="radio-buttons-group-label" required={required}>
+        <FormLabel
+          id="radio-buttons-group-label"
+          required={required}
+          className="dark:text-white!"
+          sx={{
+            "& .MuiFormLabel-asterisk": {
+              color: "red",
+              fontSize: "16px!important",
+            },
+          }}
+        >
           {label}
         </FormLabel>
         <RadioGroup
@@ -49,7 +59,11 @@ function RadioSelect({
 
         {errors && errors?.length > 0
           ? errors.map((error, index) => (
-              <FormHelperText key={index} error={errors && errors?.length > 0} sx={{mb: 1}}>
+              <FormHelperText
+                key={index}
+                error={errors && errors?.length > 0}
+                sx={{ mb: 1 }}
+              >
                 {error.message}
               </FormHelperText>
             ))

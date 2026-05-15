@@ -25,14 +25,14 @@ const RootComponent = styled(ListItemButton)<ListItemButtonStyleProps>(
     borderRadius: "8px",
     color: "white",
     "&.active": {
-      color: "white",
+      color: theme.palette.primary.main,
       backgroundColor:
         theme.palette.mode === "light"
           ? "rgba(0, 0, 0, .05)!important"
           : "rgba(255, 255, 255, .1)!important",
       transition: "border-radius .15s cubic-bezier(0.4,0.0,0.2,1)",
       "& > .nav-list-item-icon": {
-        color: "inherit",
+        color: theme.palette.primary.main,
       },
     },
   }),

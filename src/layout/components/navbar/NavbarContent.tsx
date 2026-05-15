@@ -17,7 +17,7 @@ const StyledContent = styled("div")(({ theme }) => ({
   backgroundRepeat: "no-repeat",
   backgroundSize: "100% 40px, 100% 10px",
   backgroundAttachment: "local, scroll",
-  backgroundColor: theme.palette.primary.main,
+  backgroundColor: theme.palette.mode === 'dark' ? "#101a1c": theme.palette.primary.main,
 }));
 
 /**
@@ -41,7 +41,7 @@ function NavbarContent({
     <StyledContent className="h-full flex flex-1 min-h-0 flex-col">
       <div className={clsx("flex flex-row justify-between py-3 pl-4 pr-1 mb-1", role === 'STUDENT' && 'hidden')}>
         <Image
-          className="dark:invert"
+          className="invert dark:to-black"
           src="/next.svg"
           alt="Next.js logo"
           width={100}

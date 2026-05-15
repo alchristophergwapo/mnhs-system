@@ -60,12 +60,12 @@ function PageCardedWrapper<T>(props: PageWrapperProps<T>) {
   }, [data, isLoading]);
 
   return (
-    <div className={clsx(className, "w-full z-10 p-8")}>
+    <div className={clsx(className, "w-full h-full z-10 p-8 dark:bg-gray-100 bg-[#0B1416]")}>
       <div className="flex flex-row justify-between">
         <div className={clsx("", !displayBreadcrumbs && "w-full")}>{headerWithData}</div>
         <div>{displayBreadcrumbs && <PageBreadcrumbs />}</div>
       </div>
-      <Paper className="w-full mt-8 flex flex-col py-2 z-10 gap-6 bg-white min-h-40">
+      <Paper className="w-full mt-8 flex flex-col py-2 z-10 gap-6 bg-white shadow-md! shadow-teal-300! min-h-40">
         {contentWithData}
       </Paper>
       {children}

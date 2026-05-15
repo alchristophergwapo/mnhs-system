@@ -38,7 +38,7 @@ function AdminLayout(props: AdminLayoutProps) {
             className="relative w-full h-full z-10 flex min-h-0 flex-auto flex-col"
             sx={{
               "::before": {
-                backgroundColor: "teal",
+                backgroundColor: theme => theme.palette.mode === 'dark' ? theme.palette.primary.contrastText: "teal",
                 height: "200px",
                 content: "''",
                 display: "block",

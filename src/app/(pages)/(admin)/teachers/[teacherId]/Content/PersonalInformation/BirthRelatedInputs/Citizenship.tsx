@@ -20,8 +20,17 @@ export default function Citizenship() {
 
   return (
     <FormControl component="fieldset" variant="standard">
-      <FormLabel component="legend">
-        <div>Citizenship</div>
+      <FormLabel
+        component="legend"
+        className="dark:text-white!"
+        sx={{
+          "& .MuiFormLabel-asterisk": {
+            color: "red",
+            fontSize: "16px!important",
+          },
+        }}
+      >
+        <Typography>Citizenship</Typography>
         <Typography variant="caption">
           If holder of dual citizenship, please indicate the details
         </Typography>

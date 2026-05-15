@@ -2,7 +2,6 @@ import { memo } from "react";
 
 import AppBar from "@mui/material/AppBar";
 import Image from "next/image";
-import { teal } from "@mui/material/colors";
 
 /**
  * Footer component for the layout.
@@ -12,14 +11,14 @@ import { teal } from "@mui/material/colors";
 function FooterLayout() {
   return (
     <AppBar
-      className="sticky bottom-0 z-20 p-4"
+      className="sticky bottom-0 z-20 p-4 bg-teal-700 dark:bg-[#1a2426]!"
       elevation={0}
       sx={{
         position: "sticky",
-        backgroundColor: teal[700],
       }}
     >
       <Image
+        className="invert dark:to-black"
         src="/next.svg"
         alt="Next.js logo"
         width={100}
