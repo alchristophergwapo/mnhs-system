@@ -1,3 +1,3 @@
-import StudentPage from ".";
+import StudentPage from "./StudentPage";
 
 export default StudentPage;

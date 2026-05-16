@@ -1,3 +1,3 @@
-import TeacherForm from ".";
+import TeacherForm from "./TeacherPage";
 
 export default TeacherForm;

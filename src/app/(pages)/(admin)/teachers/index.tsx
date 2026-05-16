@@ -1,9 +1,9 @@
 "use client";
 
-import Content from "./Content";
+import TeachersPageContent from "./TeachersPageContent";
 import { useGetTeachersQuery } from "./TeachersApi";
 import PageWrapper from "@components/PageCardedWrapper";
-import Headers from "./Headers";
+import Headers from "./TeachersPageHeaders";
 import { useState } from "react";
 
 /**
@@ -46,7 +46,7 @@ export default function Teachers() {
       isLoading={isFetching}
       className="pt-4"
       header={<Headers parameters={parameters} setParameters={handleOptionsChange} />}
-      content={<Content parameters={parameters} setParameters={(newOpt) => handleOptionsChange(newOpt as typeof defaultOptions)} />}
+      content={<TeachersPageContent parameters={parameters} setParameters={(newOpt) => handleOptionsChange(newOpt as typeof defaultOptions)} />}
     />
   );
 }
