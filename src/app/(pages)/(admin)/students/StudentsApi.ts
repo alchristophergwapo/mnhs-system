@@ -1,4 +1,4 @@
-import { apiService } from "@/src/store/apiService";
+import { apiService } from "@store/apiService";
 import { AddressType, CitizenshipType, EnrollmentBackgroundType, EnrollmentType, FamilyType, StudentType, UserType } from "@/src/types";
 
 // Set the type of the response data which is an array of UserType

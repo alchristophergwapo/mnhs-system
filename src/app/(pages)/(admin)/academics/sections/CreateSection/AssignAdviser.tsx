@@ -1,8 +1,8 @@
 import AutocompleteSearch from "@components/AutocompleteSearch";
-import { useGetTeachersQuery } from "../../../teachers/TeachersApi";
+import { useGetTeachersQuery } from "@app/(pages)/(admin)/teachers/TeachersApi";
 import { useState } from "react";
 import { UserType } from "../../../teachers/_types";
-import { useFormContext } from "@/src/hooks/useTanstack";
+import { useFormContext } from "@hooks/useTanstack";
 
 function AssignAdviser() {
   const defaultOptions = {

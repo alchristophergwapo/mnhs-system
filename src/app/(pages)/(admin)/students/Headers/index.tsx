@@ -1,6 +1,6 @@
 import { amber, teal } from "@mui/material/colors";
 import { SharedPropsType } from "@components/PageCardedWrapper";
-import useNavigate from "@/src/hooks/useNavigate";
+import useNavigate from "@hooks/useNavigate";
 import { PlusOne } from "@mui/icons-material";
 import { GetStudentsApiArg } from "../StudentsApi";
 import { UserType } from "../../teachers/_types";

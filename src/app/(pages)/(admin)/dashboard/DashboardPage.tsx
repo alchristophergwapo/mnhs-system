@@ -5,8 +5,8 @@ import SchoolNewsAndEvents from "./DashboardPageContent/SchoolNews";
 import Admissions from "./DashboardPageContent/Admissions";
 import FeaturedHighlights from "./DashboardPageContent/FeaturedHighlights";
 import { Suspense } from "react";
-import { getUserById } from "@/src/server/services/userService";
-import { auth } from "@/src/auth";
+import { getUserById } from "@server/services/userService";
+import { auth } from "@/auth";
 import Typography from "@mui/material/Typography";
 
 /**

@@ -13,7 +13,7 @@ jest.mock("next-auth/jwt", () => ({
   getToken: jest.fn(),
 }));
 
-jest.mock("@/src/auth", () => ({
+jest.mock("@/auth", () => ({
   __esModule: true,
   auth: jest.fn(),
   signIn: jest.fn(),
@@ -27,8 +27,8 @@ jest.mock("@lib/service/userService", () => ({
 
 import { render, screen } from "@testing-library/react";
 import DashboardPage from "./DashboardPage";
-import { auth } from "@/src/auth";
-import { getUserById } from "@/src/server/services/userService";
+import { auth } from "@/auth";
+import { getUserById } from "@server/services/userService";
 
 describe("Dasboard page", () => {
   const mockUser = {

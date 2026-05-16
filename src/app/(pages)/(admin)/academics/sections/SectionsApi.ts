@@ -1,4 +1,4 @@
-import { apiService } from "@/src/store/apiService";
+import { apiService } from "@store/apiService";
 import { UserType } from "../../teachers/_types";
 
 export type SectionsType = {

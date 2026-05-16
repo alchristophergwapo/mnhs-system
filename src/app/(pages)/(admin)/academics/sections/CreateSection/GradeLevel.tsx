@@ -1,8 +1,8 @@
 import { memo } from "react";
-import { useGetGradeLevelsQuery } from "../../../GradeLevelApi";
+import { useGetGradeLevelsQuery } from "@app/(pages)/(admin)/GradeLevelApi";
 import Select from "@components/ui/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { useFormContext } from "@/src/hooks/useTanstack";
+import { useFormContext } from "@hooks/useTanstack";
 import z from "zod";
 
 /**

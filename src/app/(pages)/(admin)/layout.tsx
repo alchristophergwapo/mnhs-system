@@ -1,4 +1,4 @@
-import AdminLayout from "@/src/layout/AdminLayout";
+import AdminLayout from "@layout/AdminLayout";
 import AuthGuard from "@components/AuthGuard";
 
 type LayoutProps = {
@@ -6,7 +6,7 @@ type LayoutProps = {
 };
 
 /**
- * A wrapper component that wraps the AdminLayout component from @/src/layout/AdminLayout.
+ * A wrapper component that wraps the AdminLayout component from @layout/AdminLayout.
  * It takes a children prop, which is the content to be rendered inside the AdminLayout.
  * @param {LayoutProps} props - The props for the component.
  * @example

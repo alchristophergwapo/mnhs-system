@@ -1,4 +1,4 @@
-import { apiService } from "@/src/store/apiService";
+import { apiService } from "@store/apiService";
 
 export type GetGradeLevelApiResponse = { id: number; name: string; gradeLevelNumber: number }[];
 export type GetGradeLevelApiArg = { query: string };

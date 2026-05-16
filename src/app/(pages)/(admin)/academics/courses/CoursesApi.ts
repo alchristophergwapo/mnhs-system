@@ -1,4 +1,4 @@
-import { apiService } from "@/src/store/apiService";
+import { apiService } from "@store/apiService";
 import { CourseType } from "@/src/types";
 
 export type GetCoursesApiResponse = CourseType[];

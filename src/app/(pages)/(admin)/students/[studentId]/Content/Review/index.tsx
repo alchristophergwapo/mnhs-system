@@ -1,6 +1,6 @@
 import { JSX, useState } from "react";
 import Typography from "@mui/material/Typography";
-import { useFormContext } from "@/src/hooks/useTanstack";
+import { useFormContext } from "@hooks/useTanstack";
 import DetailField from "./DetailField";
 import {
   AddressType,

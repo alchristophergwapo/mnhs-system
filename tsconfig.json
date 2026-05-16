@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "es2023",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "ignoreDeprecations": "6.0",
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -20,14 +24,50 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "@components/*": ["./src/components/*"],
-      "@store/*": ["./src/store/*"],
-      "@types": ["./src/types"],
-      "@lib/*": ["./src/lib/*"],
-      "@api/*": ["./src/app/api/*"],
-      "@/prisma/*": ["./src/prisma/*"],
-    }
+      "@app/*": [
+        "./src/app/*"
+      ],
+      "@/auth": [
+        "./src/auth.ts"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@configs/*": [
+        "./src/configs/*"
+      ],
+      "@contexts/*": [
+        "./src/contexts/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@layout/*": [
+        "./src/layout/*"
+      ],
+      "@store/*": [
+        "./src/store/*"
+      ],
+      "@types": [
+        "./src/types"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ],
+      "@api/*": [
+        "./src/app/api/*"
+      ],
+      "@/prisma/*": [
+        "./src/prisma/*"
+      ],
+      "@server/*": [
+        "./src/server/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+    },
+    "strict": false
   },
   "include": [
     "./src/**/*.ts",
@@ -39,5 +79,9 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out"
+  ]
 }

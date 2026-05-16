@@ -1,4 +1,4 @@
-import { useFormContext } from "@/src/hooks/useTanstack";
+import { useFormContext } from "@hooks/useTanstack";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
@@ -7,7 +7,7 @@ import RadioSelect from "@components/RadioSelect";
 import Radio from "@mui/material/Radio";
 import Select from "@components/ui/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { useGetCoursesQuery } from "@/src/app/(pages)/(admin)/academics/courses/CoursesApi";
+import { useGetCoursesQuery } from "@app/(pages)/(admin)/academics/courses/CoursesApi";
 import EntryType from "./EntryType";
 import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 import z from "zod";

@@ -13,7 +13,7 @@ import {
   useCreateSectionMutation,
   useGetSectionByIdQuery,
 } from "../SectionsApi";
-import { useAppForm } from "@/src/hooks/useTanstack";
+import { useAppForm } from "@hooks/useTanstack";
 import z from "zod";
 import SectionPreview from "./SectionPreview";
 import { useSnackbar } from "notistack";

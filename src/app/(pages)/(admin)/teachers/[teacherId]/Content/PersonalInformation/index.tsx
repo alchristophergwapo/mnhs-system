@@ -3,7 +3,7 @@ import Gender from "./BirthRelatedInputs/Gender";
 import CivilStatus from "./BirthRelatedInputs/CivilStatus";
 import Citizenship from "./BirthRelatedInputs/Citizenship";
 import NameInput from "../NameInput";
-import { useFormContext } from "@/src/hooks/useTanstack";
+import { useFormContext } from "@hooks/useTanstack";
 import Input from "@components/ui/Input";
 import z from "zod";
 import BloodType from "./BloodType";

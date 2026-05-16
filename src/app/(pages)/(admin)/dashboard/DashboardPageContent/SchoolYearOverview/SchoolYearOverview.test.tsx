@@ -16,7 +16,7 @@ jest.mock("@lib/prisma", () => ({
 
 import { render, screen } from "@testing-library/react";
 import SchoolYearOverview from ".";
-import prisma from "@/src/lib/prisma";
+import prisma from "@lib/prisma";
 
 describe("School Year Overview component", () => {
   const totalTransferStudents = 4;

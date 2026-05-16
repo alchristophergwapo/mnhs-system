@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import LinearProgress from "@mui/material/LinearProgress";
 import Avatar from "@mui/material/Avatar";
 import { InfoOutlineRounded } from "@mui/icons-material";
-import { useFormContext } from "@/src/hooks/useTanstack";
+import { useFormContext } from "@hooks/useTanstack";
 import { SectionsType } from "../SectionsApi";
 import { memo } from "react";
 import { UserType } from "../../../teachers/_types";
