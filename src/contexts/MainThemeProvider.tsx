@@ -30,7 +30,7 @@ export default function MainThemeProvider(props: MainThemeProviderProps) {
       <ThemeProvider
         theme={theme}
         modeStorageKey="mnhs-themeMode"
-        defaultMode="light"
+        defaultMode="dark"
       >
         <CssBaseline />
         {children}
