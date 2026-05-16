@@ -1,6 +1,7 @@
 import ArrowForward from "@mui/icons-material/ArrowForward";
-import Button, { ButtonProps } from "@mui/material/Button";
+import { ButtonProps } from "@mui/material/Button";
 import { memo } from "react";
+import Button from "../Button";
 
 type NextButtonProps = ButtonProps & {
   label: string;
@@ -19,7 +20,6 @@ function NextButton(props: NextButtonProps) {
 
   return (
     <Button
-      variant="contained"
       sx={{ color: "white", "& MuiButton-root.Mui-loading": { 
         backgroundColor: "rgba(0, 0, 0, 0.5)!important",
         color: "gray",
@@ -31,7 +31,6 @@ function NextButton(props: NextButtonProps) {
         />
       }
       onClick={onClick}
-      disableRipple
       {...rest}
     >
       {label}

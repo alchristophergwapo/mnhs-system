@@ -5,7 +5,7 @@ import { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useAppForm } from "@/src/hooks/useTanstack";
+import { useAppForm } from "@hooks/useTanstack";
 import Input from "@components/ui/Input";
 import { UpdaterFn } from "@tanstack/react-form";
 import Link from "@components/Link";
@@ -14,7 +14,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import useNavigate from "@/src/hooks/useNavigate";
+import useNavigate from "@hooks/useNavigate";
 
 function Login() {
   const [loginType, setLoginType] = useState("email");

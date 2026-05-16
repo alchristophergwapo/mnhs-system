@@ -7,7 +7,7 @@ import Popover from "@mui/material/Popover";
 import { MRT_ActionMenuItem } from "material-react-table";
 import { ReactNode, useState } from "react";
 import { Delete, Edit } from "@mui/icons-material";
-import useNavigate from "@/src/hooks/useNavigate";
+import useNavigate from "@hooks/useNavigate";
 
 interface ActionsColumnProps {
   row?: any;

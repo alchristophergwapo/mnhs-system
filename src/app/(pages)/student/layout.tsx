@@ -1,7 +1,7 @@
 "use client";
 
-import AppContext from "@/src/contexts/AppContext";
-import StudentLayout from "@/src/layout/StudentLayout";
+import AppContext from "@contexts/AppContext";
+import StudentLayout from "@layout/StudentLayout";
 import { redirect } from "next/navigation";
 import React, { useContext } from "react";
 

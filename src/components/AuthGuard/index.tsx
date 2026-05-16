@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { auth } from "@/src/auth";
+import { auth } from "@/auth";
 
 /**
  * AuthGuard component - A route protection component that checks user authentication and role

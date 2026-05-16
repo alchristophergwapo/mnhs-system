@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import MenuList from "@mui/material/MenuList";
 import MenuButton from "../MenuButton";
 import Icon from "@mui/material/Icon";
-import AppContext from "@/src/contexts/AppContext";
+import AppContext from "@contexts/AppContext";
 import { signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
 

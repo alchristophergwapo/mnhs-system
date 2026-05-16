@@ -1,9 +1,9 @@
-import prisma from "@/src/lib/prisma";
-import { createClient } from "@/src/lib/supabase/server";
-import { EnrollmentStatus, FamilyRelationShip, Gender } from "@/src/prisma/generated/prisma";
+import prisma from "@lib/prisma";
+import { createClient } from "@lib/supabase/server";
+import { EnrollmentStatus, FamilyRelationShip, Gender } from "@/prisma/generated/prisma";
 import { AddressType, CitizenshipType, EnrollmentBackgroundType, EnrollmentType, FamilyType, GradeLevelType, StudentType, UserType } from "@/src/types";
-import { generateSecurePassword } from "@/src/utils/passwordHelper";
-import { generateUsername, normalizeAddressData } from "@/src/utils/userDataHelper";
+import { generateSecurePassword } from "@utils/passwordHelper";
+import { generateUsername, normalizeAddressData } from "@utils/userDataHelper";
 import { cookies } from "next/headers";
 
 export async function GET(_: Request) {

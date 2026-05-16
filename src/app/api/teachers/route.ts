@@ -2,8 +2,8 @@ import prisma from "@lib/prisma";
 import { CivilStatus, Gender, Prisma, Role } from "@/prisma/generated/prisma";
 import { UserType } from "../../(pages)/(admin)/teachers/_types";
 import bcrypt from "bcrypt";
-import { getTeacherById, getTeachers } from "@/src/server/services/teacherService";
-import { generateSecurePassword } from "@/src/utils/passwordHelper";
+import { getTeacherById, getTeachers } from "@server/services/teacherService";
+import { generateSecurePassword } from "@utils/passwordHelper";
 
 /**
  * GET /api/teachers

@@ -1,5 +1,5 @@
 import Input from "@components/ui/Input";
-import { useFormContext } from "@/src/hooks/useTanstack";
+import { useFormContext } from "@hooks/useTanstack";
 import { memo } from "react";
 import { zipCode, zipCodeRequired } from "./addressValidators";
 import { AddressInputProps } from ".";

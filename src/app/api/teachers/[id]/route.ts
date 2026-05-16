@@ -1,12 +1,12 @@
-import { UserType } from "@/src/app/(pages)/(admin)/teachers/_types";
-import prisma from "@/src/lib/prisma";
-import { getTeacherById } from "@/src/server/services/teacherService";
+import { UserType } from "@app/(pages)/(admin)/teachers/_types";
+import prisma from "@lib/prisma";
+import { getTeacherById } from "@server/services/teacherService";
 import {
   CivilStatus,
   Gender,
   Role,
-} from "@/src/prisma/generated/prisma";
-import { CitizenshipType } from "@/src/types";
+} from "@/prisma/generated/prisma";
+import { CitizenshipType } from "@types";
 
 /**
  * GET /api/teachers/:id

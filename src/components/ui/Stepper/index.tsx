@@ -8,7 +8,7 @@ import clsx from "clsx";
 import StepperNextButton from "./StepperNextButton";
 import StepperPreviousButton from "./StepperPreviousButton";
 import { StepperConnector } from "./styledComponents";
-import { useFormContext } from "@/src/hooks/useTanstack";
+import { useFormContext } from "@hooks/useTanstack";
 
 export type StepsType<T> = {
   label: string;

@@ -1,4 +1,4 @@
-import { getUserById } from "@/src/server/services/userService";
+import { getUserById } from "@server/services/userService";
 
 export async function GET(request: Request, props: { params: Promise<{ userId: number }>}) {
     try {

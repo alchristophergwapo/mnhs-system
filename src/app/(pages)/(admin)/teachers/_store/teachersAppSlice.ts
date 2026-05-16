@@ -5,7 +5,7 @@ import {
   PayloadAction,
   WithSlice,
 } from "@reduxjs/toolkit";
-import { rootReducer } from "@/src/store/rootReducer";
+import { rootReducer } from "@store/rootReducer";
 const teachersAdapter = createEntityAdapter();
 
 const emptyInitialState = teachersAdapter.getInitialState({
@@ -31,7 +31,7 @@ export const teachersAppSlice = createSlice({
 
 rootReducer.inject(teachersAppSlice);
 const injectedSlice = teachersAppSlice.injectInto(rootReducer);
-declare module "@/src/store/rootReducer" {
+declare module "@store/rootReducer" {
   export interface LazyLoadedSlices extends WithSlice<
     typeof teachersAppSlice
   > {}

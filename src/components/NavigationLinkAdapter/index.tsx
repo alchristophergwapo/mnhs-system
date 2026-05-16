@@ -1,6 +1,6 @@
 import { MouseEvent, ReactNode } from "react";
 import Link from "../Link";
-import useNavigate from "@/src/hooks/useNavigate";
+import useNavigate from "@hooks/useNavigate";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 

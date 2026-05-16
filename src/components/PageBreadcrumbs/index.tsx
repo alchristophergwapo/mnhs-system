@@ -2,8 +2,8 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@mui/material/Typography";
 import { usePathname } from "next/navigation";
 import Link from "../Link";
-import { NavigationItemType } from "@/src/layout/components/navigation/types/NavigationItemType";
-import useNavigation from "@/src/layout/components/navigation/hooks/useNavigation";
+import { NavigationItemType } from "@layout/components/navigation/types/NavigationItemType";
+import useNavigation from "@layout/components/navigation/hooks/useNavigation";
 import { useMemo } from "react";
 
 // Function to get the navigation item based on URL
@@ -49,7 +49,7 @@ export default function PageBreadcrumbs() {
     .split("/")
     .filter(Boolean)
     .map((path, index) => {
-      const url = `/${pathname.split("/").slice(0, index + 1).join("/")}`;
+      const url = `${pathname.split("/").slice(0, index + 1).join("/")}`;
       const navItem = navItemMap[url];
       return {
         title: navItem?.title || path.replace(/^./, char => char.toUpperCase()),

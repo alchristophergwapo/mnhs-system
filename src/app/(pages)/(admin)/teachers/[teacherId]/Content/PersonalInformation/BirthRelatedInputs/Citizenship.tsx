@@ -5,7 +5,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Typography from "@mui/material/Typography";
 import FormGroup from "@mui/material/FormGroup";
 import DualCitizenship from "./DualCitizenship";
-import { useFormContext } from "@/src/hooks/useTanstack";
+import { useFormContext } from "@hooks/useTanstack";
 
 /**
  * A component for inputting the teacher's citizenship information.

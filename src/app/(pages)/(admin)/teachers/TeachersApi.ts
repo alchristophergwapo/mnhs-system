@@ -1,4 +1,4 @@
-import { apiService } from "@/src/store/apiService";
+import { apiService } from "@store/apiService";
 import { PositionType, UserType } from "./_types";
 
 // Set the type of the response data which is an array of UserType

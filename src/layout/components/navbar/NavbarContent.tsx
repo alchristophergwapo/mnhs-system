@@ -1,12 +1,12 @@
 import { memo } from "react";
 import { styled } from "@mui/material/styles";
 import Navigation from "../navigation/Navigation";
-import { adminNavigationConfig } from "@/src/configs/adminNavigationConfig";
+import { adminNavigationConfig } from "@configs/adminNavigationConfig";
 import Image from "next/image";
 import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import IconButton from "@mui/material/IconButton";
 import { useSession } from "next-auth/react";
-import { studentNavigationConfig } from "@/src/configs/studentNavigationConfig";
+import { studentNavigationConfig } from "@configs/studentNavigationConfig";
 import clsx from "clsx";
 
 const StyledContent = styled("div")(({ theme }) => ({

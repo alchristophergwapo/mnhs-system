@@ -1,8 +1,8 @@
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@components/ui/Select";
-import { useFormContext } from "@/src/hooks/useTanstack";
+import { useFormContext } from "@hooks/useTanstack";
 import { memo } from "react"
-import { useGetGradeLevelsQuery } from "@/src/app/(pages)/(admin)/GradeLevelApi";
+import { useGetGradeLevelsQuery } from "@app/(pages)/(admin)/GradeLevelApi";
 import z from "zod";
 
 function GradeLevel() {

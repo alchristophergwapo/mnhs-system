@@ -1,8 +1,8 @@
 import { createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { FlatNavigationItemType, NavigationItemType } from "../types/NavigationItemType";
-import { RootState } from "@/src/store/store";
-import { adminNavigationConfig } from "@/src/configs/adminNavigationConfig";
-import NavigationHelper from "@/src/utils/navigationHelper";
+import { RootState } from "@store/store";
+import { adminNavigationConfig } from "@configs/adminNavigationConfig";
+import NavigationHelper from "@utils/navigationHelper";
 
 const navigationAdapter = createEntityAdapter<FlatNavigationItemType>();
 

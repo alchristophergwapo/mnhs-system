@@ -1,4 +1,4 @@
-import EmptyLayout from "@/src/layout/EmptyLayout";
+import EmptyLayout from "@layout/EmptyLayout";
 import React from "react";
 
 type LayoutProps = {

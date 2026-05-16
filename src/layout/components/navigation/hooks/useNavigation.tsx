@@ -1,7 +1,7 @@
-import { useAppSelector } from "@/src/store/hooks";
+import { useAppSelector } from "@store/hooks";
 import { selectAllNavigation } from "../store/navigationSlice";
 import { useMemo } from "react";
-import NavigationHelper from "@/src/utils/navigationHelper";
+import NavigationHelper from "@utils/navigationHelper";
 
 /**
  * Custom hook for managing navigation state in the application.
