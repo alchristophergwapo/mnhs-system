@@ -1,6 +1,6 @@
 import { JSX, memo, useCallback, useEffect, useMemo, useState } from "react";
 import Autocomplete, { AutocompleteProps } from "@mui/material/Autocomplete";
-import Input from "../Input";
+import Input from "../ui/Input";
 import { debounce } from "lodash";
 import CircularProgress from "@mui/material/CircularProgress";
 

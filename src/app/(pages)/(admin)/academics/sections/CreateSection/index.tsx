@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Divider from "@mui/material/Divider";
 import GradeLevel from "./GradeLevel";
-import Input from "@components/Input";
+import Input from "@components/ui/Input";
 import AssignAdviser from "./AssignAdviser";
 import {
   SectionsType,
@@ -17,7 +17,7 @@ import { useAppForm } from "@/src/hooks/useTanstack";
 import z from "zod";
 import SectionPreview from "./SectionPreview";
 import { useSnackbar } from "notistack";
-import Button from "@components/Button";
+import Button from "@components/ui/Button";
 import Loading from "@components/Loading";
 
 function CreateSection({

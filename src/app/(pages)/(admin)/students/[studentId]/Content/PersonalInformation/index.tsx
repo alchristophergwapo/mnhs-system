@@ -1,4 +1,4 @@
-import Input from "@components/Input";
+import Input from "@components/ui/Input";
 import RadioSelect from "@components/RadioSelect";
 import { useFormContext } from "@/src/hooks/useTanstack";
 import Typography from "@mui/material/Typography";

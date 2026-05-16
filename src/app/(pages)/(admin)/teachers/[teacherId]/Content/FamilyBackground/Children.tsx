@@ -1,4 +1,4 @@
-import Button from "@components/Button";
+import Button from "@components/ui/Button";
 import InputField from "../InputField";
 import { Delete, PlusOne } from "@mui/icons-material";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";

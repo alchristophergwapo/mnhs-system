@@ -1,5 +1,5 @@
 import { useGetGradeLevelsQuery } from "@/src/app/(pages)/(admin)/GradeLevelApi";
-import Select from "@components/Select";
+import Select from "@components/ui/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useFormContext } from "@/src/hooks/useTanstack";
 import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
@@ -29,18 +29,19 @@ function LastGradeLevel({
       validators={{
         onChangeAsyncDebounceMs: 300,
         onChangeAsync: (required
-          ? z.number().nonoptional("Please select a grade level")
-          .superRefine((value, ctx) => {
-            console.log(value)
-              if(!value) {
-                ctx.addIssue({
-                  code: "custom",
-                  message: "Please select a grade level",
-                })
-              }
-          }
-          )
-          : z.number().nullish()) as FieldAsyncValidateOrFn<
+          ? z
+              .number()
+              .nonoptional("Please select a grade level")
+              .superRefine((value, ctx) => {
+                console.log(value);
+                if (!value) {
+                  ctx.addIssue({
+                    code: "custom",
+                    message: "Please select a grade level",
+                  });
+                }
+              })
+          : z.number().nullish()) as unknown as FieldAsyncValidateOrFn<
           Record<string, never>,
           never,
           never

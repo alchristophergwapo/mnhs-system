@@ -1,5 +1,5 @@
 import MenuItem from "@mui/material/MenuItem";
-import Select from "@components/Select";
+import Select from "@components/ui/Select";
 import { useFormContext } from "@/src/hooks/useTanstack";
 import { memo } from "react"
 import { useGetGradeLevelsQuery } from "@/src/app/(pages)/(admin)/GradeLevelApi";

@@ -1,6 +1,6 @@
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import Button from "@components/Button";
+import Button from "@components/ui/Button";
 
 function SchoolEvents() {
   return (

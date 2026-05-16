@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Table from "@components/Table";
 import Column from "@components/Table/columns/Column";
 import { faker } from "@faker-js/faker";
-import Button from "@components/Button";
+import Button from "@components/ui/Button";
 
 let TIME_START = 8;
 

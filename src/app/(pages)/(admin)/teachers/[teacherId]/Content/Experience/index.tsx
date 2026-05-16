@@ -1,8 +1,8 @@
-import { ContentProps } from "@components/Stepper";
+import { ContentProps } from "@components/ui/Stepper";
 import { ExperienceType, UserType } from "../../../_types";
 import { MouseEvent, useCallback, useRef } from "react";
 import ExperienceDetails from "./ExperienceDetails";
-import Button from "@components/Button";
+import Button from "@components/ui/Button";
 import { PlusOne } from "@mui/icons-material";
 
 /**

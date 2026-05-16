@@ -1,7 +1,7 @@
 import { useFormContext } from "@/src/hooks/useTanstack";
 import { memo } from "react";
 import { subdivision } from "./addressValidators";
-import Input from "@components/Input";
+import Input from "@components/ui/Input";
 import { AddressInputProps } from ".";
 
 function Subdivision({target}: AddressInputProps) {

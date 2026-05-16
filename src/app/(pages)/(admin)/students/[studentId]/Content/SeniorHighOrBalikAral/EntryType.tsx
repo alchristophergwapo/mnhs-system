@@ -5,7 +5,7 @@ import { useFormContext } from "@/src/hooks/useTanstack";
 import z from "zod";
 import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 import LastGradeLevel from "./LastGradeLevel";
-import Input from "@components/Input";
+import Input from "@components/ui/Input";
 import { StudentEntryType } from "@/prisma/generated/prisma";
 
 function EntryType({ required }: { required: boolean }) {
@@ -18,7 +18,7 @@ function EntryType({ required }: { required: boolean }) {
         onChangeAsyncDebounceMs: 300,
         onChangeAsync: (required
           ? z.string().nonoptional("Entry type is required")
-          : z.string().nullish()) as FieldAsyncValidateOrFn<
+          : z.string().nullish()) as unknown as FieldAsyncValidateOrFn<
           Record<string, never>,
           never,
           never
@@ -75,7 +75,7 @@ function EntryType({ required }: { required: boolean }) {
                           new Date().getFullYear() - 2,
                           "Last school year cannot be equal to present or future or last year",
                         )
-                        .nullish()) as FieldAsyncValidateOrFn<
+                        .nullish()) as unknown as FieldAsyncValidateOrFn<
                     Record<string, never>,
                     never,
                     never
@@ -114,7 +114,7 @@ function EntryType({ required }: { required: boolean }) {
                           /^[0-9]+$/,
                           "School ID should only contain numbers",
                         )
-                        .nullish() as FieldAsyncValidateOrFn<
+                        .nullish() as unknown as FieldAsyncValidateOrFn<
                         Record<string, never>,
                         never,
                         never
@@ -158,7 +158,7 @@ function EntryType({ required }: { required: boolean }) {
                                 50,
                                 "School name should be at most 50 characters",
                               )
-                              .nullish()) as FieldAsyncValidateOrFn<
+                              .nullish()) as unknown as FieldAsyncValidateOrFn<
                           Record<string, never>,
                           never,
                           never
@@ -207,7 +207,7 @@ function EntryType({ required }: { required: boolean }) {
                                 50,
                                 "School address should be at most 50 characters",
                               )
-                              .nullish()) as FieldAsyncValidateOrFn<
+                              .nullish()) as unknown as FieldAsyncValidateOrFn<
                           Record<string, never>,
                           never,
                           never

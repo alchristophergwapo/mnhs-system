@@ -1,6 +1,6 @@
 import { amber, teal } from "@mui/material/colors";
 import { PlusOne } from "@mui/icons-material";
-import Button from "@components/Button";
+import Button from "@components/ui/Button";
 
 /**
  * Properties for the Headers component, which displays the header section of the Non-Advisory Teachers page.

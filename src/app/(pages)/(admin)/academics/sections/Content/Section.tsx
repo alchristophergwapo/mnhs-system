@@ -8,7 +8,7 @@ import Alert from "@mui/material/Alert";
 import LinearProgress from "@mui/material/LinearProgress";
 import CardActions from "@mui/material/CardActions";
 import { red, teal } from "@mui/material/colors";
-import Button from "@components/Button";
+import Button from "@components/ui/Button";
 import Icon from "@mui/material/Icon";
 import { Edit, ListOutlined, WcOutlined } from "@mui/icons-material";
 import Divider from "@mui/material/Divider";

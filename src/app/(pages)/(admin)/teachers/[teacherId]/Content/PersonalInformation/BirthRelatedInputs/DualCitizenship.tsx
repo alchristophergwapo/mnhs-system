@@ -2,7 +2,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import RadioSelect from "@components/RadioSelect";
 import { useFormContext } from "@/src/hooks/useTanstack";
-import Input from "@components/Input";
+import Input from "@components/ui/Input";
 import z from "zod";
 
 /**

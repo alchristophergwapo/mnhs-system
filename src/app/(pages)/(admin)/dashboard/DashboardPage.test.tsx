@@ -28,7 +28,7 @@ jest.mock("@lib/service/userService", () => ({
 import { render, screen } from "@testing-library/react";
 import DashboardPage from "./DashboardPage";
 import { auth } from "@/src/auth";
-import { getUserById } from "@lib/service/userService";
+import { getUserById } from "@/src/server/services/userService";
 
 describe("Dasboard page", () => {
   const mockUser = {

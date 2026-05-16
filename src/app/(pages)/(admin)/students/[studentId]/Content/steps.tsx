@@ -1,4 +1,4 @@
-import { StepsType } from "@components/Stepper";
+import { StepsType } from "@components/ui/Stepper";
 import EscalatorWarning from "@mui/icons-material/EscalatorWarning";
 import HistoryEduOutlined from "@mui/icons-material/HistoryEduOutlined";
 import LocationCity from "@mui/icons-material/LocationCity";

@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Column from "../../../../../components/Table/columns/Column";
 import Grid from "@mui/material/Grid";
 import { faker } from "@faker-js/faker";
-import Button from "@components/Button";
+import Button from "@components/ui/Button";
 
 const DUMMY_GRADES = faker.helpers.multiple(
   () => ({

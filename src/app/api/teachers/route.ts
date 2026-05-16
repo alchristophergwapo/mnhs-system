@@ -2,7 +2,8 @@ import prisma from "@lib/prisma";
 import { CivilStatus, Gender, Prisma, Role } from "@/prisma/generated/prisma";
 import { UserType } from "../../(pages)/(admin)/teachers/_types";
 import bcrypt from "bcrypt";
-import { getTeacherById, getTeachers } from "@lib/service/teacherService";
+import { getTeacherById, getTeachers } from "@/src/server/services/teacherService";
+import { generateSecurePassword } from "@/src/utils/passwordHelper";
 
 /**
  * GET /api/teachers
@@ -143,9 +144,9 @@ export async function POST(request: Request) {
     const teacherData = body as UserType;
 
     const salt = await bcrypt.genSalt(10);
-    const password = await bcrypt.hash(`${teacherData.firstName}${teacherData.lastName}${new Date(teacherData.dateOfBirth).getMonth()}${new Date(teacherData.dateOfBirth).getDate()}${new Date(teacherData.dateOfBirth).getFullYear()}`, salt);
+    const password = await generateSecurePassword(teacherData.firstName, teacherData.lastName, new Date(teacherData.dateOfBirth));
 
-    const user = await prisma.$transaction(async (tx) => {
+    const user = await prisma.$transaction(async(tx) => {
       const [permanentAddress, residentialAddress, citizenship] = await Promise.all([
         tx.address.create({ data: { ...teacherData?.permanentAddress, zipCode: Number(teacherData?.permanentAddress?.zipCode) } as any }),
         teacherData?.residentialAddress ? tx.address.create({ data: { ...teacherData.residentialAddress, zipCode: Number(teacherData.residentialAddress.zipCode) } as any }) : Promise.resolve(null),

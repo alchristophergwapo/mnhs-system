@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
-import Stepper from "@components/Stepper";
+import Stepper from "@components/ui/Stepper";
 import getFormSteps from "./steps";
 import { JSX, useMemo } from "react";
 

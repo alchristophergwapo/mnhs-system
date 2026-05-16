@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { useFormContext } from "@/src/hooks/useTanstack";
-import Input from "@components/Input";
+import Input from "@components/ui/Input";
 import z from "zod";
 
 /**

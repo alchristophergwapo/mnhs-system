@@ -4,13 +4,14 @@ import CivilStatus from "./BirthRelatedInputs/CivilStatus";
 import Citizenship from "./BirthRelatedInputs/Citizenship";
 import NameInput from "../NameInput";
 import { useFormContext } from "@/src/hooks/useTanstack";
-import Input from "@components/Input";
+import Input from "@components/ui/Input";
 import z from "zod";
-import { format, parseISO } from "date-fns";
 import BloodType from "./BloodType";
 import LicenseNumber from "./LicenseNumber";
 import LicenseExpiryDate from "./LicenseExpiryDate";
 import GradeLevel from "./GradeLevel";
+import DateInput from "@components/ui/DateInput";
+import { UpdaterFn } from "@tanstack/react-form";
 
 /**
  * Component for the personal information section of the teacher form.
@@ -51,16 +52,14 @@ export default function PositionAndPersonalInformation() {
               .nonoptional("Date of birth is required") as any,
           }}
           children={(field) => (
-            <Input
+            <DateInput
               name={field.name}
-              type="date"
-              value={
-                field.state.value
-                  ? format(parseISO(field.state.value), "yyyy-MM-dd")
-                  : ""
-              }
+              value={field.state.value}
+              onChange={(newValue) => {
+                const value: unknown = newValue;
+                field.handleChange(value as UpdaterFn<never, never>);
+              }}
               label="Date of Birth"
-              onChange={(e) => field.handleChange(e.target.value as any)}
               errors={field.state.meta.errors || []}
               error={field.state.meta.errors?.length > 0}
               required

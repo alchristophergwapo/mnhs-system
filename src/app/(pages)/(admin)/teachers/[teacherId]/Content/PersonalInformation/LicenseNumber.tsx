@@ -1,4 +1,4 @@
-import Input from "@components/Input";
+import Input from "@components/ui/Input";
 import { useFormContext } from "@/src/hooks/useTanstack";
 import { memo } from "react";
 import z from "zod";

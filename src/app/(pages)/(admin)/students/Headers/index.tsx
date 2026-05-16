@@ -5,7 +5,7 @@ import { PlusOne } from "@mui/icons-material";
 import { GetStudentsApiArg } from "../StudentsApi";
 import { UserType } from "../../teachers/_types";
 import SearchStudent from "./SearchStudent";
-import Button from "@components/Button";
+import Button from "@components/ui/Button";
 
 /**
  * Properties for the Headers component, which displays the header section of the Non-Advisory Teachers page.

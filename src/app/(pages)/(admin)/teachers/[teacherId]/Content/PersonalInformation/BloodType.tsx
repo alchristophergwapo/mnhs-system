@@ -1,4 +1,4 @@
-import Select from "@components/Select";
+import Select from "@components/ui/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useFormContext } from "@/src/hooks/useTanstack";
 import z from "zod";

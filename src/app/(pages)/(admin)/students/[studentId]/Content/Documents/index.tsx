@@ -1,4 +1,4 @@
-import Input from "@components/Input";
+import Input from "@components/ui/Input";
 import { useFormContext } from "@/src/hooks/useTanstack";
 import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 import { ChangeEvent } from "react";
@@ -27,7 +27,7 @@ function Documents() {
             .refine(
               (file) => ALLOWED_FILE_TYPES.includes(file.type),
               "File must be an image",
-            ) as FieldAsyncValidateOrFn<Record<string, never>, never, never>,
+            ) as unknown as FieldAsyncValidateOrFn<Record<string, never>, never, never>,
         }}
         children={(field) => {
           return (

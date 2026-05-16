@@ -1,4 +1,4 @@
-import { ContentProps } from "@components/Stepper";
+import { ContentProps } from "@components/ui/Stepper";
 import { EducationsType, UserType } from "../../../_types";
 import Studies from "./Studies";
 import { useCallback, useMemo, useRef } from "react";

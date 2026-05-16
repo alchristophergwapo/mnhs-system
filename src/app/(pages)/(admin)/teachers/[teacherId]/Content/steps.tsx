@@ -1,4 +1,4 @@
-import { StepsType } from "@components/Stepper";
+import { StepsType } from "@components/ui/Stepper";
 import { lazy } from "react";
 const PositionAndPersonalInformation = lazy(
   () => import("./PersonalInformation"),

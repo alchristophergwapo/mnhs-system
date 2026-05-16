@@ -5,7 +5,7 @@ import FormGroup from "@mui/material/FormGroup";
 import { memo, useRef, useState } from "react";
 import RadioSelect from "@components/RadioSelect";
 import Radio from "@mui/material/Radio";
-import Select from "@components/Select";
+import Select from "@components/ui/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useGetCoursesQuery } from "@/src/app/(pages)/(admin)/academics/courses/CoursesApi";
 import EntryType from "./EntryType";
@@ -15,14 +15,7 @@ import { CourseType } from "@/prisma/generated/prisma";
 
 function SeniorHighOrBalikAral() {
   const form = useFormContext();
-  const [isSeniorHigh, setIsSeniorHigh] = useState(false);
-  const [isTransferee, setIsTransferee] = useState(false);
   const [track, setTrack] = useState("");
-  const isTransfereeRef = useRef(isTransferee);
-  isTransfereeRef.current = isTransferee;
-
-  const isSeniorHighRef = useRef(isSeniorHigh);
-  isSeniorHighRef.current = isSeniorHigh;
 
   const trackRef = useRef(track);
   trackRef.current = track;
@@ -96,7 +89,7 @@ function SeniorHighOrBalikAral() {
                   onChangeAsyncDebounceMs: 300,
                   onChangeAsync: (isSeniorHigh
                     ? z.string().nonempty("Semester is required")
-                    : z.string().nullish()) as FieldAsyncValidateOrFn<
+                    : z.string().nullish()) as unknown as FieldAsyncValidateOrFn<
                     Record<string, never>,
                     never,
                     never
@@ -134,7 +127,7 @@ function SeniorHighOrBalikAral() {
                       ? z
                           .string("Track is required")
                           .nonempty("Track is required")
-                      : z.string().nullish()) as FieldAsyncValidateOrFn<
+                      : z.string().nullish()) as unknown as FieldAsyncValidateOrFn<
                       Record<string, never>,
                       never,
                       never
@@ -183,7 +176,7 @@ function SeniorHighOrBalikAral() {
                                     .nonoptional("Strand is required")
                                 : z.coerce
                                     .number()
-                                    .nullish()) as FieldAsyncValidateOrFn<
+                                    .nullish()) as unknown as FieldAsyncValidateOrFn<
                                 Record<string, never>,
                                 never,
                                 never
@@ -234,3 +227,5 @@ function SeniorHighOrBalikAral() {
     </div>
   );
 }
+
+export default memo(SeniorHighOrBalikAral);

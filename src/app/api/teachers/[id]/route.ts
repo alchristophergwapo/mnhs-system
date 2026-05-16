@@ -1,6 +1,6 @@
 import { UserType } from "@/src/app/(pages)/(admin)/teachers/_types";
 import prisma from "@/src/lib/prisma";
-import { getTeacherById } from "@/src/lib/service/teacherService";
+import { getTeacherById } from "@/src/server/services/teacherService";
 import {
   CivilStatus,
   Gender,
