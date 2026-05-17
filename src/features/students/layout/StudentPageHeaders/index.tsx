@@ -1,11 +1,11 @@
 import { amber, teal } from "@mui/material/colors";
-import { SharedPropsType } from "@components/PageCardedWrapper";
+import { SharedPropsType } from "@components/layouts/PageCardedWrapper";
 import useNavigate from "@hooks/useNavigate";
 import { PlusOne } from "@mui/icons-material";
-import { GetStudentsApiArg } from "../StudentsApi";
-import { UserType } from "../../teachers/_types";
-import SearchStudent from "./SearchStudent";
+import { UserType } from "../../../../app/(pages)/(admin)/teachers/_types";
+import SearchStudent from "./components/SearchStudent";
 import Button from "@components/ui/Button";
+import { GetStudentsApiArg } from "@features/students/api/students.types";
 
 /**
  * Properties for the Headers component, which displays the header section of the Non-Advisory Teachers page.
@@ -20,7 +20,7 @@ type HeadersProps = Partial<SharedPropsType<UserType>> & {
  * @param props
  * @returns ReactNode
  */
-export default function Headers(props: HeadersProps) {
+function StudentsPageHeaders(props: HeadersProps) {
   const { total, parameters, isLoading = false, setParameters } = props;
   const navigate = useNavigate();
 
@@ -52,3 +52,5 @@ export default function Headers(props: HeadersProps) {
     </div>
   );
 }
+
+export default StudentsPageHeaders;

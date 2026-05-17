@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback, useRef, useState } from "react";
 import { useGetGradeLevelsQuery } from "@app/(pages)/(admin)/GradeLevelApi";
 
 type GradeLevelFilterProps<T> = {
@@ -42,17 +42,9 @@ function GradeLevelFilter<T extends Record<string, any>>({
     (option) => option?.id === gradeLvlId,
   );
   
-  /** 
-   * State variable controlling the open/close visibility of the dropdown menu. 
-   * @type {boolean}
-   */
   const [open, setOpen] = useState(false);
   
-  /** 
-   * A ref attached to the ButtonGroup, used as the anchor element for the Popper dropdown.
-   * @type {React.RefObject<HTMLDivElement>}
-   */
-  const anchorRef = React.useRef<HTMLDivElement>(null);
+  const anchorRef = useRef<HTMLDivElement>(null);
 
   /**
    * Toggles the open state of the type selection component.

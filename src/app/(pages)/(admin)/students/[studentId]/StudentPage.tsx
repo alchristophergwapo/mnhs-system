@@ -16,7 +16,7 @@ import {
 import {
   useCreateStudentMutation,
   useGetStudentDetailsQuery,
-} from "../StudentsApi";
+} from "../../../../../features/students/api/students.api";
 import { useSnackbar } from "notistack";
 import useNavigate from "@hooks/useNavigate";
 import { useEffect, useState } from "react";
