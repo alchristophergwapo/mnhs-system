@@ -16,11 +16,11 @@ jest.mock("@lib/prisma", () => ({
 }));
 
 // Mock the teacherService module to isolate the tests from the actual service implementation
-jest.mock("@lib/service/teacherService", () => ({
+jest.mock("@server/services/teacherService", () => ({
   getTeachers: jest.fn(),
 }));
 
-const { getTeachers } = require("@lib/service/teacherService");
+const { getTeachers } = require("@server/services/teacherService");
 
 /**
  * Test suite for the GET handler
