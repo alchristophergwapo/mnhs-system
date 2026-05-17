@@ -1,0 +1,38 @@
+name: GitHub Actions
+
+run-name: ${{ github.actor }} is running GitHub Actions
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  ci:
+    name: Lint, Type Check, Test, and Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint with ESLint
+        run: npm run lint
+
+      - name: Type check with TypeScript
+        run: npm tsc --noEmit
+
+      - name: Test with Jest
+        run: npm test -- --watchAll=false --passWithNoTests
+
+      - name: Build with Next.js
+        run: npm run build
