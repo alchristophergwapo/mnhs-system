@@ -1,5 +1,5 @@
 import Avatar from "@mui/material/Avatar";
-import MaterialTable, { mrtTableInitialState } from "@components/MaterialTable";
+import MaterialTable, { mrtTableInitialState } from "@components/table/MaterialTable";
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import ActionsColumn from "./columns/ActionsColumn";
 import { UserType } from "../_types";

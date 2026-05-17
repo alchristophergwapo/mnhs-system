@@ -13,7 +13,6 @@ export default async function AuthGuard({
 }) {
   // Get the current user session
   const session = await auth();
-  console.log(session);
 
   if (!session) {
     redirect("/auth/login");

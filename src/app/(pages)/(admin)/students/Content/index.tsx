@@ -1,7 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import MaterialTable, {
   mrtTableInitialState,
-} from "@components/MaterialTable";
+} from "@components/table/MaterialTable";
 import { Fragment, useEffect, useState } from "react";
 import { SharedPropsType } from "@components/PageCardedWrapper";
 import { MRT_PaginationState, MRT_TableState } from "material-react-table";

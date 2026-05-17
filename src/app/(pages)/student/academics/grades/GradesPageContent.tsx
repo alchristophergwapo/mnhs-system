@@ -1,7 +1,7 @@
-import Table from "@components/Table";
+import Table from "@components/table/BasicTable";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import Column from "../../../../../components/Table/columns/Column";
+import Column from "../../../../../components/table/BasicTable/columns/Column";
 import Grid from "@mui/material/Grid";
 import { faker } from "@faker-js/faker";
 import Button from "@components/ui/Button";

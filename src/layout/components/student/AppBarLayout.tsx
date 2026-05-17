@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import UserMenu from "@components/UserMenu";
+import UserMenu from "@components/layouts/UserMenu";
 import NavbarToggleButton from "../navbar/NavbarToggleButton";
 
 type AppBarLayoutProps = {

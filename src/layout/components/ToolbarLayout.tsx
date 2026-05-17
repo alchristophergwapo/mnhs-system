@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Image from "next/image";
 import Toolbar from "@mui/material/Toolbar";
 import NavbarToggleButton from "./navbar/NavbarToggleButton";
-import UserMenu from "../../components/UserMenu";
+import UserMenu from "../../components/layouts/UserMenu";
 
 /**
  * A custom toolbar component for the application.

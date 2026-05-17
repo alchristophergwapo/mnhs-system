@@ -1,4 +1,4 @@
-import RadioSelect from "@components/RadioSelect";
+import RadioSelect from "@components/ui/RadioSelect";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import { useFormContext } from "@hooks/useTanstack";

@@ -6,7 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { NavigationItemProps } from "../NavigationItem";
 import { useMemo } from "react";
 import Icon from "@mui/material/Icon";
-import NavigationLinkAdapter from "@components/NavigationLinkAdapter";
+import NavigationLinkAdapter from "@components/ui/NavigationLinkAdapter";
 
 type ListItemButtonStyleProps = ListItemButtonProps & {
   _itempadding: number;

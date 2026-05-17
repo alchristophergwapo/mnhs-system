@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import { useAppForm } from "@hooks/useTanstack";
 import Input from "@components/ui/Input";
 import { UpdaterFn } from "@tanstack/react-form";
-import Link from "@components/Link";
+import Link from "@components/ui/Link";
 import Button from "@components/ui/Button";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
