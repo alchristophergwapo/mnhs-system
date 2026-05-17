@@ -89,7 +89,6 @@ const theme = createTheme({
             theme.palette.mode === "dark"
               ? "1px solid rgba(255, 255, 255, 0.03)!important"
               : "none",
-          padding: "16px",
         }),
       },
     },

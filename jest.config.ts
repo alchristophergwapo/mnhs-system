@@ -13,6 +13,8 @@ const sharedConfig = {
     "^@api/(.*)$": "<rootDir>/src/app/api/$1",
     "^@/src/(.*)$": "<rootDir>/src/$1",
     "^@/auth$": "<rootDir>/src/auth.ts",
+    "^@server/(.*)$": "<rootDir>/src/server/$1",
+    "^@utils/(.*)$": "<rootDir>/src/utils/$1"
   },
   transform: {
     "^.+\\.(ts|tsx|js|jsx)$": [
