@@ -27,6 +27,8 @@ jobs:
 
       - name: Generate Prisma client
         run: npm run prisma
+        env:
+          DATABASE_URL: postgres://postgres:postres@localhost:5432/postgres?sslmode=require
 
       - name: Lint with ESLint
         run: npm run lint
