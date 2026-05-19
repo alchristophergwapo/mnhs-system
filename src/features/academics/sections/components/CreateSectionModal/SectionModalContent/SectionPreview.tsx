@@ -4,9 +4,9 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Avatar from "@mui/material/Avatar";
 import { InfoOutlineRounded } from "@mui/icons-material";
 import { useFormContext } from "@hooks/useTanstack";
-import { SectionsType } from "../SectionsApi";
 import { memo } from "react";
-import { UserType } from "../../../teachers/_types";
+import { SectionsType } from "../../../api/sections.types";
+import { UserType } from "@types";
 
 function SectionPreview() {
   const form = useFormContext();

@@ -1,7 +1,7 @@
 import AutocompleteSearch from "@components/ui/AutocompleteSearch";
 import { useGetTeachersQuery } from "@app/(pages)/(admin)/teachers/TeachersApi";
 import { useState } from "react";
-import { UserType } from "../../../teachers/_types";
+import { UserType } from "../../../../../../app/(pages)/(admin)/teachers/_types";
 import { useFormContext } from "@hooks/useTanstack";
 import { UpdaterFn } from "@tanstack/react-form";
 

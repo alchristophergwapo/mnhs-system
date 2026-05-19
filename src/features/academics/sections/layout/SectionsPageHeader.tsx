@@ -14,7 +14,7 @@ type HeadersProps = {
  * @param props
  * @returns ReactNode
  */
-export default function Headers(props: HeadersProps) {
+function SectionsPageHeaders(props: HeadersProps) {
   //   const { total, parameters, isLoading = false, setParameters } = props;
 
   return (
@@ -44,3 +44,5 @@ export default function Headers(props: HeadersProps) {
     </div>
   );
 }
+
+export default SectionsPageHeaders;
