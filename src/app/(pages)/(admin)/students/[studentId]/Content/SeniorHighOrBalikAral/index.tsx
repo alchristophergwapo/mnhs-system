@@ -2,7 +2,7 @@ import { useFormContext } from "@hooks/useTanstack";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
-import { memo, useRef, useState } from "react";
+import { memo, useState } from "react";
 import RadioSelect from "@components/ui/RadioSelect";
 import Radio from "@mui/material/Radio";
 import Select from "@components/ui/Select";
