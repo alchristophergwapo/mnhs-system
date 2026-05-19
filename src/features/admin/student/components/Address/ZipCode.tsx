@@ -1,8 +1,8 @@
 import Input from "@components/ui/Input";
 import { useFormContext } from "@hooks/useTanstack";
 import { memo } from "react";
-import { zipCode, zipCodeRequired } from "./addressValidators";
-import { AddressInputProps } from ".";
+import { zipCode, zipCodeRequired } from "../../validations/addressValidators";
+import { AddressInputProps } from "../../types/student.types";
 import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 
 /**

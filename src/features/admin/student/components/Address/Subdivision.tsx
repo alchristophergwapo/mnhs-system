@@ -1,27 +1,27 @@
-import Input from "@components/ui/Input";
 import { useFormContext } from "@hooks/useTanstack";
 import { memo } from "react";
-import { street } from "./addressValidators";
-import { AddressInputProps } from ".";
+import { subdivision } from "../../validations/addressValidators";
+import Input from "@components/ui/Input";
+import { AddressInputProps } from "../../types/student.types";
 import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 
 /**
- * Renders a street address input field integrated with a form context.
- * Handles asynchronous validation with a debounce and binds the input
- * value and error states to the form's state.
+ * Renders a subdivision or village input field integrated with a form context.
+ * This component handles asynchronous validation with a debounce and binds the
+ * input value to a nested `subdivision` property within the target form state.
  *
  * @param {AddressInputProps} props - The component props.
- * @param {string} props.target - The target path prefix used to resolve the field name within the form context.
- * @returns {JSX.Element} The rendered street input field.
+ * @param {string} props.target - The base target path in the form state where the subdivision data is nested.
+ * @returns {JSX.Element} The rendered subdivision input field.
  */
-function Street({ target }: AddressInputProps) {
+function Subdivision({ target }: AddressInputProps) {
   const form = useFormContext();
   return (
     <form.Field
-      name={`${target}.street` as never}
+      name={`${target}.subdivision` as never}
       validators={{
         onChangeAsyncDebounceMs: 300,
-        onChangeAsync: street as unknown as FieldAsyncValidateOrFn<
+        onChangeAsync: subdivision as unknown as FieldAsyncValidateOrFn<
           Record<string, never>,
           never,
           never
@@ -31,7 +31,7 @@ function Street({ target }: AddressInputProps) {
       {(field) => (
         <Input
           name={field.name}
-          label="Street"
+          label="Subdivision/Village"
           value={field.state.value ?? ""}
           onChange={(e) =>
             field.handleChange(
@@ -46,4 +46,4 @@ function Street({ target }: AddressInputProps) {
   );
 }
 
-export default memo(Street);
+export default memo(Subdivision);

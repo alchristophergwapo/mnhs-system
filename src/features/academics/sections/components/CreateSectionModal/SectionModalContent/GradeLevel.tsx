@@ -49,11 +49,7 @@ function GradeLevel() {
       }}
     >
       {(field) => {
-        const value = field.state.value as {
-          id: string;
-          name: string;
-          gradeLevelNumber: number | null;
-        } | null;
+        const value = field.state.value as GradeLevelType | null;
 
         return (
           <Select

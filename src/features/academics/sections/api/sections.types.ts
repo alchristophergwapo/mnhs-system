@@ -1,15 +1,6 @@
-import { UserType } from "@types";
+import { UserType, SectionType as BaseSectionType } from "@types";
 
-export type SectionsType = {
-    id: number;
-    name: string;
-    maxCapacity: number | null;
-    gradeLevelId: number | null;
-    gradeLevel: {
-        id: number | null;
-        name: string;
-        gradeLevelNumber: number | null;
-    } | null;
+export type SectionsType = Partial<BaseSectionType> & {
     _count: {
         students: number
     };

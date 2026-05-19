@@ -2,7 +2,7 @@ import Stepper from "@components/ui/Stepper";
 import Typography from "@mui/material/Typography";
 import { getSteps } from "./steps";
 import { SharedPropsType } from "@components/layouts/PageCardedWrapper";
-import { StudentDataType } from "../StudentPage";
+import { StudentDataType } from "../types/student.types";
 
 /**
  * Content component that renders a form with a stepper navigation

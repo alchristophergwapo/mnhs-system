@@ -6,17 +6,14 @@ import Street from "./Street";
 import Subdivision from "./Subdivision";
 import ZipCode from "./ZipCode";
 
-export type AddressInputProps = {
-  required?: boolean;
-  target: "permanentAddress" | "temporaryAddress";
-};
-
 /**
- * Component for displaying and editing the addresses of a teacher.
- * It includes fields for the residential and permanent addresses.
- * @param {ContentProps<UserType>} props - The props for the component.
- * @example
- * <Address />
+ * A React functional component that renders a form layout for collecting
+ * permanent and residential addresses. It utilizes a responsive grid
+ * system to display various address-related input fields (House Number,
+ * Street, Subdivision, Barangay, City, Province, and Zip Code) grouped
+ * under "Permanent Address" and "Residential Address" sections.
+ *
+ * @returns {JSX.Element} The rendered address form component.
  */
 export default function Address() {
   return (

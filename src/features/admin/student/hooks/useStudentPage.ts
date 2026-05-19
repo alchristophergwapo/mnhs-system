@@ -1,41 +1,10 @@
-"use client";
-
-import PageWrapper from "@components/layouts/PageCardedWrapper";
-import Headers from "./Headers";
-import Content from "./Content";
-import { useAppForm } from "@hooks/useTanstack";
-import {
-  AddressType,
-  CitizenshipType,
-  EnrollmentBackgroundType,
-  EnrollmentType,
-  FamilyType,
-  StudentType,
-  UserType,
-} from "@types";
-import {
-  useCreateStudentMutation,
-  useGetStudentDetailsQuery,
-} from "../../../../../features/students/api/students.api";
-import { useSnackbar } from "notistack";
+import { useCreateStudentMutation, useGetStudentDetailsQuery } from "@features/students/api/students.api";
 import useNavigate from "@hooks/useNavigate";
-import { useEffect, useState } from "react";
+import { useAppForm } from "@hooks/useTanstack";
 import { useParams } from "next/navigation";
-
-export type StudentDataType = {
-  user: UserType;
-  permanentAddress: AddressType;
-  residentialAddress?: AddressType;
-  student: StudentType;
-  citizenship: CitizenshipType;
-  father: FamilyType;
-  mother: FamilyType;
-  guardian?: FamilyType;
-  enrollment: EnrollmentType;
-  enrollmentBackground?: EnrollmentBackgroundType;
-  isSeniorHigh: boolean;
-  isTransferee: boolean;
-};
+import { useSnackbar } from "notistack";
+import { useState } from "react";
+import { StudentDataType } from "../types/student.types";
 
 const defaultStudentData: StudentDataType = {
   user: {
@@ -83,17 +52,7 @@ const defaultStudentData: StudentDataType = {
   isTransferee: false,
 };
 
-/**
- * @component StudentPage
- * @description A React functional component that serves as the student details page.
- * It handles both creating a new student and viewing/editing an existing student's details,
- * determined by the `studentId` route parameter ("new" for creation, or an existing ID).
- * It manages form state, data fetching, and submission using custom hooks and mutations.
- *
- * @returns {JSX.Element} The rendered student page component wrapped in a PageWrapper,
- * including a form for student data, a header, and breadcrumbs.
- */
-function StudentPage() {
+function useStudentPage() {
   const routeParams = useParams<{ studentId: string }>();
   const { studentId } = routeParams;
   const [createStudent] = useCreateStudentMutation();
@@ -137,18 +96,10 @@ function StudentPage() {
     },
   });
 
-  return (
-    <PageWrapper
-      isLoading={isFetching}
-      displayBreadcrumbs={true}
-      content={
-        <form.AppForm>
-          <Content />
-        </form.AppForm>
-      }
-      header={<Headers />}
-    />
-  );
+    return {
+        isFetching,
+        form,
+    }
 }
 
-export default StudentPage;
+export default useStudentPage;

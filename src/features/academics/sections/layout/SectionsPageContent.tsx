@@ -7,6 +7,15 @@ import SectionsStatsCard from "../components/SectionsStatsCard";
 import SectionCard from "../components/SectionCard";
 import CreateSectionModal from "../components/CreateSectionModal";
 
+/**
+ * Renders the main content for the Sections page, displaying section statistics,
+ * a grade level filter, a grid of section cards, and a modal for creating/editing sections.
+ * 
+ * @param {Partial<SharedPropsType<GetSectionsApiResponse>>} props - The component props.
+ * @param {GetSectionsApiResponse} [props.data] - The API response data containing sections and statistics.
+ * @param {boolean} [props.isLoading] - Flag indicating if the data is currently loading.
+ * @returns {JSX.Element} The rendered sections page content or a loading spinner.
+ */
 function SectionsPageContent({
   data,
   isLoading,
@@ -38,7 +47,7 @@ function SectionsPageContent({
           <SectionCard
             key={`section-${section.id}`}
             section={section}
-            onEdit={() => setOpenCreateSection({ open: true, id: section.id })}
+            onEdit={() => setOpenCreateSection({ open: true, id: Number(section.id) })}
           />
         ))}
       </div>

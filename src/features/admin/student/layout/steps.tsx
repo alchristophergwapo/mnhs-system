@@ -5,12 +5,12 @@ import LocationCity from "@mui/icons-material/LocationCity";
 import { lazy } from "react";
 import DocumentScanner from "@mui/icons-material/DocumentScanner";
 import FindInPageOutlined from "@mui/icons-material/FindInPageOutlined";
-const PersonalInformation = lazy(() => import("./PersonalInformation"));
-const Address = lazy(() => import("./Address"));
-const ParentOrGuardian = lazy(() => import("./ParentOrGuardian"));
-const SeniorHighOrBalikAral = lazy(() => import("./SeniorHighOrBalikAral"));
-const Documents = lazy(() => import("./Documents"));
-const Review = lazy(() => import("./Review"));
+const PersonalInformation = lazy(() => import("../components/PersonalInformation"));
+const Address = lazy(() => import("../components/Address"));
+const ParentOrGuardian = lazy(() => import("../components/ParentOrGuardian"));
+const SeniorHighOrBalikAral = lazy(() => import("../components/SeniorHighOrBalikAral"));
+const Documents = lazy(() => import("../components/Documents"));
+const Review = lazy(() => import("../components/Review"));
 
 export function getSteps(): StepsType[] {
   return [

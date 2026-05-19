@@ -1,8 +1,8 @@
 import { useFormContext } from "@hooks/useTanstack";
 import { memo } from "react";
-import { barangay, barangayRequired } from "./addressValidators";
+import { barangay, barangayRequired } from "../../validations/addressValidators";
 import Input from "@components/ui/Input";
-import { AddressInputProps } from ".";
+import { AddressInputProps } from "../../types/student.types";
 import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 
 /**

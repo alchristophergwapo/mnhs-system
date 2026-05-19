@@ -1,9 +1,9 @@
 import { useFormContext } from "@hooks/useTanstack";
 import { memo } from "react";
-import { city, cityRequired } from "./addressValidators";
+import { city, cityRequired } from "../../validations/addressValidators";
 import Input from "@components/ui/Input";
-import { AddressInputProps } from ".";
 import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
+import { AddressInputProps } from "../../types/student.types";
 
 /**
  * A React component that renders a City/Municipality input field within a form.

@@ -5,9 +5,16 @@ import Avatar from "@mui/material/Avatar";
 import { InfoOutlineRounded } from "@mui/icons-material";
 import { useFormContext } from "@hooks/useTanstack";
 import { memo } from "react";
-import { SectionsType } from "../../../api/sections.types";
 import { UserType } from "@types";
+import { SectionsType } from "@features/academics/sections/api/sections.types";
 
+/**
+ * A React functional component that renders a live preview of a section being created.
+ * It subscribes to a form context to display real-time updates for section details
+ * such as grade level, name, capacity, and assigned adviser.
+ * 
+ * @returns {JSX.Element} The rendered section preview component.
+ */
 function SectionPreview() {
   const form = useFormContext();
 

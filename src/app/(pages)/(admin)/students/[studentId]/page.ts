@@ -1,3 +1,3 @@
-import StudentPage from "./StudentPage";
+import StudentPage from "@features/admin/student/StudentPage";
 
 export default StudentPage;
