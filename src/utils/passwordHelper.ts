@@ -16,7 +16,5 @@ export async function generateSecurePassword(
   lastName: string,
   dateOfBirth: Date,
 ): Promise<string> {
-  const salt = await bcrypt.genSalt(12); // Increased salt rounds
-  const passwordString = `${firstName}${lastName}${dateOfBirth.getMonth() + 1}${dateOfBirth.getDate()}${dateOfBirth.getFullYear()}`;
-  return bcrypt.hash(passwordString, salt);
+  return "";
 }
