@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import App from "./App";
 import { SessionProvider } from "next-auth/react";
-import { auth } from "../auth";
+import { auth } from "../lib/auth";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { InitColorSchemeScript } from "@mui/material";
 

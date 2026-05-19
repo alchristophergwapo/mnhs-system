@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { getUserById } from "@server/services/userService";
-import { auth } from "@/auth";
+import { auth } from "@lib/auth";
 import Typography from "@mui/material/Typography";
 import SchoolYearOverview from "../sections/SchoolYearOverview";
 import DashboardSchoolEvents from "../sections/DashboardSchoolEvents";

@@ -27,7 +27,7 @@
         "./src/app/*"
       ],
       "@/auth": [
-        "./src/auth.ts"
+        "./src/lib/auth.ts"
       ],
       "@components/*": [
         "./src/components/*"

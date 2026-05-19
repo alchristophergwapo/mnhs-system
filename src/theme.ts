@@ -83,7 +83,7 @@ const theme = createTheme({
         root: ({ theme }) => ({
           borderRadius: 12,
           backgroundImage: "none", // Removes MUI's default elevation overlay
-          backgroundColor: theme.palette.mode === "dark" ? "#1A2426" : "#fff", // Sets the background color for cards
+          backgroundColor: theme.palette.mode === "dark" ? "#1A2426!" : "#fff", // Sets the background color for cards
           boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.4)", // Adds a box shadow for better depth
           border:
             theme.palette.mode === "dark"
@@ -110,13 +110,19 @@ const theme = createTheme({
             color: "#006666",
           },
         },
-        contained:({ theme }) => ({
+        contained: ({ theme }) => ({
           // Adds that subtle "glow" seen on the Join Class button
           color: theme.palette.mode === "dark" ? "black!important" : "#fff",
           boxShadow: "0 0 15px rgba(0, 245, 212, 0.3)",
           "&:hover": {
             boxShadow: "0 0 25px rgba(0, 245, 212, 0.5)",
           },
+        }),
+        text: ({ theme }) => ({
+          color:
+            theme.palette.mode === "dark"
+              ? `${theme.palette.primary.main}!important`
+              : "inherit",
         }),
       },
     },
@@ -129,10 +135,16 @@ const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         notchedOutline: ({ theme }) => ({
-          border: theme.palette.mode === "dark" ? "1px solid rgba(255, 255, 255, 0.15)" : "1px solid rgba(0, 0, 0, 0.15)",
+          border:
+            theme.palette.mode === "dark"
+              ? "1px solid rgba(255, 255, 255, 0.15)"
+              : "1px solid rgba(0, 0, 0, 0.15)",
         }),
         root: ({ theme }) => ({
-          color: theme.palette.mode === "dark" ? "white!important" : "black!important",
+          color:
+            theme.palette.mode === "dark"
+              ? "white!important"
+              : "black!important",
         }),
       },
     },
@@ -140,7 +152,7 @@ const theme = createTheme({
       styleOverrides: {
         root: ({ theme }) => ({
           color: theme.palette.mode === "dark" ? "white" : "black",
-        })
+        }),
       },
     },
     MuiInputLabel: {
@@ -154,7 +166,8 @@ const theme = createTheme({
     MuiFormLabel: {
       styleOverrides: {
         root: ({ theme }) => ({
-          color: theme.palette.mode === "dark" ? "inherit": "rgba(0, 0, 0, 0.7)",
+          color:
+            theme.palette.mode === "dark" ? "inherit" : "rgba(0, 0, 0, 0.7)",
         }),
       },
     },
@@ -191,7 +204,8 @@ const theme = createTheme({
           fontWeight: 600,
           textTransform: "uppercase",
           fontSize: "0.75rem",
-          backgroundColor: theme.palette.mode === "dark" ? "#1d2729!important": "inherit",
+          backgroundColor:
+            theme.palette.mode === "dark" ? "#1d2729!important" : "inherit",
         }),
       },
     },

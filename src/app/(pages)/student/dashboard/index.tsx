@@ -1,7 +1,7 @@
 import Paper from "@mui/material/Paper";
 import { DateCalendar } from "@mui/x-date-pickers";
 import Grid from "@mui/material/Grid";
-import { auth } from "@/auth";
+import { auth } from "@lib/auth";
 import { redirect } from "next/navigation";
 import prisma from "@lib/prisma";
 import { Suspense } from "react";

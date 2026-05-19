@@ -6,7 +6,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import { memo } from "react";
 import z from "zod";
-import GradeLevel from "@app/(pages)/(admin)/academics/sections/CreateSection/GradeLevel";
+import GradeLevel from "@features/academics/sections/components/CreateSectionModal/SectionModalContent/GradeLevel";
 import Citizenship from "./Citizenship";
 import { format, parseISO } from "date-fns";
 import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
