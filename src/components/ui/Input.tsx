@@ -1,5 +1,5 @@
 import TextField, { TextFieldProps } from "@mui/material/TextField";
-import { memo, useState } from "react";
+import { memo } from "react";
 
 /**
  * A custom input component that wraps the Material-UI TextField component.
@@ -15,9 +15,6 @@ function Input({
   slotProps = {},
   ...otherProps
 }: TextFieldProps & { errors?: { message: string }[] }) {
-  if (type === "date") {
-    slotProps.inputLabel = { shrink: true };
-  }
 
   return (
     <div className="flex flex-col">
@@ -29,7 +26,7 @@ function Input({
         slotProps={{
           ...slotProps,
           inputLabel: {
-            ...slotProps.inputLabel,
+            shrink: type === "date" ? true : false,
             sx: {
               "& .MuiInputLabel-asterisk": {
                 color: "red",

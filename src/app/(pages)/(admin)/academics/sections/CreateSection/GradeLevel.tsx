@@ -4,10 +4,17 @@ import Select from "@components/ui/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useFormContext } from "@hooks/useTanstack";
 import z from "zod";
+import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
+import { GradeLevelType } from "@types";
 
 /**
- * GradeLevel component is a form field for selecting a grade level.
- * It uses React Hook Form for form management and a custom query for fetching grade levels.
+ * A React component that renders a grade level selection dropdown.
+ * It fetches available grade levels using a custom query and integrates
+ * with React Hook Form for state management and asynchronous validation.
+ * The field requires a grade level to be selected, debouncing the
+ * validation check by 300ms for performance optimization.
+ *
+ * @returns {JSX.Element} The rendered grade level select component.
  */
 function GradeLevel() {
   // Fetches grade levels data using a custom query
@@ -25,13 +32,23 @@ function GradeLevel() {
         onChangeAsyncDebounceMs: 300,
         // Validate that the grade level is a required number
         onChangeAsync: z
-          .object({
-            id: z.string(),
-            name: z.string(),
-          }, "Grade level is required")
-          .nonoptional("Grade level is required") as any,
+          .object(
+            {
+              id: z.string(),
+              name: z.string(),
+            },
+            "Grade level is required",
+          )
+          .nonoptional(
+            "Grade level is required",
+          ) as unknown as FieldAsyncValidateOrFn<
+          Record<string, never>,
+          never,
+          never
+        >,
       }}
-      children={(field) => {
+    >
+      {(field) => {
         const value = field.state.value as {
           id: string;
           name: string;
@@ -42,7 +59,7 @@ function GradeLevel() {
           <Select
             required
             label="Grade Level"
-            value={value || { }}
+            value={value || {}}
             name={field.name}
             displayEmpty
             renderValue={(val) => {
@@ -53,15 +70,19 @@ function GradeLevel() {
               return <em>Select grade level</em>;
             }}
             error={field.state.meta.errors.length > 0}
-            errors={field.state.meta.errors}
+            errors={field.state.meta.errors as { message: string }[]}
           >
             {/* Map through grade levels and create a menu item for each */}
-            {gradelevels?.map((gradeLevel) => (
+            {gradelevels?.map((gradeLevel: GradeLevelType) => (
               <MenuItem
                 key={gradeLevel.id}
                 value={gradeLevel.id}
                 selected={Number(gradeLevel.id) === Number(value?.id)}
-                onClick={() => field.handleChange(gradeLevel as any)}
+                onClick={() =>
+                  field.handleChange(
+                    gradeLevel as unknown as UpdaterFn<never, never>,
+                  )
+                }
               >
                 {gradeLevel.name}
               </MenuItem>
@@ -69,7 +90,7 @@ function GradeLevel() {
           </Select>
         );
       }}
-    />
+    </form.Field>
   );
 }
 

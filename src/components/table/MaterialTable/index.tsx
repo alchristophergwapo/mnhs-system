@@ -13,13 +13,13 @@ import {
 import { Theme } from "@mui/material/styles";
 import _ from "lodash";
 
-type MaterialTableProps<T extends Record<string, any>> = {
+type MaterialTableProps<T extends Record<string, unknown>> = {
   tableColumns: MRT_ColumnDef<T>[];
   tableRows: T[];
 } & Partial<MaterialReactTableProps<T>>;
 
 type TData = {
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 export const mrtTableInitialState: Partial<MRT_TableState<TData>> = {
@@ -43,7 +43,7 @@ export const mrtTableInitialState: Partial<MRT_TableState<TData>> = {
  * @param {Partial<MaterialReactTableProps<T>>} otherProps - The other props for the component.
  * @returns {JSX.Element} - The rendered MaterialReactTable component.
  */
-export default function MaterialTable<T extends Record<string, any>>(
+export default function MaterialTable<T extends Record<string, unknown>>(
   props: MaterialTableProps<T>,
 ) {
   const { tableColumns, tableRows, ...otherProps } = props;

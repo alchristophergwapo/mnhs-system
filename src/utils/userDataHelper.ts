@@ -1,3 +1,4 @@
+import { AddressType } from "@types";
 
 
 /**
@@ -18,7 +19,7 @@ export function generateUsername(firstName: string, lastName: string, dateOfBirt
  * Normalizes the address data by extracting specific fields and ensuring
  * the `zipCode` is converted to a number.
  *
- * @param {any} address - The raw address object containing various address fields.
+ * @param {AddressType} address - The raw address object containing various address fields.
  * @returns {Object} The normalized address object.
  * @returns {string} return.barangay - The barangay of the address.
  * @returns {string} return.city - The city of the address.
@@ -28,7 +29,7 @@ export function generateUsername(firstName: string, lastName: string, dateOfBirt
  * @returns {string} return.street - The street of the address.
  * @returns {string} return.subdivision - The subdivision of the address.
  */
-export function normalizeAddressData(address: any) {
+export function normalizeAddressData(address: AddressType) {
     return {
         barangay: address.barangay,
         city: address.city,

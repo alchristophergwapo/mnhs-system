@@ -1,7 +1,7 @@
 import prisma from "@lib/prisma";
 import { createClient } from "@lib/supabase/server";
 import { EnrollmentStatus, FamilyRelationShip, Gender } from "@/prisma/generated/prisma";
-import { AddressType, CitizenshipType, EnrollmentBackgroundType, EnrollmentType, FamilyType, GradeLevelType, StudentType, UserType } from "@/src/types";
+import { AddressType, CitizenshipType, EnrollmentBackgroundType, EnrollmentType, FamilyType, GradeLevelType, StudentType, UserType } from "@types";
 import { generateSecurePassword } from "@utils/passwordHelper";
 import { generateUsername, normalizeAddressData } from "@utils/userDataHelper";
 import { cookies } from "next/headers";
@@ -19,9 +19,9 @@ export async function GET(_: Request) {
         if (q) {
             queryConditions.push({
                 OR: [
-                    { firstName: { contains: q, mode: "insensitive" as any } },
-                    { lastName: { contains: q, mode: "insensitive" as any } },
-                    { middleName: { contains: q, mode: "insensitive" as any } }
+                    { firstName: { contains: q, mode: "insensitive" as unknown } },
+                    { lastName: { contains: q, mode: "insensitive" as unknown } },
+                    { middleName: { contains: q, mode: "insensitive" as unknown } }
                 ]
             });
         } else if (glevel) {

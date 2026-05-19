@@ -94,9 +94,12 @@ export default function NavigationItemTypeButton(props: NavigationItemProps) {
             {item.icon}
           </Icon>
         )}
-        <ListItemText primary={item.title} sx={{ margin: "0!important", paddingLeft: "6px" }} />
+        <ListItemText
+          primary={item.title}
+          sx={{ margin: "0!important", paddingLeft: "6px" }}
+        />
       </RootComponent>
     ),
-    [item, itempadding],
+    [item, itempadding, onItemClick, itemProps, component],
   );
 }

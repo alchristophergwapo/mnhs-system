@@ -1,7 +1,7 @@
 import { TextFieldProps } from "@mui/material";
 
 export type InputProps = Partial<TextFieldProps> & {
-  [key: string]: any;
+  [key: string]: unknown;
   errors: {message: string}[]
 };
 

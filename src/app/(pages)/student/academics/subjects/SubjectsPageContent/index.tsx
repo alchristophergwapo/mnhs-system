@@ -5,9 +5,8 @@ import CardHeader from "@mui/material/CardHeader";
 import Paper from "@mui/material/Paper";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { teal } from "@mui/material/colors";
 import { CheckCircleOutlineOutlined, Mail, Message } from "@mui/icons-material";
 import Divider from "@mui/material/Divider";
 import { colors, Container } from "@mui/material";
@@ -37,7 +36,7 @@ function SubjectsPageContent() {
             <Box
               sx={{
                 ":before": {
-                  backgroundColor: (colors as any)[item][200],
+                  backgroundColor: (colors as unknown)[item][200],
                   height: "60px",
                   content: "''",
                   display: "block",
@@ -84,7 +83,7 @@ function SubjectsPageContent() {
             <div className="w-full flex flex-row gap-2 p-2">
               <div className="w-1/2 flex flex-col">
                 <Container className={`flex flex-col p-2 rounded-md`} sx={{
-                  bgcolor: (colors as any)[item][50]
+                  bgcolor: (colors as unknown)[item][50]
                 }}>
                   <Typography className="uppercase! font-semibold!">
                     class schedule

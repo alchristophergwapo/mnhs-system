@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import FormGroup from "@mui/material/FormGroup";
 import DualCitizenship from "./DualCitizenship";
 import { useFormContext } from "@hooks/useTanstack";
+import { UpdaterFn } from "@tanstack/react-form";
 
 /**
  * A component for inputting the teacher's citizenship information.
@@ -36,24 +37,26 @@ export default function Citizenship() {
         </Typography>
       </FormLabel>
       <FormGroup row className="items-start">
-        <form.Field
-          name={"citizenship.filipino" as never}
-          children={(field) => (
+        <form.Field name={"citizenship.filipino" as never}>
+          {(field) => (
             <FormControlLabel
               label="Filipino"
               name={field.name}
               control={
                 <Checkbox
                   checked={field.state.value || false}
-                  onChange={(e) => field.handleChange(e.target.checked as any)}
+                  onChange={(e) =>
+                    field.handleChange(
+                      e.target.checked as unknown as UpdaterFn<never, never>,
+                    )
+                  }
                 />
               }
             />
           )}
-        />
-        <form.Field
-          name={"citizenship.dualCitizenship" as never}
-          children={(field) => (
+        </form.Field>
+        <form.Field name={"citizenship.dualCitizenship" as never}>
+          {(field) => (
             <div className="flex flex-col">
               <FormControlLabel
                 label="Dual Citizenship"
@@ -62,7 +65,9 @@ export default function Citizenship() {
                   <Checkbox
                     checked={field.state.value || false}
                     onChange={(e) =>
-                      field.handleChange(e.target.checked as any)
+                      field.handleChange(
+                        e.target.checked as unknown as UpdaterFn<never, never>,
+                      )
                     }
                   />
                 }
@@ -70,7 +75,7 @@ export default function Citizenship() {
               {field.state.value && <DualCitizenship />}
             </div>
           )}
-        />
+        </form.Field>
       </FormGroup>
     </FormControl>
   );

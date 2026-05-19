@@ -11,7 +11,7 @@ import LicenseNumber from "./LicenseNumber";
 import LicenseExpiryDate from "./LicenseExpiryDate";
 import GradeLevel from "./GradeLevel";
 import DateInput from "@components/ui/DateInput";
-import { UpdaterFn } from "@tanstack/react-form";
+import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 
 /**
  * Component for the personal information section of the teacher form.
@@ -49,9 +49,16 @@ export default function PositionAndPersonalInformation() {
                 new Date(`${new Date().getFullYear() - 17}-01-01`),
                 "You must be at least 17 or 18 years old",
               )
-              .nonoptional("Date of birth is required") as any,
+              .nonoptional(
+                "Date of birth is required",
+              ) as unknown as FieldAsyncValidateOrFn<
+              Record<string, never>,
+              never,
+              never
+            >,
           }}
-          children={(field) => (
+        >
+          {(field) => (
             <DateInput
               name={field.name}
               value={field.state.value}
@@ -60,12 +67,12 @@ export default function PositionAndPersonalInformation() {
                 field.handleChange(value as UpdaterFn<never, never>);
               }}
               label="Date of Birth"
-              errors={field.state.meta.errors || []}
+              errors={field.state.meta.errors as { message: string }[]}
               error={field.state.meta.errors?.length > 0}
               required
             />
           )}
-        />
+        </form.Field>
         <form.Field
           name={"placeOfBirth" as never}
           validators={{
@@ -73,32 +80,52 @@ export default function PositionAndPersonalInformation() {
             onChangeAsync: z
               .string()
               .max(100, "Address is too long")
-              .nullish() as any,
+              .nullish() as unknown as FieldAsyncValidateOrFn<
+              Record<string, never>,
+              never,
+              never
+            >,
           }}
-          children={(field) => (
+        >
+          {(field) => (
             <Input
               name={field.name}
               value={field.state.value ?? ""}
-              onChange={(e) => field.handleChange(e.target.value as any)}
+              onChange={(e) =>
+                field.handleChange(
+                  e.target.value as unknown as UpdaterFn<never, never>,
+                )
+              }
               label="Place of Birth"
             />
           )}
-        />
+        </form.Field>
         <form.Field
           name={"telephoneNumer" as never}
           validators={{
             onChangeAsyncDebounceMs: 300,
-            onChangeAsync: z.string().nullish() as any,
+            onChangeAsync: z
+              .string()
+              .nullish() as unknown as FieldAsyncValidateOrFn<
+              Record<string, never>,
+              never,
+              never
+            >,
           }}
-          children={(field) => (
+        >
+          {(field) => (
             <Input
               name={field.name}
               value={field.state.value ?? ""}
-              onChange={(e) => field.handleChange(e.target.value as any)}
+              onChange={(e) =>
+                field.handleChange(
+                  e.target.value as unknown as UpdaterFn<never, never>,
+                )
+              }
               label="Telephone No."
             />
           )}
-        />
+        </form.Field>
         <form.Field
           name={"contactNumber" as never}
           validators={{
@@ -112,9 +139,14 @@ export default function PositionAndPersonalInformation() {
               .refine(
                 (value) => (/^(\+639|09)\d{9}$/.test(value) ? true : false),
                 "Invalid contact number format",
-              ) as any,
+              ) as unknown as FieldAsyncValidateOrFn<
+              Record<string, never>,
+              never,
+              never
+            >,
           }}
-          children={(field) => (
+        >
+          {(field) => (
             <Input
               name={field.name}
               value={
@@ -122,32 +154,47 @@ export default function PositionAndPersonalInformation() {
                   ? String(field.state.value).replace(/[\s.\-\(\)]/g, "")
                   : ""
               }
-              onChange={(e) => field.handleChange(e.target.value as any)}
+              onChange={(e) =>
+                field.handleChange(
+                  e.target.value as unknown as UpdaterFn<never, never>,
+                )
+              }
               label="Mobile No."
-              errors={field.state.meta.errors || []}
+              errors={field.state.meta.errors as { message: string }[]}
               error={field.state.meta.errors?.length > 0}
               placeholder="Example (+639xxxxxxxxx, 09xxxxxxxxx)"
               required
             />
           )}
-        />
+        </form.Field>
         <form.Field
           name={"email" as never}
           validators={{
             onChangeAsyncDebounceMs: 300,
-            onChangeAsync: z.email().or(z.literal("")) as any,
+            onChangeAsync: z
+              .email()
+              .or(z.literal("")) as unknown as FieldAsyncValidateOrFn<
+              Record<string, never>,
+              never,
+              never
+            >,
           }}
-          children={(field) => (
+        >
+          {(field) => (
             <Input
               name={field.name}
               value={field.state.value ?? ""}
-              onChange={(e) => field.handleChange(e.target.value as any)}
+              onChange={(e) =>
+                field.handleChange(
+                  e.target.value as unknown as UpdaterFn<never, never>,
+                )
+              }
               label="Email Address (Optional)"
-              errors={field.state.meta.errors || []}
+              errors={field.state.meta.errors as { message: string }[]}
               error={field.state.meta.errors?.length > 0}
             />
           )}
-        />
+        </form.Field>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-4">
@@ -155,18 +202,31 @@ export default function PositionAndPersonalInformation() {
           name={"gender" as never}
           validators={{
             onChangeAsyncDebounceMs: 300,
-            onChangeAsync: z.string().nonempty("Gender is required") as any,
+            onChangeAsync: z
+              .string()
+              .nonempty(
+                "Gender is required",
+              ) as unknown as FieldAsyncValidateOrFn<
+              Record<string, never>,
+              never,
+              never
+            >,
           }}
-          children={(field) => (
+        >
+          {(field) => (
             <Gender
               name={field.name}
               value={field.state.value ?? ""}
-              onChange={(e) => field.handleChange(e.target.value as any)}
-              errors={field.state.meta.errors || []}
+              onChange={(e) =>
+                field.handleChange(
+                  e.target.value as unknown as UpdaterFn<never, never>,
+                )
+              }
+              errors={field.state.meta.errors as { message: string }[]}
               error={field.state.meta.errors?.length > 0}
             />
           )}
-        />
+        </form.Field>
         <CivilStatus />
       </div>
       <Citizenship />
@@ -179,24 +239,31 @@ export default function PositionAndPersonalInformation() {
               .string()
               .regex(/^[0-9]+$/, "Only numbers are allowed")
               .max(3, "Invalid height")
-              .nullish() as any,
+              .nullish() as unknown as FieldAsyncValidateOrFn<
+              Record<string, never>,
+              never,
+              never
+            >,
           }}
-          children={(field) => (
+        >
+          {(field) => (
             <Input
               name={field.name}
               value={field.state.value ?? ""}
               label="Height (cm)"
               onChange={(e) =>
                 field.handleChange(
-                  (Number(e.target.value) ? e.target.value : "") as any,
+                  (Number(e.target.value)
+                    ? e.target.value
+                    : "") as unknown as UpdaterFn<never, never>,
                 )
               }
-              errors={field.state.meta.errors || []}
+              errors={field.state.meta.errors as { message: string }[]}
               error={field.state.meta.errors?.length > 0}
               sx={{ "& .MuiSvgIcon-root": { display: "none" } }}
             />
           )}
-        />
+        </form.Field>
         <form.Field
           name={"weight" as never}
           validators={{
@@ -204,23 +271,30 @@ export default function PositionAndPersonalInformation() {
             onChangeAsync: z.coerce
               .number()
               .max(300, "Invalid weight")
-              .nullish() as any,
+              .nullish() as unknown as FieldAsyncValidateOrFn<
+              Record<string, never>,
+              never,
+              never
+            >,
           }}
-          children={(field) => (
+        >
+          {(field) => (
             <Input
               name={field.name}
               value={field.state.value ?? ""}
               onChange={(e) =>
                 field.handleChange(
-                  Number(e.target.value) ? Number(e.target.value) : ("" as any),
+                  (Number(e.target.value)
+                    ? Number(e.target.value)
+                    : "") as unknown as UpdaterFn<never, never>,
                 )
               }
               label="Weight (kg)"
-              errors={field.state.meta.errors || []}
+              errors={field.state.meta.errors as { message: string }[]}
               error={field.state.meta.errors?.length > 0}
             />
           )}
-        />
+        </form.Field>
         <BloodType />
       </div>
     </div>

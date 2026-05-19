@@ -1,6 +1,6 @@
 "use client";
 
-import PageWrapper from "@components/PageCardedWrapper";
+import PageWrapper from "@components/layouts/PageCardedWrapper";
 import Headers from "./Headers";
 import Content from "./Content";
 import { useAppForm } from "@hooks/useTanstack";
@@ -100,7 +100,7 @@ function StudentPage() {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
-  const [studentData, setStudentData] =
+  const [updatedStudentData, setUpdatedStudentData] =
     useState<StudentDataType>(defaultStudentData);
 
   const {
@@ -111,11 +111,10 @@ function StudentPage() {
     skip: studentId === "new",
   });
 
-  useEffect(() => {
-    if (studentId !== "new" && !isLoading && !isFetching) {
-      setStudentData(student as StudentDataType);
-    }
-  }, [studentId, isLoading, isFetching, student]);
+  const studentData =
+    studentId !== "new" && !isLoading && !isFetching
+      ? (student as StudentDataType)
+      : updatedStudentData;
 
   const form = useAppForm({
     defaultValues: studentData,
@@ -128,6 +127,7 @@ function StudentPage() {
           enqueueSnackbar("Student added successfully", {
             variant: "success",
           });
+          setUpdatedStudentData(student as unknown as StudentDataType);
           navigate(`/students/${student.id}`);
         })
         .catch((err) => {
@@ -136,6 +136,7 @@ function StudentPage() {
         });
     },
   });
+
   return (
     <PageWrapper
       isLoading={isFetching}

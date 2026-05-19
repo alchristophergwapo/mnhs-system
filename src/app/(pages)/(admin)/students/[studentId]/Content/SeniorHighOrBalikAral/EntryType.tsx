@@ -24,14 +24,19 @@ function EntryType({ required }: { required: boolean }) {
           never
         >,
       }}
-      children={(parentField) => {
+    >
+      {(parentField) => {
         const isTransferee =
           parentField.state.value === StudentEntryType.TRANSFER;
         return (
           <>
             <RadioSelect
               label="You are enrolling as?"
-              onChange={(e) => parentField.handleChange(e.target.value as any)}
+              onChange={(e) =>
+                parentField.handleChange(
+                  e.target.value as unknown as UpdaterFn<never, never>,
+                )
+              }
               value={parentField.state.value || ""}
               required={required}
               name={parentField.name}
@@ -81,7 +86,8 @@ function EntryType({ required }: { required: boolean }) {
                     never
                   >,
                 }}
-                children={(field) => (
+              >
+                {(field) => (
                   <Input
                     name={field.name}
                     value={field.state.value || ""}
@@ -99,7 +105,7 @@ function EntryType({ required }: { required: boolean }) {
                     error={field.state.meta.errors.length > 0}
                   />
                 )}
-              />
+              </form.Field>
               {isTransferee && (
                 <>
                   <form.Field
@@ -120,12 +126,18 @@ function EntryType({ required }: { required: boolean }) {
                         never
                       >,
                     }}
-                    children={(field) => (
+                  >
+                    {(field) => (
                       <Input
                         name={field.name}
                         value={field.state.value || ""}
                         onChange={(e) =>
-                          field.handleChange(e.target.value as any)
+                          field.handleChange(
+                            e.target.value as unknown as UpdaterFn<
+                              never,
+                              never
+                            >,
+                          )
                         }
                         label="Last School ID"
                         error={field.state.meta.errors.length > 0}
@@ -134,7 +146,7 @@ function EntryType({ required }: { required: boolean }) {
                         }
                       />
                     )}
-                  />
+                  </form.Field>
                   <div className="col-span-2">
                     <form.Field
                       name={"enrollmentBackground.lastSchoolName" as never}
@@ -164,7 +176,8 @@ function EntryType({ required }: { required: boolean }) {
                           never
                         >,
                       }}
-                      children={(field) => (
+                    >
+                      {(field) => (
                         <Input
                           name={field.name}
                           value={field.state.value || ""}
@@ -182,7 +195,7 @@ function EntryType({ required }: { required: boolean }) {
                           }
                         />
                       )}
-                    />
+                    </form.Field>
                   </div>
                   <div className="col-span-2">
                     <form.Field
@@ -213,7 +226,8 @@ function EntryType({ required }: { required: boolean }) {
                           never
                         >,
                       }}
-                      children={(field) => (
+                    >
+                      {(field) => (
                         <Input
                           name={field.name}
                           value={field.state.value || ""}
@@ -231,7 +245,7 @@ function EntryType({ required }: { required: boolean }) {
                           }
                         />
                       )}
-                    />
+                    </form.Field>
                   </div>
                 </>
               )}
@@ -239,7 +253,7 @@ function EntryType({ required }: { required: boolean }) {
           </>
         );
       }}
-    />
+    </form.Field>
   );
 }
 

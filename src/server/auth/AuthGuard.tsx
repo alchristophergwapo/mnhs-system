@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
+import { Role } from "@/prisma/generated/prisma";
 
 /**
  * AuthGuard component - A route protection component that checks user authentication and role
@@ -8,8 +9,10 @@ import { auth } from "@/auth";
  */
 export default async function AuthGuard({
   children,
+  allowedRoles,
 }: {
   children: React.ReactNode;
+  allowedRoles: Partial<Role>[];
 }) {
   // Get the current user session
   const session = await auth();
@@ -18,7 +21,6 @@ export default async function AuthGuard({
     redirect("/auth/login");
   }
 
-  const allowedRoles = ["ADMIN", "SUPERADMIN"];
   if (!allowedRoles.includes(session.user?.role)) {
     redirect("/unauthorized"); // Or redirect to a safe default route based on their actual role
   }

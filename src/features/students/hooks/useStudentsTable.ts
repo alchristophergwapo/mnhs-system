@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { SetStateAction, useCallback, useEffect, useState } from "react";
 import { GetStudentsApiArg } from "../api/students.types";
 import { MRT_PaginationState } from "material-react-table";
 
@@ -8,7 +8,7 @@ import { MRT_PaginationState } from "material-react-table";
  * API query parameters, synchronizing pagination changes back to the parameters.
  *
  * @param {GetStudentsApiArg} parameters - The current API query parameters (e.g., page, limit, filters).
- * @param {(parameters: Record<string, any>) => void} setParameters - The state setter function to update the API query parameters.
+ * @param {(parameters: Record<string, string | number | boolean>) => void} setParameters - The state setter function to update the API query parameters.
  * @returns {Object} An object containing the table state and handlers.
  * @returns {MRT_PaginationState} return.pagination - The current pagination state (pageIndex and pageSize).
  * @returns {React.Dispatch<React.SetStateAction<MRT_PaginationState>>} return.setPagination - The setter function to update the pagination state.
@@ -16,7 +16,7 @@ import { MRT_PaginationState } from "material-react-table";
  */
 export function useStudentsTable(
   parameters: GetStudentsApiArg,
-  setParameters: (parameters: Record<string, any>) => void,
+  setParameters: (parameters: SetStateAction<GetStudentsApiArg>) => void,
 ) {
   const [pagination, setPagination] = useState<MRT_PaginationState>({
     pageIndex: parameters.page,
@@ -33,14 +33,17 @@ export function useStudentsTable(
    */
   const handleChangeOptions = useCallback(
     (key: string, value: string | number) => {
-      setParameters({ ...parameters, [key]: value });
+      setParameters((prev: GetStudentsApiArg) => ({
+        ...prev,
+        [key]: value,
+      }));
     },
     [],
   );
 
   // Update the parameters state when the pagination state changes
   useEffect(() => {
-    setParameters((prev: object) => ({
+    setParameters((prev: GetStudentsApiArg) => ({
       ...prev,
       page: pagination.pageIndex,
       limit: pagination.pageSize,

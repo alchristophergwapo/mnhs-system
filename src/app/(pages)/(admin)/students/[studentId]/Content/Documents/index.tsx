@@ -27,9 +27,14 @@ function Documents() {
             .refine(
               (file) => ALLOWED_FILE_TYPES.includes(file.type),
               "File must be an image",
-            ) as unknown as FieldAsyncValidateOrFn<Record<string, never>, never, never>,
+            ) as unknown as FieldAsyncValidateOrFn<
+            Record<string, never>,
+            never,
+            never
+          >,
         }}
-        children={(field) => {
+      >
+        {(field) => {
           return (
             <div className="flex flex-col gap-4">
               <Input
@@ -58,7 +63,7 @@ function Documents() {
             </div>
           );
         }}
-      />
+      </form.Field>
     </div>
   );
 }

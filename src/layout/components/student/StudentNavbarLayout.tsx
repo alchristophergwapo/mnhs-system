@@ -6,6 +6,14 @@ import Toolbar from "@mui/material/Toolbar";
 
 const drawerWidth = 280;
 
+/**
+ * Generates the CSS styles for a drawer in its opened state.
+ * Sets the drawer to its full width with a smooth transition animation
+ * and hides horizontal overflow.
+ *
+ * @param {Theme} theme - The MUI theme object used to access transition settings.
+ * @returns {CSSObject} The CSS properties to apply when the drawer is opened.
+ */
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -15,6 +23,14 @@ const openedMixin = (theme: Theme): CSSObject => ({
   overflowX: "hidden",
 });
 
+/**
+ * Generates the CSS styles for a drawer component in its closed state.
+ * Applies a width transition, hides horizontal overflow, and sets a responsive width
+ * based on the theme's spacing and breakpoints.
+ *
+ * @param {Theme} theme - The MUI theme object used to access spacing, transitions, and breakpoints.
+ * @returns {CSSObject} The CSS properties for the closed drawer state.
+ */
 const closedMixin = (theme: Theme): CSSObject => ({
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
@@ -26,6 +42,8 @@ const closedMixin = (theme: Theme): CSSObject => ({
     width: `calc(${theme.spacing(7)} + 1px)`,
   },
 });
+
+// Define the styled component for the drawer
 const StyledNavbar = styled(Drawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme }) => ({
@@ -64,7 +82,7 @@ export default function StudentNavbarLayout(props: {
   onClose: () => void;
   onOpen: () => void;
 }) {
-  const { open, onClose, onOpen } = props;
+  const { open, onClose } = props;
 
   return (
     <StyledNavbar

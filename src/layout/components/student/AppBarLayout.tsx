@@ -10,18 +10,30 @@ type AppBarLayoutProps = {
   onOpen: () => void;
 };
 
+/**
+ * Renders the main application bar layout component.
+ * This component dynamically adapts to mobile or desktop views by listening
+ * to screen width changes (breakpoint at 768px) and conditionally rendering
+ * the navbar toggle button. It includes a logo, application title, and user menu.
+ *
+ * @param {AppBarLayoutProps} props - The props for the component.
+ * @param {boolean} props.open - The current open state of the sidebar/navbar.
+ * @param {() => void} props.onOpen - Callback function triggered when the navbar toggle button is clicked.
+ * @returns {JSX.Element} The rendered AppBar layout component.
+ */
 function AppBarLayout({ open, onOpen }: AppBarLayoutProps) {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined"
+      ? window.matchMedia("(max-width: 768px)").matches
+      : false,
+  );
 
   useEffect(() => {
     // Standard mobile breakpoint is often 768px
     const mediaQuery = window.matchMedia("(max-width: 768px)");
 
-    // Set initial value
-    setIsMobile(mediaQuery.matches);
-
     // Update value when screen size changes
-    const handler = (e: any) => setIsMobile(e.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mediaQuery.addEventListener("change", handler);
 
     return () => mediaQuery.removeEventListener("change", handler);

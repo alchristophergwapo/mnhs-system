@@ -7,10 +7,10 @@ import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
-import React, { memo, useCallback, useRef, useState } from "react";
+import React, { memo, useCallback, useMemo, useRef, useState } from "react";
 import { useGetGradeLevelsQuery } from "@app/(pages)/(admin)/GradeLevelApi";
 
-type GradeLevelFilterProps<T> = {
+type GradeLevelFilterProps = {
   gradeLvlId?: number | null;
   onChange: (gradeLvlId: number) => void;
 };
@@ -21,30 +21,30 @@ type GradeLevelFilterProps<T> = {
  * grade level's name (or a default placeholder), and an arrow button that toggles
  * a dropdown menu (Popper) to allow the user to select a different grade level.
  *
- * @template T - A generic type extending `Record<string, any>`, representing the option objects. Must include at least `id` and `name` properties.
  * @param {GradeLevelFilterProps<T>} props - The props for the component.
  * @param {number} [props.gradeLvlId] - The ID of the currently selected grade level.
  * @param {function} props.onChange - Callback function triggered when a new grade level is selected. Receives the ID of the selected option.
  * @returns {React.ReactElement} The rendered GradeLevelFilter component.
  */
-function GradeLevelFilter<T extends Record<string, any>>({
+function GradeLevelFilter({
   gradeLvlId,
   onChange,
-}: GradeLevelFilterProps<T>) {
+}: GradeLevelFilterProps) {
   const { data: options } = useGetGradeLevelsQuery({
-      query: "",
-    });
+    query: "",
+  });
   /**
    * Finds and stores the currently selected grade level object from the options array
    * by matching its `id` against the provided `gradeLvlId`.
    */
-  const selectedGradeLevel = options?.find(
-    (option) => option?.id === gradeLvlId,
+  const selectedGradeLevel = useMemo(
+    () => options?.find((option) => option?.id === gradeLvlId),
+    [options, gradeLvlId],
   );
-  
+
   const [open, setOpen] = useState(false);
-  
-  const anchorRef = useRef<HTMLDivElement>(null);
+
+  const [anchorRef, setAnchorRef] = useState<HTMLDivElement | null>(null);
 
   /**
    * Toggles the open state of the type selection component.
@@ -54,21 +54,24 @@ function GradeLevelFilter<T extends Record<string, any>>({
     setOpen((prevOpen) => !prevOpen);
   }, []);
 
-/**
- * Handles the selection of a type/item
- * @param ngLvlId - The ID of the selected item/type
- */
-  const handleSelectType = useCallback((ngLvlId: number) => {
-    onChange(ngLvlId); // Call the onChange callback with the selected ID
-    setOpen(false);
-  }, [onChange]); // Empty dependency array means this callback is memoized and won't change between renders
+  /**
+   * Handles the selection of a type/item
+   * @param ngLvlId - The ID of the selected item/type
+   */
+  const handleSelectType = useCallback(
+    (ngLvlId: number) => {
+      onChange(ngLvlId); // Call the onChange callback with the selected ID
+      setOpen(false);
+    },
+    [onChange],
+  ); // Empty dependency array means this callback is memoized and won't change between renders
 
   return (
     <React.Fragment>
       <ButtonGroup
         variant="contained"
         aria-label="Filter for teacher type"
-        ref={anchorRef}
+        ref={setAnchorRef}
         color="inherit"
         sx={{ bgcolor: "white" }}
       >
@@ -92,7 +95,7 @@ function GradeLevelFilter<T extends Record<string, any>>({
       <Popper
         sx={{ zIndex: 10 }}
         open={open}
-        anchorEl={anchorRef.current}
+        anchorEl={anchorRef}
         role={undefined}
         transition
         disablePortal

@@ -5,6 +5,7 @@ import Input from "@components/ui/Input";
 import { ChangeEvent } from "react";
 import { useFormContext } from "@hooks/useTanstack";
 import z from "zod";
+import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 
 /**
  * A component that renders a radio group with a label and children.
@@ -22,19 +23,28 @@ export default function CivilStatus() {
       name={"civilStatus" as never}
       validators={{
         onChangeAsyncDebounceMs: 300,
-        onChangeAsync: z.string().nonempty('Gender is required') as any,
+        onChangeAsync: z
+          .string()
+          .nonempty("Gender is required") as unknown as FieldAsyncValidateOrFn<
+          Record<string, never>,
+          never,
+          never
+        >,
       }}
-      children={(field) => (
+    >
+      {(field) => (
         <RadioSelect
           label="Civil status"
-          onChange={(ev: ChangeEvent<HTMLInputElement>, nv: string) =>
-            field.handleChange(ev.target.value as any)
+          onChange={(ev: ChangeEvent<HTMLInputElement>) =>
+            field.handleChange(
+              ev.target.value as unknown as UpdaterFn<never, never>,
+            )
           }
           name={field.name}
           value={field.state.value}
           required
           error={field.state.meta.errors.length > 0}
-          errors={field.state.meta.errors || []}
+          errors={field.state.meta.errors as { message: string }[]}
         >
           <FormControlLabel value="SINGLE" control={<Radio />} label="Single" />
           <FormControlLabel
@@ -68,27 +78,38 @@ export default function CivilStatus() {
                     .nullish()
                     .superRefine((value, ctx) => {
                       if (field.state.value === "OTHER" && !value) {
-                        ctx.addIssue({ code: "custom", message: "This field is required when civil status is 'Other'"})
-                       }
-                    }) as any,
+                        ctx.addIssue({
+                          code: "custom",
+                          message:
+                            "This field is required when civil status is 'Other'",
+                        });
+                      }
+                    }) as unknown as FieldAsyncValidateOrFn<
+                    Record<string, never>,
+                    never,
+                    never
+                  >,
                 }}
-                children={(subfield) => (
+              >
+                {(subfield) => (
                   <Input
                     value={subfield.state.value ?? ""}
                     onChange={(e) =>
-                      subfield.handleChange(e.target.value as any)
+                      subfield.handleChange(
+                        e.target.value as unknown as UpdaterFn<never, never>,
+                      )
                     }
                     name={subfield.name}
-                    errors={subfield.state.meta.errors || []}
+                    errors={subfield.state.meta.errors as { message: string }[]}
                     error={subfield.state.meta.errors?.length > 0}
                     placeholder="Please specify"
                   />
                 )}
-              />
+              </form.Field>
             )}
           </div>
         </RadioSelect>
       )}
-    />
+    </form.Field>
   );
 }

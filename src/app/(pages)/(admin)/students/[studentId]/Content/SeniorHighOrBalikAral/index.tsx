@@ -17,12 +17,9 @@ function SeniorHighOrBalikAral() {
   const form = useFormContext();
   const [track, setTrack] = useState("");
 
-  const trackRef = useRef(track);
-  trackRef.current = track;
-
   const {
     data: courses,
-    isFetching,
+    isLoading,
     isError,
   } = useGetCoursesQuery(
     { track },
@@ -37,9 +34,8 @@ function SeniorHighOrBalikAral() {
         Skip this step if not applicable
       </div>
       <FormGroup row>
-        <form.Field
-          name={"isSeniorHigh" as never}
-          children={(field) => (
+        <form.Field name={"isSeniorHigh" as never}>
+          {(field) => (
             <FormControlLabel
               labelPlacement="end"
               control={
@@ -54,11 +50,10 @@ function SeniorHighOrBalikAral() {
               label="Applying for Senior High?"
             />
           )}
-        />
+        </form.Field>
 
-        <form.Field
-          name={"isTransferee" as never}
-          children={(field) => (
+        <form.Field name={"isTransferee" as never}>
+          {(field) => (
             <FormControlLabel
               labelPlacement="end"
               control={
@@ -73,7 +68,7 @@ function SeniorHighOrBalikAral() {
               label="Applying as Transferee or Balik-Aral?"
             />
           )}
-        />
+        </form.Field>
       </FormGroup>
       <form.Field name={"isSeniorHigh" as never}>
         {(field) => {
@@ -89,17 +84,24 @@ function SeniorHighOrBalikAral() {
                   onChangeAsyncDebounceMs: 300,
                   onChangeAsync: (isSeniorHigh
                     ? z.string().nonempty("Semester is required")
-                    : z.string().nullish()) as unknown as FieldAsyncValidateOrFn<
+                    : z
+                        .string()
+                        .nullish()) as unknown as FieldAsyncValidateOrFn<
                     Record<string, never>,
                     never,
                     never
                   >,
                 }}
-                children={(field) => (
+              >
+                {(field) => (
                   <RadioSelect
                     name={field.name}
                     value={field.state.value || ""}
-                    onChange={(e) => field.handleChange(e.target.value as any)}
+                    onChange={(e) =>
+                      field.handleChange(
+                        e.target.value as unknown as UpdaterFn<never, never>,
+                      )
+                    }
                     label="Semester"
                     required={isSeniorHigh}
                     error={field.state.meta.errors.length > 0}
@@ -117,7 +119,7 @@ function SeniorHighOrBalikAral() {
                     />
                   </RadioSelect>
                 )}
-              />
+              </form.Field>
               <div className="grid grid-cols-3 gap-4">
                 <form.Field
                   name={"track" as never}
@@ -127,13 +129,16 @@ function SeniorHighOrBalikAral() {
                       ? z
                           .string("Track is required")
                           .nonempty("Track is required")
-                      : z.string().nullish()) as unknown as FieldAsyncValidateOrFn<
+                      : z
+                          .string()
+                          .nullish()) as unknown as FieldAsyncValidateOrFn<
                       Record<string, never>,
                       never,
                       never
                     >,
                   }}
-                  children={(field) => {
+                >
+                  {(field) => {
                     const track = field.state.value as string;
                     if (track) {
                       setTrack(track);
@@ -182,11 +187,17 @@ function SeniorHighOrBalikAral() {
                                 never
                               >,
                             }}
-                            children={(sfield) => (
+                          >
+                            {(sfield) => (
                               <Select
                                 label="Strand"
                                 onChange={(e) =>
-                                  sfield.handleChange(e.target.value as any)
+                                  sfield.handleChange(
+                                    e.target.value as unknown as UpdaterFn<
+                                      never,
+                                      never
+                                    >,
+                                  )
                                 }
                                 value={sfield.state.value || ""}
                                 required
@@ -204,12 +215,12 @@ function SeniorHighOrBalikAral() {
                                 ))}
                               </Select>
                             )}
-                          />
+                          </form.Field>
                         )}
                       </>
                     );
                   }}
-                />
+                </form.Field>
               </div>
             </div>
           );

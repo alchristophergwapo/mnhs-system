@@ -19,6 +19,7 @@ import SectionPreview from "./SectionPreview";
 import { useSnackbar } from "notistack";
 import Button from "@components/ui/Button";
 import Loading from "@components/Loading";
+import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 
 function CreateSection({
   open,
@@ -103,9 +104,13 @@ function CreateSection({
                               .max(
                                 20,
                                 "Section name must be no more than 20 characters",
-                              ) as any,
+                              ) as unknown as FieldAsyncValidateOrFn<
+                              Partial<SectionsType>,
+                              never,
+                              Partial<SectionsType>
+                            >,
                           }}
-                          children={(field) => (
+                          >{(field) => (
                             <Input
                               label="Section Name"
                               placeholder="e.g., Jasmine, Rose"
@@ -113,13 +118,20 @@ function CreateSection({
                               required
                               value={field.state.value || ""}
                               onChange={(e) =>
-                                field.handleChange(e.target.value as any)
+                                field.handleChange(
+                                  e.target.value as unknown as UpdaterFn<
+                                    never,
+                                    never
+                                  >,
+                                )
                               }
                               error={field.state.meta.errors.length > 0}
-                              errors={field.state.meta.errors}
+                              errors={
+                                field.state.meta.errors as { message: string }[]
+                              }
                             />
                           )}
-                        />
+                        </form.Field>
                       </div>
                       <div className="col-span-1">
                         <form.Field
@@ -130,9 +142,15 @@ function CreateSection({
                               .number()
                               .min(1, "Max capacity must be a positive number")
                               .max(50, "Max capacity must be no more than 50")
-                              .nonoptional("Max capacity is required") as any,
+                              .nonoptional(
+                                "Max capacity is required",
+                              ) as unknown as FieldAsyncValidateOrFn<
+                              Partial<SectionsType>,
+                              never,
+                              Partial<SectionsType>
+                            >,
                           }}
-                          children={(field) => (
+                          >{(field) => (
                             <Input
                               label="Max capacity"
                               placeholder="e.g., 30"
@@ -140,14 +158,18 @@ function CreateSection({
                               value={field.state.value || ""}
                               onChange={(e) =>
                                 field.handleChange(
-                                  Number(e.target.value) as any,
+                                  Number(
+                                    e.target.value,
+                                  ) as unknown as UpdaterFn<never, never>,
                                 )
                               }
                               error={field.state.meta.errors.length > 0}
-                              errors={field.state.meta.errors}
+                              errors={
+                                field.state.meta.errors as { message: string }[]
+                              }
                             />
                           )}
-                        />{" "}
+                        </form.Field>
                       </div>
                     </div>
                   </div>

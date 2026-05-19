@@ -1,5 +1,5 @@
 import AdminLayout from "@layout/AdminLayout";
-import AuthGuard from "@components/AuthGuard";
+import AuthGuard from "@server/auth/AuthGuard";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -18,7 +18,7 @@ export default function Layout(props: LayoutProps) {
   const { children } = props;
 
   return (
-    <AuthGuard>
+    <AuthGuard allowedRoles={["ADMIN", "SUPERADMIN"]}>
       <AdminLayout>{children}</AdminLayout>
     </AuthGuard>
   );

@@ -6,7 +6,7 @@ import { UserType } from "./UserType";
 export type TeacherType = {
     id?: number;
     dateHired: Date | string;
-    isOjt: Boolean;
+    isOjt: boolean;
     bloodType?: string;
     advisorySectionId?: number;
     civilStatusOther?: string;

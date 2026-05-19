@@ -1,5 +1,3 @@
-import { UserType } from "./UserType";
-
 export type CitizenshipType = {
     id?: number;
     filipino: boolean;

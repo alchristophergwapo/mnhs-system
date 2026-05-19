@@ -22,7 +22,7 @@ function AutocompleteSearch<T extends Record<string, unknown>>({
   label,
   ...rest
 }: Partial<
-  AutocompleteProps<T, boolean, boolean, boolean, (props: any) => JSX.Element>
+  AutocompleteProps<T, boolean, boolean, boolean, (props: unknown) => JSX.Element>
 > & {
   onValueChange?: (value: T) => void;
   onInputValueChange: (value: string) => void;

@@ -5,6 +5,8 @@ import { Suspense } from "react";
 import OverviewDataCard from "./components/OverviewDataCard";
 import DashboardPaper from "@features/dashboard/components/DashboardPaper";
 
+const dateNow = Date.now();
+
 /**
  * SchoolYearOverview component.
  *
@@ -15,7 +17,7 @@ import DashboardPaper from "@features/dashboard/components/DashboardPaper";
  * @returns {JSX.Element} - The JSX element for the component.
  */
 async function SchoolYearOverview() {
-  const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); // 7 days ago
+  const weekAgo = new Date(dateNow - 7 * 24 * 60 * 60 * 1000); // 7 days ago
   const [totalTransfereeStudents, totalTeachers, totalNewTeachers] =
     await Promise.all([
       prisma.enrollment.count({

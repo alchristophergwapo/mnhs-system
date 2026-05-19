@@ -6,6 +6,18 @@ import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 import z from "zod";
 import { ReactNode } from "react";
 
+/**
+ * A React component that renders a dropdown select field for choosing the last grade level finished.
+ * It integrates with a form context and fetches the available grade levels dynamically using an API query.
+ * The field supports conditional validation based on the `required` prop.
+ * 
+ * @param {Object} props - The component props.
+ * @param {boolean} [props.required=false] - Determines if the grade level selection is mandatory. 
+ *                                           If true, asynchronous validation is applied to ensure a value is selected.
+ * @param {boolean} [props.show=false] - Controls whether the grade levels data should be fetched. 
+ *                                       If false, the API query is skipped.
+ * @returns {JSX.Element} The rendered select field component bound to the form context.
+ */
 function LastGradeLevel({
   required = false,
   show = false,
@@ -47,7 +59,8 @@ function LastGradeLevel({
           never
         >,
       }}
-      children={(field) => (
+    >
+      {(field) => (
         <Select
           required={required}
           label="Last Grade Level Finished"
@@ -70,14 +83,18 @@ function LastGradeLevel({
             <MenuItem
               key={gradeLevel.id}
               value={gradeLevel.gradeLevelNumber}
-              onClick={() => field.handleChange(gradeLevel as any)}
+              onClick={() =>
+                field.handleChange(
+                  gradeLevel as unknown as UpdaterFn<never, never>,
+                )
+              }
             >
               {gradeLevel.name}
             </MenuItem>
           ))}
         </Select>
       )}
-    />
+    </form.Field>
   );
 }
 

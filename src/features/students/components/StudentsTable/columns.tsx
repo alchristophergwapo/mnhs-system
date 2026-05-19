@@ -9,7 +9,7 @@ export const studentColumns = [
     size: 50,
     maxSize: 50,
     grow: false,
-    Cell: ({ row }: { row: any }) => (
+    Cell: ({ row }: { row: unknown }) => (
       <Avatar
         src={row.original?.avatar}
         alt="teacher's avatar"

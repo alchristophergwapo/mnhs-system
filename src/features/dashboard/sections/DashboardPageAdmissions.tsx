@@ -9,6 +9,8 @@ import {
 import Typography from "@mui/material/Typography";
 import DashboardPaper from "../components/DashboardPaper";
 
+const dateNow = Date.now();
+
 /**
  * Asynchronous React component that renders the Admissions Pipeline dashboard.
  * It fetches and displays the total and weekly new counts for various enrollment
@@ -17,7 +19,7 @@ import DashboardPaper from "../components/DashboardPaper";
  * @returns {Promise<JSX.Element>} A Promise resolving to the admissions dashboard Paper component.
  */
 async function DashboardPageAdmissions() {
-  const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); // 7 days ago
+  const weekAgo = new Date(dateNow - 7 * 24 * 60 * 60 * 1000); // 7 days ago
   const year = new Date().getFullYear();
   const [
     totalApplicants,
@@ -84,9 +86,7 @@ async function DashboardPageAdmissions() {
   ]);
 
   return (
-    <DashboardPaper
-      title={`Admissions Pipeline SY ${year} - ${year + 1}`}
-    >
+    <DashboardPaper title={`Admissions Pipeline SY ${year} - ${year + 1}`}>
       <div className="grid grid-cols-2 gap-4 mt-1">
         <div className="col-span-1 flex flex-row items-center gap-2">
           <BadgeOutlined

@@ -10,8 +10,8 @@ import { Delete, Edit } from "@mui/icons-material";
 import useNavigate from "@hooks/useNavigate";
 
 interface ActionsColumnProps {
-  row?: any;
-  table?: any;
+  row?: unknown;
+  table?: unknown;
 }
 
 /**

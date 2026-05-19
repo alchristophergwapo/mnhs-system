@@ -4,6 +4,7 @@ import { getTeacherById } from "@server/services/teacherService";
 import {
   CivilStatus,
   Gender,
+  Prisma,
   Role,
 } from "@/prisma/generated/prisma";
 import { CitizenshipType } from "@types";
@@ -105,7 +106,7 @@ export async function PUT(
           data: {
             ...permanentAddress,
             zipCode: Number(permanentAddress?.zipCode),
-          } as any,
+          } as Prisma.AddressUpdateInput,
         }),
         residentialAddress
           ? tx.address.update({
@@ -113,7 +114,7 @@ export async function PUT(
               data: {
                 ...residentialAddress,
                 zipCode: Number(residentialAddress.zipCode),
-              } as any,
+              } as Prisma.AddressUpdateInput,
             })
           : Promise.resolve(null),
         tx.citizenship.update({

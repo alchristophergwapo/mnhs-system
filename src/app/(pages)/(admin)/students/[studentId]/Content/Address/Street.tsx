@@ -3,7 +3,17 @@ import { useFormContext } from "@hooks/useTanstack";
 import { memo } from "react";
 import { street } from "./addressValidators";
 import { AddressInputProps } from ".";
+import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 
+/**
+ * Renders a street address input field integrated with a form context.
+ * Handles asynchronous validation with a debounce and binds the input
+ * value and error states to the form's state.
+ *
+ * @param {AddressInputProps} props - The component props.
+ * @param {string} props.target - The target path prefix used to resolve the field name within the form context.
+ * @returns {JSX.Element} The rendered street input field.
+ */
 function Street({ target }: AddressInputProps) {
   const form = useFormContext();
   return (
@@ -11,19 +21,28 @@ function Street({ target }: AddressInputProps) {
       name={`${target}.street` as never}
       validators={{
         onChangeAsyncDebounceMs: 300,
-        onChangeAsync: street as any,
+        onChangeAsync: street as unknown as FieldAsyncValidateOrFn<
+          Record<string, never>,
+          never,
+          never
+        >,
       }}
-      children={(field) => (
+    >
+      {(field) => (
         <Input
           name={field.name}
           label="Street"
           value={field.state.value ?? ""}
-          onChange={(e) => field.handleChange(e.target.value as any)}
+          onChange={(e) =>
+            field.handleChange(
+              e.target.value as unknown as UpdaterFn<never, never>,
+            )
+          }
           error={field.state.meta.errors.length > 0}
           errors={field.state.meta.errors as { message: string }[]}
         />
       )}
-    />
+    </form.Field>
   );
 }
 

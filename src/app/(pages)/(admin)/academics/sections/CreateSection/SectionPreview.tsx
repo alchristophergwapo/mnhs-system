@@ -21,8 +21,8 @@ function SectionPreview() {
           </p>
         </div>
       </div>
-      <form.Subscribe
-        children={(state) => {
+      <form.Subscribe>
+        {(state) => {
           const values = state.values as Partial<SectionsType>;
           const gradeLevel = values.gradeLevel;
           const name = values.name;
@@ -40,7 +40,8 @@ function SectionPreview() {
                 </Typography>
               </div>
               <Typography variant="body1" className="text-gray-600 mt-2">
-                Capacity: {maxCapacity !== null ? `${maxCapacity} students` : "Not set"}
+                Capacity:{" "}
+                {maxCapacity !== null ? `${maxCapacity} students` : "Not set"}
               </Typography>
               <LinearProgress
                 variant="determinate"
@@ -55,13 +56,16 @@ function SectionPreview() {
                   {adviser?.lastName?.charAt(0)}
                 </Avatar>
                 <Typography variant="body2">
-                  Adviser: {adviser?.firstName && adviser?.lastName ? `${adviser.firstName} ${adviser.lastName}` : "Not assigned"}
+                  Adviser:{" "}
+                  {adviser?.firstName && adviser?.lastName
+                    ? `${adviser.firstName} ${adviser.lastName}`
+                    : "Not assigned"}
                 </Typography>
               </div>
             </Paper>
           );
         }}
-      />
+      </form.Subscribe>
       <div className="mt-4">
         <Typography variant="body2">
           Tip: Ensure a unique name to avoid conflicts.
@@ -69,8 +73,8 @@ function SectionPreview() {
         <div className="flex flex-row items-center gap-1 mt-2">
           <InfoOutlineRounded />
           <Typography variant="body2">
-            You can assign an adviser later if you don't have one in mind right
-            now.
+            You can assign an adviser later if you don&apos;t have one in mind
+            right now.
           </Typography>
         </div>
       </div>

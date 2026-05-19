@@ -1,6 +1,6 @@
 "use client";
 
-import PageWrapper from "@components/PageCardedWrapper";
+import PageWrapper from "@components/layouts/PageCardedWrapper";
 import Content from "./Content";
 import Header from "./TeacherHeader";
 import { UserType } from "../_types";
@@ -64,24 +64,18 @@ export default function TeacherForm() {
     },
   );
   const { enqueueSnackbar } = useSnackbar();
-
-  const [teacherData, setTeacherData] = useState(defaultValues);
+  const [updatedTeacher, setUpdatedTeacher] = useState<UserType | null>(null);
 
   const isNew = teacherId === "new";
   const isReady = isNew || !!teacherDetails;
-
-  useEffect(() => {
-    if (!isNew && teacherDetails) {
-      const restructuredData = ObjectHelper.restructure(
-        teacherDetails,
-        defaultValues,
-      );
-      setTeacherData(restructuredData);
-    }
-  }, [teacherDetails, isNew]);
+  const formDefaultValues = updatedTeacher
+    ? ObjectHelper.restructure(updatedTeacher, defaultValues)
+    : !isNew && teacherDetails
+      ? ObjectHelper.restructure(teacherDetails, defaultValues)
+      : defaultValues;
 
   const form = useAppForm({
-    defaultValues: teacherData as UserType,
+    defaultValues: formDefaultValues as UserType,
     onSubmit: async ({ value }) => {
       // Make sure to validate form data before submitting the data to the database
       await form.validateAllFields("submit");
@@ -94,11 +88,11 @@ export default function TeacherForm() {
           teacherId: Number(teacherId),
         })
           .unwrap()
-          .then((teacher) => {
+          .then((updatedTeacher) => {
             enqueueSnackbar("Teacher updated successfully", {
               variant: "success",
             });
-            setTeacherData(ObjectHelper.restructure(teacher, defaultValues));
+            setUpdatedTeacher(updatedTeacher);
           })
           .catch((err) => {
             enqueueSnackbar("An error occurred", { variant: "error" });
@@ -107,11 +101,11 @@ export default function TeacherForm() {
         // Add/Create new teacher data if teacherId from route params is equal to "new"
         await createTeacher(value as UserType)
           .unwrap()
-          .then((teacher) => {
+          .then((newTeacher) => {
             enqueueSnackbar("Teacher added successfully", {
               variant: "success",
             });
-            setTeacherData(ObjectHelper.restructure(teacher, defaultValues));
+            setUpdatedTeacher(newTeacher);
           })
           .catch((err) => {
             enqueueSnackbar("An error occurred", { variant: "error" });

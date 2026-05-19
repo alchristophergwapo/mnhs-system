@@ -124,8 +124,8 @@ export async function getTeacherById(id: bigint, include?: Prisma.UserInclude) {
         ...baseTeacherInclude,
         // Safely spread nested include objects if provided (e.g., gradeLevel)
         ...(typeof include?.teacher === "object" &&
-        "include" in (include.teacher as any)
-          ? (include.teacher as any).include
+        "include" in (include.teacher as Prisma.TeacherInclude)
+          ? (include.teacher)?.include
           : {}),
       },
     },

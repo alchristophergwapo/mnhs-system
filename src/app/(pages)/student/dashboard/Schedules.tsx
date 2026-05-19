@@ -46,7 +46,7 @@ function Schedules() {
       {/* Title section for the schedules */}
       <div className="flex flex-row items-center gap-2">
         <CalendarToday />
-        <div className="uppercase text-lg font-bold">today's schedules</div>
+        <div className="uppercase text-lg font-bold">today&apos;s schedules</div>
       </div>
       {/* Container for schedule items with vertical gap */}
       {DUMMY_SCHEDULES.map((schedule, index) => (

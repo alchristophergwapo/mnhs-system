@@ -1,6 +1,6 @@
 import Input from "@components/ui/Input";
 import { useFormContext } from "@hooks/useTanstack";
-import { FieldAsyncValidateOrFn } from "@tanstack/react-form";
+import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 import z from "zod";
 
 function Family({
@@ -35,87 +35,114 @@ function Family({
                 .max(50, "Maiden name cannot be greater than 50 characters")
                 .regex(/^[a-zA-Z -/]+$/, "Only letters are allowed")
                 .or(z.literal(""))
-                .nullish() as any,
+                .nullish() as unknown as FieldAsyncValidateOrFn<
+                Record<string, never>,
+                never,
+                never
+              >,
             }}
-            children={(field) => {
+          >
+            {(field) => {
               const errors = field.state.meta.errors || [];
               return (
                 <Input
                   name={field.name}
                   value={field.state.value || ""}
                   label="Maiden Name"
-                  onChange={(e) => field.handleChange(e.target.value as any)}
-                  errors={errors as any}
+                  onChange={(e) =>
+                    field.handleChange(
+                      e.target.value as unknown as UpdaterFn<never, never>,
+                    )
+                  }
+                  errors={errors as { message: string }[]}
                   error={errors.length > 0}
                 />
               );
             }}
-          />
+          </form.Field>
         )}
         <form.Field
           name={`${target}.lastName` as never}
           validators={{
             onChangeAsyncDebounceMs: 300,
-            onChangeAsync: required
-              ? (z
+            onChangeAsync: (required
+              ? z
                   .string()
                   .nonempty("Last name is required")
                   .max(50, "Last name cannot be greater than 50 characters")
                   .min(2, "Last name cannot be lesser than 2 characters")
-                  .regex(/^[a-zA-Z -/]+$/, "Only letters are allowed") as any)
-              : (z
+                  .regex(/^[a-zA-Z -/]+$/, "Only letters are allowed")
+              : z
                   .string()
                   .max(50, "Last name cannot be greater than 50 characters")
                   .regex(/^[a-zA-Z -]+$/, "Only letters are allowed")
-                  .nullish() as any),
+                  .nullish()) as unknown as FieldAsyncValidateOrFn<
+              Record<string, never>,
+              never,
+              never
+            >,
           }}
-          children={(field) => {
+        >
+          {(field) => {
             const errors = field.state.meta.errors || [];
             return (
               <Input
                 name={field.name}
                 value={field.state.value}
                 label="Last Name"
-                onChange={(e) => field.handleChange(e.target.value as any)}
-                errors={errors as any}
+                onChange={(e) =>
+                  field.handleChange(
+                    e.target.value as unknown as UpdaterFn<never, never>,
+                  )
+                }
+                errors={errors as { message: string }[]}
                 error={errors.length > 0}
                 required={required}
               />
             );
           }}
-        />
+        </form.Field>
         <form.Field
           name={`${target}.firstName` as never}
           validators={{
             onChangeAsyncDebounceMs: 300,
-            onChangeAsync: required
-              ? (z
+            onChangeAsync: (required
+              ? z
                   .string()
                   .nonempty("First name is required")
                   .max(50, "First name cannot be greater than 50 characters")
                   .min(2, "First name cannot be lesser than 2 characters")
-                  .regex(/^[a-zA-Z ./]+$/, "Only letters are allowed") as any)
-              : (z
+                  .regex(/^[a-zA-Z ./]+$/, "Only letters are allowed")
+              : z
                   .string()
                   .max(50, "First name cannot be greater than 50 characters")
                   .regex(/^[a-zA-Z ]+$/, "Only letters are allowed")
-                  .nullish() as any),
+                  .nullish()) as unknown as FieldAsyncValidateOrFn<
+              Record<string, never>,
+              never,
+              never
+            >,
           }}
-          children={(field) => {
+        >
+          {(field) => {
             const errors = field.state.meta.errors;
             return (
               <Input
                 name={field.name}
                 value={field.state.value || ""}
                 label="First Name"
-                onChange={(e) => field.handleChange(e.target.value as any)}
+                onChange={(e) =>
+                  field.handleChange(
+                    e.target.value as unknown as UpdaterFn<never, never>,
+                  )
+                }
                 required={required}
                 error={errors?.length > 0}
-                errors={errors as any}
+                errors={errors as { message: string }[]}
               />
             );
           }}
-        />
+        </form.Field>
         <form.Field
           name={`${target}.middleName` as never}
           validators={{
@@ -124,22 +151,31 @@ function Family({
               .string()
               .max(50, "Middle name cannot be greater than 50 characters")
               .regex(/^[- a-zA-Z /]*$/, "Only letters are allowed")
-              .nullish() as any,
+              .nullish() as unknown as FieldAsyncValidateOrFn<
+              Record<string, never>,
+              never,
+              never
+            >,
           }}
-          children={(field) => {
+        >
+          {(field) => {
             const errors = field.state.meta.errors;
             return (
               <Input
                 name={field.name}
                 value={field.state.value || ""}
                 label="Middle Name"
-                onChange={(e) => field.handleChange(e.target.value as any)}
+                onChange={(e) =>
+                  field.handleChange(
+                    e.target.value as unknown as UpdaterFn<never, never>,
+                  )
+                }
                 error={errors?.length > 0}
-                errors={errors as any}
+                errors={errors as { message: string }[]}
               />
             );
           }}
-        />
+        </form.Field>
         {nameExtension && (
           <form.Field
             name={`${target}.nameExtension` as never}
@@ -149,22 +185,31 @@ function Family({
                 .string()
                 .max(3, "Name extension cannot be greater than 3 characters")
                 .regex(/^[. a-zA-Z ]*$/, "Only letters are allowed")
-                .nullish() as any,
+                .nullish() as unknown as FieldAsyncValidateOrFn<
+                Record<string, never>,
+                never,
+                never
+              >,
             }}
-            children={(field) => {
+          >
+            {(field) => {
               const errors = field.state.meta.errors;
               return (
                 <Input
                   name={field.name}
                   value={field.state.value || ""}
                   label="Name extension (Jr., Sr., III, etc.)"
-                  onChange={(e) => field.handleChange(e.target.value as any)}
+                  onChange={(e) =>
+                    field.handleChange(
+                      e.target.value as unknown as UpdaterFn<never, never>,
+                    )
+                  }
                   error={errors?.length > 0}
-                  errors={errors as any}
+                  errors={errors as { message: string }[]}
                 />
               );
             }}
-          />
+          </form.Field>
         )}
 
         <form.Field
@@ -197,25 +242,30 @@ function Family({
                     (value) => (/^(\+639|09)\d{9}$/.test(value) ? true : false),
                     "Invalid contact number format",
                   )
-                  .nullish()) as FieldAsyncValidateOrFn<
+                  .nullish()) as unknown as FieldAsyncValidateOrFn<
               Record<string, never>,
               never,
               never
             >,
           }}
-          children={(field) => (
+        >
+          {(field) => (
             <Input
               name={field.name}
               label="Guardian Contact Number"
               value={field.state.value || ""}
-              onChange={(e) => field.handleChange(e.target.value as any)}
-              errors={field.state.meta.errors as any}
+              onChange={(e) =>
+                field.handleChange(
+                  e.target.value as unknown as UpdaterFn<never, never>,
+                )
+              }
+              errors={field.state.meta.errors as { message: string }[]}
               error={field.state.meta.errors.length > 0}
               required={required}
               helperText="If not applicable, use the student's contact number"
             />
           )}
-        />
+        </form.Field>
       </div>
     </>
   );

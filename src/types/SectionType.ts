@@ -2,8 +2,8 @@ import { GradeLevelType } from "./GradeLevelType";
 import { EnrollmentType } from "./EnrollmentType";
 
 export type SectionType = {
-    id?: BigInt;
-    name: String;
+    id?: bigint;
+    name: string;
     gradeLevelId?: number;
     maxCapacity: number;
     gradeLevel?: GradeLevelType;

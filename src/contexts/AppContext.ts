@@ -3,7 +3,7 @@ import { createContext } from "react";
 /**
  * The type of our AppContext value
  */
-export type AppContextType = Record<string, any>;
+export type AppContextType = Record<string, unknown>;
 
 /**
  * The AppContext object

@@ -1,27 +1,25 @@
-"use client";
-
-import AppContext from "@contexts/AppContext";
 import StudentLayout from "@layout/StudentLayout";
-import { redirect } from "next/navigation";
-import React, { useContext } from "react";
+import AuthGuard from "@server/auth/AuthGuard";
+import React from "react";
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 
-export default async function Layout(props: LayoutProps) {
+/**
+ * An async layout component that wraps its children within a student-specific layout
+ * and an authentication guard restricting access to the "STUDENT" role.
+ *
+ * @param {LayoutProps} props - The props object for the layout.
+ * @param {React.ReactNode} props.children - The child components to be rendered inside the layout.
+ * @returns {Promise<JSX.Element>} A promise that resolves to the rendered layout component.
+ */
+export default function Layout(props: LayoutProps) {
   const { children } = props;
-  const { session } = useContext(AppContext);
-  
-  if (!session) redirect("/auth/login");
 
-  if (session?.user?.role !== "STUDENT") {
-    redirect(
-      session?.user?.role === "ADMIN" || session?.user?.role === "SUPERADMIN"
-        ? "/student"
-        : "/teacher",
-    );
-  }
-
-  return <StudentLayout>{children}</StudentLayout>;
+  return (
+    <AuthGuard allowedRoles={["STUDENT"]}>
+      <StudentLayout>{children}</StudentLayout>
+    </AuthGuard>
+  );
 }

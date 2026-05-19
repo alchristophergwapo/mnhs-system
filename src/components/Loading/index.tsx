@@ -10,7 +10,7 @@ function Loading() {
             Almost There...
           </div>
           <div className="text-gray-600 text-sm opacity-80 animate-fadeIn">
-            <p>We're getting everything ready for you...</p>
+            <p>We&apos;re getting everything ready for you...</p>
             <p>Sit tight for just a moment.</p>
           </div>
         </div>

@@ -11,7 +11,7 @@ import {
   GradeLevelType,
   StudentType,
   UserType,
-} from "@/src/types";
+} from "@types";
 import {
   AttachFileOutlined,
   CalendarViewDaySharp,

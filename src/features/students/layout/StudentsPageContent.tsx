@@ -1,6 +1,5 @@
-import { Fragment } from "react";
+import { Fragment, SetStateAction } from "react";
 import { SharedPropsType } from "@components/layouts/PageCardedWrapper";
-import GradeLevelFilter from "@components/Filters/GradeLevelFilter";
 import { UserType } from "@types";
 import { GetStudentsApiArg } from "@features/students/api/students.types";
 import { useStudentsTable } from "../hooks/useStudentsTable";
@@ -9,7 +8,7 @@ import StudentsTableToolbar from "../components/StudentsTable/StudentsTableToolb
 
 export type StudentPageContentProps = Partial<SharedPropsType<UserType>> & {
   parameters: GetStudentsApiArg;
-  setParameters: (parameters: Record<string, any>) => void;
+  setParameters: (parameters: SetStateAction<GetStudentsApiArg>) => void;
 };
 
 /**
@@ -20,11 +19,14 @@ export type StudentPageContentProps = Partial<SharedPropsType<UserType>> & {
  */
 function StudentsPageContent(props: StudentPageContentProps) {
   const { parameters, setParameters } = props;
-  const {handleChangeOptions} = useStudentsTable(parameters, setParameters);
+  const { handleChangeOptions } = useStudentsTable(parameters, setParameters);
 
   return (
     <Fragment>
-      <StudentsTableToolbar parameters={parameters} onChangeOptions={handleChangeOptions} />
+      <StudentsTableToolbar
+        parameters={parameters}
+        onChangeOptions={handleChangeOptions}
+      />
       <StudentsTable {...props} />
     </Fragment>
   );

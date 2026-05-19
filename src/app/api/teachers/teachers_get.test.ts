@@ -20,7 +20,7 @@ jest.mock("@server/services/teacherService", () => ({
   getTeachers: jest.fn(),
 }));
 
-const { getTeachers } = require("@server/services/teacherService");
+import { getTeachers } from "@server/services/teacherService";
 
 /**
  * Test suite for the GET handler
@@ -40,7 +40,7 @@ describe("GET handler", () => {
     // Reset all mocks before each test
     jest.clearAllMocks();
     // Set default return value for getTeachers mock
-    getTeachers.mockReturnValue(teachers);
+    (getTeachers as jest.Mock).mockReturnValue(teachers);
     // Set default return value for prisma.user.count mock
     (prisma.user.count as jest.Mock).mockResolvedValue(1);
   });
@@ -75,7 +75,7 @@ describe("GET handler", () => {
    */
   it("should return a 500 status code if a server error occurs", async () => {
     // Mock getTeachers to reject with a server error
-    getTeachers.mockRejectedValue(new Error("Server error"));
+    (getTeachers as jest.Mock).mockRejectedValue(new Error("Server error"));
 
     // Suppress console.error output during the test
     const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();

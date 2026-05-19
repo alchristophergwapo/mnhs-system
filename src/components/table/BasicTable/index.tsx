@@ -9,7 +9,12 @@ import TableRow from "@mui/material/TableRow";
 import TablePagination, {
   TablePaginationProps,
 } from "@mui/material/TablePagination";
-import React, { Children, cloneElement } from "react";
+import React, {
+  Children,
+  cloneElement,
+  ReactElement,
+  useCallback,
+} from "react";
 
 export type CustomTableRowProps = {
   id: number;
@@ -19,7 +24,7 @@ type TableComponentProps = TableProps & {
   tableRows: Array<CustomTableRowProps>;
   pagination?: TablePaginationProps;
   onTableRowClick?: (obj: object) => void | undefined;
-  otherProps?: any;
+  otherProps?: unknown;
 };
 
 const tableGlobalStyles = (
@@ -34,20 +39,19 @@ const tableGlobalStyles = (
 );
 
 /**
- * A reusable table component with material-ui styling.
+ * A dynamic and customizable Table component that renders tabular data based on
+ * provided column definitions (children) and row data. It automatically clones
+ * child elements to generate table headers and row contents, passing necessary
+ * metadata like row data and index to each cell. It also supports optional
+ * row click handling and pagination.
  *
- * @param {TableComponentProps} props - The props for the component.
- * @param {React.ReactNode[]} props.children - The children elements of the component.
- * @param {Array<CustomTableRowProps>} props.tableRows - The table rows data.
- * @param {TablePaginationProps} props.pagination - The pagination props.
- * @param {(obj: object) => void | undefined} props.onTableRowClick - A callback function to handle table row click event.
- * @param {any} props.otherProps - Additional props for the component.
- *
- * @example
- * const tableRows = []
- * <Table tableRows={tableRows}>
- *   <Name /> - Name column will a custom component you will create with the table header and table cell
- * </Table>
+ * @param {TableComponentProps} props - The props for the Table component.
+ * @param {React.ReactNode} props.children - The column definition elements (typically TableCell components) used as templates for both headers and rows.
+ * @param {Array<object>} [props.tableRows=[]] - An array of data objects representing the rows to be rendered in the table body.
+ * @param {object} [props.pagination] - Optional pagination configuration object passed directly to the TablePagination component.
+ * @param {function} [props.onTableRowClick] - Optional callback function triggered when a table row is clicked. Receives the clicked row's data object as an argument.
+ * @param {...any} props.otherProps - Additional props spread onto the underlying MUI Table component.
+ * @returns {React.ReactElement} The rendered Table component.
  */
 export default function Table(props: TableComponentProps) {
   const {
@@ -60,22 +64,36 @@ export default function Table(props: TableComponentProps) {
   const tableHeaders: Array<React.ReactNode> = [];
   const tableContents: Array<React.ReactNode> = [];
 
-  const handleRowClicked = (row: object) => {
-    if (onTableRowClick) {
-      onTableRowClick(row);
-    }
-  };
+  /**
+   * Handles the event when a table row is clicked.
+   * If the `onTableRowClick` callback function is provided,
+   * it will be invoked with the clicked row's data.
+   *
+   * @param {object} row - The data object representing the clicked row.
+   * @returns {void}
+   */
+  const handleRowClicked = useCallback(
+    (row: object) => {
+      if (onTableRowClick) {
+        onTableRowClick(row);
+      }
+    },
+    [onTableRowClick],
+  );
 
   const childrenArray = Children.toArray(children);
   if (childrenArray?.length) {
     for (let index = 0; index < childrenArray.length; index++) {
-      const childElement: any = childrenArray[index];
+      const childElement = childrenArray[index];
 
-      const clonedHeaderElement = cloneElement(childElement, {
-        key: `table-header-${index}`,
-        index,
-        _isheader: true,
-      });
+      const clonedHeaderElement = cloneElement(
+        childElement as ReactElement<{ index: number; _isheader: boolean }>,
+        {
+          key: `table-header-${index}`,
+          index,
+          _isheader: true,
+        },
+      );
 
       tableHeaders.push(clonedHeaderElement);
     }
@@ -83,16 +101,22 @@ export default function Table(props: TableComponentProps) {
 
   if (childrenArray.length && tableRows) {
     for (let index = 0; index < tableRows.length; index++) {
-      const rowElement: any = tableRows[index];
+      const rowElement = tableRows[index];
       const tableColumns = [];
       for (let j = 0; j < childrenArray.length; j++) {
-        const childRowElement: any = childrenArray[j];
+        const childRowElement = childrenArray[j];
 
-        const clonedTableRow = cloneElement(childRowElement, {
-          key: `table-row-${index}-column-${j}`,
-          index,
-          _rowdata: rowElement,
-        });
+        const clonedTableRow = cloneElement(
+          childRowElement as ReactElement<{
+            index: number;
+            _rowdata: typeof rowElement;
+          }>,
+          {
+            key: `table-row-${index}-column-${j}`,
+            index,
+            _rowdata: rowElement,
+          },
+        );
 
         tableColumns.push(clonedTableRow);
       }

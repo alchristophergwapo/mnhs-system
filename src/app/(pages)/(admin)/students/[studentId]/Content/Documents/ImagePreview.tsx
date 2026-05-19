@@ -1,30 +1,29 @@
-import { JSX, useEffect, useRef, useState } from "react";
+import { JSX, useMemo } from "react";
 
+/**
+ * A React component that renders a preview of an image file.
+ * It efficiently generates a temporary object URL for the file to avoid Base64 overhead
+ * and automatically revokes the URL on unmount to prevent memory leaks.
+ *
+ * @param {Object} props - The component props.
+ * @param {File} props.file - The image file to preview.
+ * @returns {JSX.Element | null} The rendered image element, or null if the URL is not yet generated.
+ */
 function ImagePreview({ file }: { file: File }): JSX.Element | null {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const objectUrlRef = useRef<string | null>(null);
+  const objectUrl = useMemo(() => {
+    if (!file) return null;
 
-  useEffect(() => {
-    if (!file) return;
-
-    // Performance: Use createObjectURL instead of readAsDataURL to avoid Base64 overhead
-    const objectUrl = URL.createObjectURL(file);
-    objectUrlRef.current = objectUrl;
-    setImageUrl(objectUrl);
+    const newObjectUrl = URL.createObjectURL(file);
 
     // Memory Management: Clean up the object URL to prevent memory leaks
-    return () => {
-      if (objectUrlRef.current) {
-        URL.revokeObjectURL(objectUrlRef.current);
-      }
-    };
+    return newObjectUrl;
   }, [file]);
 
-  if (!imageUrl) {
+  if (!objectUrl) {
     return null; // Or a loading spinner
   }
 
-  return <img src={imageUrl} alt="Card Image" width={300} height="auto" />;
+  return <img src={objectUrl} alt="Card Image" width={300} height="auto" />;
 }
 
 export default ImagePreview;

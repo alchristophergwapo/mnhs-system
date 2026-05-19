@@ -2,7 +2,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from 'next/headers';
 
-let supabaseInstance: SupabaseClient | null = null;
+const supabaseInstance: SupabaseClient | null = null;
 
 
 export const createClient = (cookieStore: Awaited<ReturnType<typeof cookies>>) => {
@@ -31,7 +31,8 @@ export const createClient = (cookieStore: Awaited<ReturnType<typeof cookies>>) =
                     setAll(cookiesToSet) {
                         try {
                             cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
-                        } catch {
+                        } catch(err) {
+                            throw new Error(`Failed to set cookies: ${err}`);
                             // The `setAll` method was called from a Server Component.
                             // This can be ignored if you have middleware refreshing
                             // user sessions.

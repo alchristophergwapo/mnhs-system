@@ -1,4 +1,10 @@
-import { JSX, memo, ReactNode, useCallback, useRef, useState } from "react";
+import {
+  JSX,
+  memo,
+  ReactNode,
+  useCallback,
+  useState,
+} from "react";
 
 import MuiStepper, { StepperProps } from "@mui/material/Stepper";
 import StepperVerticalStep from "./StepperVerticalStep";
@@ -9,19 +15,21 @@ import StepperNextButton from "./StepperNextButton";
 import StepperPreviousButton from "./StepperPreviousButton";
 import { StepperConnector } from "./styledComponents";
 import { useFormContext } from "@hooks/useTanstack";
+import Button from "../Button";
 
-export type StepsType<T> = {
-  label: string;
-  fields?: string[];
+// Type definition for a step in a multi-step form or process
+export type StepsType = {
+  label: string; // Text label for the step
+  fields?: string[]; // Optional array of field names associated with this step
   content: () => ReactNode; // Function that returns ReactNode;
   description?: string; // Optional description for the step
   validateData?: () => boolean; // Optional validation function for the step
   icon?: React.ReactNode; // Optional icon for the step
 };
 
-type CustomStepperProps<T> = Partial<StepperProps> & {
+type CustomStepperProps = Partial<StepperProps> & {
   // Define any custom props for the Stepper component here
-  steps: StepsType<T>[]; // Example custom prop for steps data
+  steps: StepsType[]; // Example custom prop for steps data
   defaultActiveStep?: number; // Optional prop to set the default active step
   isLoading?: boolean; // Optional prop to indicate loading state
   onCancel?: () => void; // Optional callback for cancel action
@@ -35,7 +43,7 @@ type CustomStepperProps<T> = Partial<StepperProps> & {
  * The component is customizable with the orientation prop set to either "vertical" or "horizontal", and the className prop can be used to add additional CSS classes to the component.
  * The component returns a JSX element containing the Stepper, with the current step content rendered below the Stepper.
  */
-function Stepper<T>(props: CustomStepperProps<T>) {
+function Stepper(props: CustomStepperProps) {
   const {
     steps,
     defaultActiveStep = 0, // Default to the first step if not provided
@@ -49,14 +57,7 @@ function Stepper<T>(props: CustomStepperProps<T>) {
   const [isBusy, setIsBusy] = useState(isLoading);
   const form = useFormContext();
 
-  // Use refs for values needed in callbacks to avoid stale closures
-  // without adding them as deps (which would recreate the handlers)
-  const activeStepRef = useRef(activeStep);
-  activeStepRef.current = activeStep;
-  const stepsRef = useRef(steps);
-  stepsRef.current = steps;
-
-  let stepWithError: number | null = null; // Find the first step with an error
+  const isComponentBusy = isBusy || form.state.isSubmitting || isLoading;
 
   const isLastStep = activeStep === steps.length - 1;
   const nextLabel = isLastStep ? "Submit" : "Next";
@@ -76,17 +77,16 @@ function Stepper<T>(props: CustomStepperProps<T>) {
   // Click handler for clicking the next button
   const handleClickNext = useCallback(async () => {
     setIsBusy(true);
-    if (activeStepRef.current === steps.length - 1) {
+    if (activeStep === steps.length - 1) {
       await form.handleSubmit();
 
       setIsBusy(false);
     } else {
-      const currentStepFields = steps[activeStepRef.current].fields ?? [];
+      const currentStepFields = steps[activeStep].fields ?? [];
       for (const field of currentStepFields) {
         const errors = await form.validateField(field as never, "submit");
         if (errors.length > 0) {
           setIsBusy(false);
-          stepWithError = activeStepRef.current;
           return; // stop immediately
         }
       }
@@ -94,7 +94,7 @@ function Stepper<T>(props: CustomStepperProps<T>) {
       setIsBusy(false);
       setActiveStep((prev) => prev + 1);
     }
-  }, [steps.length]);
+  }, [steps.length, activeStep]);
 
   return (
     <div className="w-full flex flex-col gap-4">
@@ -112,7 +112,7 @@ function Stepper<T>(props: CustomStepperProps<T>) {
           {...muiStepperProps}
         >
           {orientation === "vertical" &&
-            stepsRef.current.map((step, index) => (
+            steps.map((step, index) => (
               <Step key={index}>
                 <StepperVerticalStep
                   {...step}
@@ -129,6 +129,7 @@ function Stepper<T>(props: CustomStepperProps<T>) {
       </div>
       <Divider />
       <div className="flex flex-row justify-end mt-2 gap-4">
+        <Button onClick={onCancel}>cancel</Button>
         <StepperPreviousButton
           onClick={handleClickPrevious}
           isVisible={activeStep > 0}
@@ -136,7 +137,7 @@ function Stepper<T>(props: CustomStepperProps<T>) {
         <StepperNextButton
           label={nextLabel}
           onClick={handleClickNext}
-          loading={isBusy}
+          loading={isComponentBusy}
         />
       </div>
     </div>
@@ -144,6 +145,4 @@ function Stepper<T>(props: CustomStepperProps<T>) {
 }
 
 // Export the memoized Stepper component
-export default memo(Stepper) as <T>(
-  props: CustomStepperProps<T>,
-) => JSX.Element;
+export default memo(Stepper) as (props: CustomStepperProps) => JSX.Element;

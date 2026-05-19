@@ -42,7 +42,7 @@ function Login() {
       const credentials = {
         password: values.password,
         redirect: false,
-      } as any;
+      } as Record<string, unknown>;
 
       if (loginType === "email") {
         credentials.email = values.email;
@@ -121,9 +121,8 @@ function Login() {
                   </ToggleButtonGroup>
                 </div>
                 {loginType === "email" ? (
-                  <form.Field
-                    name={"email"}
-                    children={(field) => (
+                  <form.Field name={"email"}>
+                    {(field) => (
                       <Input
                         name={field.name}
                         value={field.state.value}
@@ -137,11 +136,10 @@ function Login() {
                         label="Email address"
                       />
                     )}
-                  />
+                  </form.Field>
                 ) : (
-                  <form.Field
-                    name={"username"}
-                    children={(field) => (
+                  <form.Field name={"username"}>
+                    {(field) => (
                       <Input
                         name={field.name}
                         value={field.state.value}
@@ -154,11 +152,10 @@ function Login() {
                         label="Username"
                       />
                     )}
-                  />
+                  </form.Field>
                 )}
-                <form.Field
-                  name={"password"}
-                  children={(field) => {
+                <form.Field name={"password"}>
+                  {(field) => {
                     return (
                       <Input
                         name={field.name}
@@ -189,7 +186,7 @@ function Login() {
                       />
                     );
                   }}
-                />
+                </form.Field>
 
                 <div className="flex flex-col sm:flex-row-reverse items-center">
                   <Link className="text-md font-medium" to="#">

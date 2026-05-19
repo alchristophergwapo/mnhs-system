@@ -1,7 +1,6 @@
 import prisma from "@lib/prisma";
 import { CivilStatus, Gender, Prisma, Role } from "@/prisma/generated/prisma";
 import { UserType } from "../../(pages)/(admin)/teachers/_types";
-import bcrypt from "bcrypt";
 import { getTeacherById, getTeachers } from "@server/services/teacherService";
 import { generateSecurePassword } from "@utils/passwordHelper";
 
@@ -66,25 +65,29 @@ export async function GET(request: Request) {
       };
     }
 
-    if (type === "advisory") { // Check if type is "advisory"
+    if (type === "advisory") {
+      // Check if type is "advisory"
       queryConditions = {
         teacher: {
           advisorySectionId: {
-            not: null
+            not: null,
           },
-          isOjt: { // Exclude OJT teachers
+          isOjt: {
+            // Exclude OJT teachers
             equals: false,
           },
         },
       };
-    } else if (type === "non-advisory") { // Check if type is "non-advisory"
+    } else if (type === "non-advisory") {
+      // Check if type is "non-advisory"
       queryConditions = {
         teacher: {
           advisorySectionId: null,
           isOjt: false,
         }, // Exclude advisory teachers that are also not OJT
       };
-    } else { // Else if type is "ojt"
+    } else {
+      // Else if type is "ojt"
       queryConditions = {
         teacher: {
           advisorySectionId: null,
@@ -101,13 +104,17 @@ export async function GET(request: Request) {
             some: {
               id: Number(gradeLevel),
             },
-          }
-        }
+          },
+        },
       };
     }
 
     // Fetch teachers with query conditions default and from parameters
-    const teachers = await getTeachers({...defaultQueryConditions, ...queryConditions}, page * limit, limit);
+    const teachers = await getTeachers(
+      { ...defaultQueryConditions, ...queryConditions },
+      page * limit,
+      limit,
+    );
 
     // Fetch the total number of teachers
     const totalTeachers = await prisma.user.count({
@@ -116,7 +123,7 @@ export async function GET(request: Request) {
           {
             role: {
               in: [Role.TEACHER, Role.ADMIN, Role.SUPERADMIN],
-            }
+            },
           },
           defaultQueryConditions,
           queryConditions,
@@ -124,17 +131,25 @@ export async function GET(request: Request) {
       },
     });
 
-    return new Response(JSON.stringify({ teachers, totalTeachers }, (_, value) =>
-      typeof value === "bigint" ? value.toString() : value
-    ), {
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ teachers, totalTeachers }, (_, value) =>
+        typeof value === "bigint" ? value.toString() : value,
+      ),
+      {
+        headers: { "Content-Type": "application/json" },
+      },
+    );
   } catch (error) {
     console.error(error);
-    return new Response(JSON.stringify({ error: (error as Error).message ?? "Internal Server Error" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({
+        error: (error as Error).message ?? "Internal Server Error",
+      }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
   }
 }
 
@@ -143,15 +158,33 @@ export async function POST(request: Request) {
     const body = await request.json();
     const teacherData = body as UserType;
 
-    const salt = await bcrypt.genSalt(10);
-    const password = await generateSecurePassword(teacherData.firstName, teacherData.lastName, new Date(teacherData.dateOfBirth));
+    const password = await generateSecurePassword(
+      teacherData.firstName,
+      teacherData.lastName,
+      new Date(teacherData.dateOfBirth),
+    );
 
-    const user = await prisma.$transaction(async(tx) => {
-      const [permanentAddress, residentialAddress, citizenship] = await Promise.all([
-        tx.address.create({ data: { ...teacherData?.permanentAddress, zipCode: Number(teacherData?.permanentAddress?.zipCode) } as any }),
-        teacherData?.residentialAddress ? tx.address.create({ data: { ...teacherData.residentialAddress, zipCode: Number(teacherData.residentialAddress.zipCode) } as any }) : Promise.resolve(null),
-        tx.citizenship.create({ data: teacherData.citizenship as any }),
-      ]);
+    const user = await prisma.$transaction(async (tx) => {
+      const [permanentAddress, residentialAddress, citizenship] =
+        await Promise.all([
+          tx.address.create({
+            data: {
+              ...teacherData?.permanentAddress,
+              zipCode: Number(teacherData?.permanentAddress?.zipCode),
+            } as Prisma.AddressCreateInput,
+          }),
+          teacherData?.residentialAddress
+            ? tx.address.create({
+                data: {
+                  ...teacherData.residentialAddress,
+                  zipCode: Number(teacherData.residentialAddress.zipCode),
+                } as Prisma.AddressCreateInput,
+              })
+            : Promise.resolve(null),
+          tx.citizenship.create({
+            data: teacherData.citizenship as Prisma.CitizenshipCreateInput,
+          }),
+        ]);
 
       const user = await tx.user.create({
         data: {
@@ -172,7 +205,7 @@ export async function POST(request: Request) {
           permanentAddressId: permanentAddress?.id,
           residentialAddressId: residentialAddress?.id,
           citizenshipId: citizenship.id,
-        }
+        },
       });
 
       await tx.teacher.create({
@@ -189,14 +222,19 @@ export async function POST(request: Request) {
           isOjt: teacherData.isOjt,
           bloodType: teacherData.bloodType,
           gradeLevelId: Number(teacherData.gradeLevelId),
-        }
+        },
       });
 
       const newUser = await getTeacherById(user.id);
 
       return newUser;
-    })
-    return new Response(JSON.stringify(user, (_, value) => typeof value === "bigint" ? value.toString() : value), { status: 201 });
+    });
+    return new Response(
+      JSON.stringify(user, (_, value) =>
+        typeof value === "bigint" ? value.toString() : value,
+      ),
+      { status: 201 },
+    );
   } catch (error) {
     console.error("Error creating teacher:", error);
     return new Response("Error creating teacher", { status: 500 });

@@ -27,7 +27,7 @@ export default class ObjectHelper {
             }
         }
 
-        const result: { [key: string]: any } = { ...extraWithoutOverlap };
+        const result: { [key: string]: unknown } = { ...extraWithoutOverlap };
 
         for (const key in template) {
             if (!Object.prototype.hasOwnProperty.call(template, key)) continue;

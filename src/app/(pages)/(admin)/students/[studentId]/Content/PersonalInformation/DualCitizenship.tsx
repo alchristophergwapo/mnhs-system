@@ -4,6 +4,7 @@ import RadioSelect from "@components/ui/RadioSelect";
 import { useFormContext } from "@hooks/useTanstack";
 import Input from "@components/ui/Input";
 import z from "zod";
+import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 
 /**
  * A component for inputting the teacher's dual citizenship information
@@ -34,15 +35,24 @@ export default function DualCitizenship() {
                       message: "Dual citizenship by is required",
                     });
                   }
-                }) as any,
+                }) as unknown as FieldAsyncValidateOrFn<
+                Record<string, never>,
+                never,
+                never
+              >,
             }}
-            children={(field) => (
+          >
+            {(field) => (
               <RadioSelect
                 name={field.name}
                 label=""
-                onChange={(e) => field.handleChange(e.target.value as any)}
+                onChange={(e) =>
+                  field.handleChange(
+                    e.target.value as unknown as UpdaterFn<never, never>,
+                  )
+                }
                 value={field.state.value ?? ""}
-                errors={field.state.meta.errors || []}
+                errors={field.state.meta.errors as { message: string }[]}
                 error={field.state.meta.errors?.length > 0}
               >
                 <FormControlLabel
@@ -57,7 +67,7 @@ export default function DualCitizenship() {
                 />
               </RadioSelect>
             )}
-          />
+          </form.Field>
           <form.Field
             name={"citizenship.countryOfDualCitizenship" as never}
             validators={{
@@ -72,20 +82,29 @@ export default function DualCitizenship() {
                       message: "Country of dual citizenship is required",
                     });
                   }
-                }) as any,
+                }) as unknown as FieldAsyncValidateOrFn<
+                Record<string, never>,
+                never,
+                never
+              >,
             }}
-            children={(field) => (
+          >
+            {(field) => (
               <Input
                 name={field.name}
                 value={field.state.value || ""}
-                onChange={(e) => field.handleChange(e.target.value as any)}
+                onChange={(e) =>
+                  field.handleChange(
+                    e.target.value as unknown as UpdaterFn<never, never>,
+                  )
+                }
                 label="Please indicate the country"
-                errors={field.state.meta.errors || []}
+                errors={field.state.meta.errors as { message: string }[]}
                 error={field.state.meta.errors?.length > 0}
                 required
               />
             )}
-          />
+          </form.Field>
         </>
       )}
     </form.Field>

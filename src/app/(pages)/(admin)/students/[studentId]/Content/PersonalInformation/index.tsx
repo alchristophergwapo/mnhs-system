@@ -9,6 +9,7 @@ import z from "zod";
 import GradeLevel from "@app/(pages)/(admin)/academics/sections/CreateSection/GradeLevel";
 import Citizenship from "./Citizenship";
 import { format, parseISO } from "date-fns";
+import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 
 function PersonalInformation() {
   const form = useFormContext();
@@ -30,20 +31,32 @@ function PersonalInformation() {
                 .nonempty("Last name is required")
                 .max(50, "Last name cannot be greater than 50 characters")
                 .min(2, "Last name cannot be lesser than 2 characters")
-                .regex(/^[a-zA-Z -]+$/, "Only letters are allowed") as any,
+                .regex(
+                  /^[a-zA-Z -]+$/,
+                  "Only letters are allowed",
+                ) as unknown as FieldAsyncValidateOrFn<
+                Record<string, never>,
+                never,
+                never
+              >,
             }}
-            children={(field) => (
+          >
+            {(field) => (
               <Input
                 name={field.name}
                 value={field.state.value || ""}
-                onChange={(e) => field.handleChange(e.target.value as any)}
+                onChange={(e) =>
+                  field.handleChange(
+                    e.target.value as unknown as UpdaterFn<never, never>,
+                  )
+                }
                 required
                 label="Last Name"
-                errors={field.state.meta.errors || []}
+                errors={field.state.meta.errors as { message: string }[]}
                 error={field.state.meta.errors.length > 0}
               />
             )}
-          />
+          </form.Field>
         </div>
         <div className="col-span-1 md:col-span-2 xl:col-span-1">
           <form.Field
@@ -55,20 +68,32 @@ function PersonalInformation() {
                 .nonempty("First name is required")
                 .max(50, "First name cannot be greater than 50 characters")
                 .min(2, "First name cannot be lesser than 2 characters")
-                .regex(/^[a-zA-Z ]+$/, "Only letters are allowed") as any,
+                .regex(
+                  /^[a-zA-Z ]+$/,
+                  "Only letters are allowed",
+                ) as unknown as FieldAsyncValidateOrFn<
+                Record<string, never>,
+                never,
+                never
+              >,
             }}
-            children={(field) => (
+          >
+            {(field) => (
               <Input
                 name={field.name}
                 value={field.state.value || ""}
-                onChange={(e) => field.handleChange(e.target.value as any)}
+                onChange={(e) =>
+                  field.handleChange(
+                    e.target.value as unknown as UpdaterFn<never, never>,
+                  )
+                }
                 required
                 label="First Name"
-                errors={field.state.meta.errors || []}
+                errors={field.state.meta.errors as { message: string }[]}
                 error={field.state.meta.errors.length > 0}
               />
             )}
-          />
+          </form.Field>
         </div>
         <div className="col-span-1 md:col-span-2 xl:col-span-1">
           <form.Field
@@ -79,19 +104,28 @@ function PersonalInformation() {
                 .string()
                 .max(50, "Middle name cannot be greater than 50 characters")
                 .regex(/^[- a-zA-Z ]*$/, "Only letters are allowed")
-                .nullish() as any,
+                .nullish() as unknown as FieldAsyncValidateOrFn<
+                Record<string, never>,
+                never,
+                never
+              >,
             }}
-            children={(field) => (
+          >
+            {(field) => (
               <Input
                 name={field.name}
                 value={field.state.value || ""}
-                onChange={(e) => field.handleChange(e.target.value as any)}
+                onChange={(e) =>
+                  field.handleChange(
+                    e.target.value as unknown as UpdaterFn<never, never>,
+                  )
+                }
                 label="Middle Name"
-                errors={field.state.meta.errors || []}
+                errors={field.state.meta.errors as { message: string }[]}
                 error={field.state.meta.errors.length > 0}
               />
             )}
-          />
+          </form.Field>
         </div>
         <div className="col-span-1 md:col-span-2 xl:col-span-1">
           <form.Field
@@ -102,20 +136,29 @@ function PersonalInformation() {
                 .string()
                 .max(3, "Name extension cannot be greater than 3 characters")
                 .regex(/^[. a-zA-Z ]*$/, "Only letters are allowed")
-                .nullish() as any,
+                .nullish() as unknown as FieldAsyncValidateOrFn<
+                Record<string, never>,
+                never,
+                never
+              >,
             }}
-            children={(field) => (
+          >
+            {(field) => (
               <Input
                 name={field.name}
                 value={field.state.value || ""}
-                onChange={(e) => field.handleChange(e.target.value as any)}
+                onChange={(e) =>
+                  field.handleChange(
+                    e.target.value as unknown as UpdaterFn<never, never>,
+                  )
+                }
                 label="Name Extension"
                 placeholder="e.g., Jr., II"
-                errors={field.state.meta.errors || []}
+                errors={field.state.meta.errors as { message: string }[]}
                 error={field.state.meta.errors.length > 0}
               />
             )}
-          />
+          </form.Field>
         </div>
         <div className="col-span-1 md:col-span-2 xl:col-span-1">
           <form.Field
@@ -132,21 +175,36 @@ function PersonalInformation() {
                   new Date(`${new Date().getFullYear() - 11}-01-01`),
                   "You must be at least 11 or 12 years old",
                 )
-                .nonoptional("Date of birth is required") as any,
+                .nonoptional(
+                  "Date of birth is required",
+                ) as unknown as FieldAsyncValidateOrFn<
+                Record<string, never>,
+                never,
+                never
+              >,
             }}
-            children={(field) => (
+          >
+            {(field) => (
               <Input
                 name={field.name}
-                value={field.state.value ? format(parseISO(field.state.value), "yyyy-MM-dd"): ""}
-                onChange={(e) => field.handleChange(e.target.value as any)}
+                value={
+                  field.state.value
+                    ? format(parseISO(field.state.value), "yyyy-MM-dd")
+                    : ""
+                }
+                onChange={(e) =>
+                  field.handleChange(
+                    e.target.value as unknown as UpdaterFn<never, never>,
+                  )
+                }
                 required
                 label="Birth Date"
                 type="date"
-                errors={field.state.meta?.errors || []}
+                errors={field.state.meta?.errors as { message: string }[]}
                 error={field.state.meta.errors.length > 0}
               />
             )}
-          />
+          </form.Field>
         </div>
         <div className="col-span-1 md:col-span-2 xl:col-span-1">
           <form.Field
@@ -157,20 +215,32 @@ function PersonalInformation() {
                 .string()
                 .nonempty("Mother tongue is required")
                 .max(20, "Mother tongue cannot be greater than 20 characters")
-                .regex(/^[a-zA-Z ]+$/, "Only letters are allowed") as any,
+                .regex(
+                  /^[a-zA-Z ]+$/,
+                  "Only letters are allowed",
+                ) as unknown as FieldAsyncValidateOrFn<
+                Record<string, never>,
+                never,
+                never
+              >,
             }}
-            children={(field) => (
+          >
+            {(field) => (
               <Input
                 name={field.name}
                 value={field.state.value || ""}
-                onChange={(e) => field.handleChange(e.target.value as any)}
+                onChange={(e) =>
+                  field.handleChange(
+                    e.target.value as unknown as UpdaterFn<never, never>,
+                  )
+                }
                 label="Mother Tongue"
                 required
-                errors={field.state.meta.errors || []}
+                errors={field.state.meta.errors as { message: string }[]}
                 error={field.state.meta.errors.length > 0}
               />
             )}
-          />
+          </form.Field>
         </div>
         <div className="col-span-1 md:col-span-2 xl:col-span-1">
           <form.Field
@@ -181,19 +251,28 @@ function PersonalInformation() {
                 .string()
                 .max(50, "Religion cannot be greater than 50 characters")
                 .regex(/^[a-zA-Z ]+$/, "Only letters are allowed")
-                .nullish() as any,
+                .nullish() as unknown as FieldAsyncValidateOrFn<
+                Record<string, never>,
+                never,
+                never
+              >,
             }}
-            children={(field) => (
+          >
+            {(field) => (
               <Input
                 name={field.name}
                 value={field.state.value || ""}
-                onChange={(e) => field.handleChange(e.target.value as any)}
+                onChange={(e) =>
+                  field.handleChange(
+                    e.target.value as unknown as UpdaterFn<never, never>,
+                  )
+                }
                 label="Religion"
-                errors={field.state.meta.errors || []}
+                errors={field.state.meta.errors as { message: string }[]}
                 error={field.state.meta.errors.length > 0}
               />
             )}
-          />
+          </form.Field>
         </div>
         <div className="col-span-1 md:col-span-2">
           <form.Field
@@ -203,19 +282,28 @@ function PersonalInformation() {
               onChangeAsync: z
                 .string()
                 .max(100, "Address is too long")
-                .nullish() as any,
+                .nullish() as unknown as FieldAsyncValidateOrFn<
+                Record<string, never>,
+                never,
+                never
+              >,
             }}
-            children={(field) => (
+          >
+            {(field) => (
               <Input
                 name={field.name}
                 value={field.state.value || ""}
-                onChange={(e) => field.handleChange(e.target.value as any)}
+                onChange={(e) =>
+                  field.handleChange(
+                    e.target.value as unknown as UpdaterFn<never, never>,
+                  )
+                }
                 label="Birth Place"
-                errors={field.state.meta.errors || []}
+                errors={field.state.meta.errors as { message: string }[]}
                 error={field.state.meta.errors.length > 0}
               />
             )}
-          />
+          </form.Field>
         </div>
         <div className="col-span-1 md:col-span-2">
           <form.Field
@@ -231,13 +319,22 @@ function PersonalInformation() {
                 .refine(
                   (value) => (/^(\+639|09)\d{9}$/.test(value) ? true : false),
                   "Invalid contact number format",
-                ) as any,
+                ) as unknown as FieldAsyncValidateOrFn<
+                Record<string, never>,
+                never,
+                never
+              >,
             }}
-            children={(field) => (
+          >
+            {(field) => (
               <Input
                 name={field.name}
                 value={field.state.value || ""}
-                onChange={(e) => field.handleChange(e.target.value as any)}
+                onChange={(e) =>
+                  field.handleChange(
+                    e.target.value as unknown as UpdaterFn<never, never>,
+                  )
+                }
                 required
                 label="Contact Number"
                 type="tel"
@@ -247,7 +344,7 @@ function PersonalInformation() {
                 error={field.state.meta.errors.length > 0}
               />
             )}
-          />
+          </form.Field>
         </div>
       </div>
       <div className="flex flex-row md:flex-col gap-4">
@@ -255,12 +352,25 @@ function PersonalInformation() {
           name={"user.gender" as never}
           validators={{
             onChangeAsyncDebounceMs: 300,
-            onChangeAsync: z.string().nonempty("Gender is required") as any,
+            onChangeAsync: z
+              .string()
+              .nonempty(
+                "Gender is required",
+              ) as unknown as FieldAsyncValidateOrFn<
+              Record<string, never>,
+              never,
+              never
+            >,
           }}
-          children={(field) => (
+        >
+          {(field) => (
             <RadioSelect
               label="Gender at birth"
-              onChange={(e) => field.handleChange(e.target.value as any)}
+              onChange={(e) =>
+                field.handleChange(
+                  e.target.value as unknown as UpdaterFn<never, never>,
+                )
+              }
               value={field.state.value || ""}
               required
               name={field.name}
@@ -275,16 +385,20 @@ function PersonalInformation() {
               />
             </RadioSelect>
           )}
-        />
-        <form.Field
-          name={"student.belongsToIP" as never}
-          children={(field) => {
+        </form.Field>
+        <form.Field name={"student.belongsToIP" as never}>
+          {(field) => {
             return (
               <div className="flex flex-col">
                 <RadioSelect
-                  label="Belonging to any Indigenous People (IP) Community/Indigenous Cultural Community?"
+                  label="Belonging to unknown Indigenous People (IP) Community/Indigenous Cultural Community?"
                   onChange={(e) =>
-                    field.handleChange((e.target.value === "yes") as any)
+                    field.handleChange(
+                      (e.target.value === "yes") as unknown as UpdaterFn<
+                        never,
+                        never
+                      >,
+                    )
                   }
                   value={field.state.value || false}
                   required
@@ -321,25 +435,35 @@ function PersonalInformation() {
                                 "This field is required when belongs to IP community is yes",
                             });
                           }
-                        }) as any,
+                        }) as unknown as FieldAsyncValidateOrFn<
+                        Record<string, never>,
+                        never,
+                        never
+                      >,
                     }}
-                    children={(sfield) => (
+                  >
+                    {(sfield) => (
                       <Input
                         name={sfield.name}
                         value={sfield.state.value || ""}
                         onChange={(e) =>
-                          sfield.handleChange(e.target.value as any)
+                          sfield.handleChange(
+                            e.target.value as unknown as UpdaterFn<
+                              never,
+                              never
+                            >,
+                          )
                         }
                         required={field.state.value}
                         label="IP Community"
                       />
                     )}
-                  />
+                  </form.Field>
                 )}
               </div>
             );
           }}
-        />
+        </form.Field>
         <Citizenship />
       </div>
     </div>
