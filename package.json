@@ -11,7 +11,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "typecheck": "tsc --noEmit",
-    "prisma": "prisma generate --schema=./src/prisma/schema/schema.prisma"
+    "prisma": "prisma generate --schema=./src/prisma/schema"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
