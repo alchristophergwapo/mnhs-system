@@ -1,4 +1,4 @@
-import { EnrollmentStatus, Semester } from "@/prisma/generated/prisma";
+import { EnrollmentStatus, Semester } from "@/prisma/generated";
 
 export type EnrollmentType = {
     id?: number;

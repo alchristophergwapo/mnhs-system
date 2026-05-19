@@ -1,5 +1,5 @@
 import prisma from "@lib/prisma";
-import { CivilStatus, Gender, Prisma, Role } from "@/prisma/generated/prisma";
+import { CivilStatus, Gender, Prisma, Role } from "@/prisma/generated";
 import { UserType } from "../../(pages)/(admin)/teachers/_types";
 import { getTeacherById, getTeachers } from "@server/services/teacherService";
 import { generateSecurePassword } from "@utils/passwordHelper";
@@ -221,7 +221,11 @@ export async function POST(request: Request) {
             : new Date(),
           isOjt: teacherData.isOjt,
           bloodType: teacherData.bloodType,
-          gradeLevelId: Number(teacherData.gradeLevelId),
+          gradeLevel: {
+            connect: {
+              id: Number(teacherData.gradeLevelId),
+            },
+          },
         },
       });
 

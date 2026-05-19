@@ -1,5 +1,5 @@
 import prisma from "@lib/prisma";
-import { EnrollmentStatus } from "@/prisma/generated/prisma";
+import { EnrollmentStatus } from "@/prisma/generated";
 import {
   AddHomeWorkOutlined,
   AssuredWorkloadOutlined,

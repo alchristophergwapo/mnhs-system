@@ -1,5 +1,5 @@
 import { apiService } from "@store/apiService";
-import { UserType } from "@/src/types";
+import { UserType } from "@types";
 
 export type GetUserApiResponse = Partial<UserType>;
 export type GetUserApiArg = number;

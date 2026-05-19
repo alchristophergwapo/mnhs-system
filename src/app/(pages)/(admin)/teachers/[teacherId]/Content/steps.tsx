@@ -3,8 +3,7 @@ import { lazy } from "react";
 const PositionAndPersonalInformation = lazy(
   () => import("./PersonalInformation"),
 );
-import { Badge, LocationCity, People } from "@mui/icons-material";
-import { UserType } from "../../_types";
+import { Badge, LocationCity } from "@mui/icons-material";
 const Address = lazy(() => import("./Address"));
 // const FamilyBackground = lazy(() => import("./FamilyBackground"));
 
@@ -15,7 +14,7 @@ const Address = lazy(() => import("./Address"));
  * The icon is a JSX element that is displayed in the stepper.
  * @returns {StepsType<UserType>[]} - An array of steps for the teacher form to be used in the Stepper component.
  */
-export default function getFormSteps(): StepsType<UserType>[] {
+export default function getFormSteps(): StepsType[] {
   return [
     {
       label: "Position and Personal Information",

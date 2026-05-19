@@ -2,7 +2,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import GradeLevelFilter from "./GradeLevelFilter";
 import { GetSectionsApiResponse } from "../SectionsApi";
-import { SharedPropsType } from "@components/PageCardedWrapper";
+import { SharedPropsType } from "@components/layouts/PageCardedWrapper";
 import Section from "./Section";
 import CreateSection from "../CreateSection";
 import { useState } from "react";

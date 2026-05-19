@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
-import { Role } from "@/prisma/generated/prisma";
+import { Role } from "@/prisma/generated";
 
 /**
  * AuthGuard component - A route protection component that checks user authentication and role

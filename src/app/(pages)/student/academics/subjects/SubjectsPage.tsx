@@ -1,6 +1,6 @@
 "use client";
 
-import PageWrapper from "@components/PageCardedWrapper";
+import PageWrapper from "@components/layouts/PageCardedWrapper";
 import SubjectsPageHeader from "./SubjectsPageHeader";
 import SubjectsPageContent from "./SubjectsPageContent";
 

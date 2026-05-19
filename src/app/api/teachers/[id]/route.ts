@@ -1,12 +1,7 @@
 import { UserType } from "@app/(pages)/(admin)/teachers/_types";
 import prisma from "@lib/prisma";
 import { getTeacherById } from "@server/services/teacherService";
-import {
-  CivilStatus,
-  Gender,
-  Prisma,
-  Role,
-} from "@/prisma/generated/prisma";
+import { CivilStatus, Gender, Prisma, Role } from "@/prisma/generated";
 import { CitizenshipType } from "@types";
 
 /**
@@ -50,7 +45,7 @@ export async function GET(
  * Updates a teacher by their id.
  * Only the fields specified in the request body will be updated.
  * All other fields will be voided to prevent accidental data loss.
- * 
+ *
  * @param {Request} request - The request object
  * @param {Promise<{ id: number }>} props.params - The id of the teacher to update
  * @returns {Response} - The response object
@@ -133,7 +128,6 @@ export async function PUT(
           lastName,
           middleName,
           nameExtension,
-          dateHired: dateHired ? new Date(dateHired) : new Date(),
           role: Role.TEACHER,
           dateOfBirth: new Date(dateOfBirth),
           gender: gender as Gender,
@@ -150,8 +144,13 @@ export async function PUT(
               civilStatusOther,
               isOjt,
               bloodType,
-              gradeLevelId: Number(gradeLevelId),
+              gradeLevel: {
+                connect: {
+                  id: Number(gradeLevelId),
+                },
+              },
               advisorySectionId: Number(advisorySectionId),
+              dateHired: dateHired ? new Date(dateHired) : new Date(),
             },
           },
         },

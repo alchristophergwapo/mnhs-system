@@ -1,4 +1,4 @@
-import { Prisma, Role } from "@/prisma/generated/prisma";
+import { Prisma, Role } from "@/prisma/generated";
 import prisma from "@lib/prisma";
 
 const baseCitizenshipSelect = {

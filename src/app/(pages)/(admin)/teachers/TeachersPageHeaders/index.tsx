@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import { teal } from "@mui/material/colors";
 import { GetTeachersApiArg } from "../TeachersApi";
 import SearchTeacher from "./SearchTeacher";
-import { SharedPropsType } from "@components/PageCardedWrapper";
+import { SharedPropsType } from "@components/layouts/PageCardedWrapper";
 import useNavigate from "@hooks/useNavigate";
 import { UserType } from "../_types";
 import { PlusOne } from "@mui/icons-material";

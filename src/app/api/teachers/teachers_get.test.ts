@@ -1,7 +1,7 @@
 /**
  * Import necessary modules
  */
-import { Role } from "@/prisma/generated/prisma";
+import { Role } from "@/prisma/generated";
 import { GET } from "./route";
 import prisma from "@lib/prisma";
 

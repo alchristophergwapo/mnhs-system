@@ -1,4 +1,4 @@
-import { CivilStatus } from "@/prisma/generated/prisma";
+import { CivilStatus } from "@/prisma/generated";
 import { SectionType } from "./SectionType";
 import { GradeLevelType } from "./GradeLevelType";
 import { UserType } from "./UserType";

@@ -3,7 +3,6 @@ import EscalatorWarning from "@mui/icons-material/EscalatorWarning";
 import HistoryEduOutlined from "@mui/icons-material/HistoryEduOutlined";
 import LocationCity from "@mui/icons-material/LocationCity";
 import { lazy } from "react";
-import { UserType } from "../../../teachers/_types";
 import DocumentScanner from "@mui/icons-material/DocumentScanner";
 import FindInPageOutlined from "@mui/icons-material/FindInPageOutlined";
 const PersonalInformation = lazy(() => import("./PersonalInformation"));
@@ -13,7 +12,7 @@ const SeniorHighOrBalikAral = lazy(() => import("./SeniorHighOrBalikAral"));
 const Documents = lazy(() => import("./Documents"));
 const Review = lazy(() => import("./Review"));
 
-export function getSteps(): StepsType<UserType>[] {
+export function getSteps(): StepsType[] {
   return [
     {
       label: "Student Information",

@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma, Role } from "./generated/prisma/client";
+import { PrismaClient, Prisma, Role } from "./generated/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import "dotenv/config";
 import { faker } from "@faker-js/faker";

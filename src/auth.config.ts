@@ -1,6 +1,6 @@
 import Credentials from "next-auth/providers/credentials";
 import type { Session } from "next-auth";
-import { Role } from "./prisma/generated/prisma";
+import { Role } from "./prisma/generated";
 
 export const authConfig = {
     session: {

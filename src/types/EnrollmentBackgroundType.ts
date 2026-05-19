@@ -1,4 +1,4 @@
-import { StudentEntryType } from "@/prisma/generated/prisma";
+import { StudentEntryType } from "@/prisma/generated";
 
 export type EnrollmentBackgroundType = {
     id?: number;

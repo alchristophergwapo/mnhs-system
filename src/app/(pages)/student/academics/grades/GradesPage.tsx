@@ -1,6 +1,6 @@
 "use client";
 
-import PageWrapper from "@components/PageCardedWrapper";
+import PageWrapper from "@components/layouts/PageCardedWrapper";
 import GradesPageHeader from "./GradesPageHeader";
 import GradesPageContent from "./GradesPageContent";
 

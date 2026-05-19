@@ -30,6 +30,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                             }
                         )
                     },
+                    select: {
+                        id: true,
+                        role: true,
+                        username: true,
+                        email: true,
+                        password: true,
+                    },
                 })
 
                 if (!user || !user.password) return null;

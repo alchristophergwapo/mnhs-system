@@ -1,5 +1,6 @@
 import Avatar from "@mui/material/Avatar";
 import { GradeLevelType, StudentType, UserType } from "@types";
+import { MRT_RowData } from "material-react-table";
 
 export const studentColumns = [
   {
@@ -9,7 +10,7 @@ export const studentColumns = [
     size: 50,
     maxSize: 50,
     grow: false,
-    Cell: ({ row }: { row: unknown }) => (
+    Cell: ({ row }: { row: MRT_RowData }) => (
       <Avatar
         src={row.original?.avatar}
         alt="teacher's avatar"

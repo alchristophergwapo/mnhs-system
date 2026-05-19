@@ -41,7 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 /node_modules/.prisma
-/src/prisma/generated/prisma
+/src/prisma/generated
 /.vscode
 
 # this prevent from commiting the passwordHelper.ts file for public repo

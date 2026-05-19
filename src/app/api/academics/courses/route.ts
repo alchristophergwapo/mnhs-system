@@ -1,5 +1,5 @@
 import prisma from "@lib/prisma";
-import { CourseType } from "@/prisma/generated/prisma";
+import { CourseType } from "@/prisma/generated";
 
 export async function GET(_: Request) {
     try {

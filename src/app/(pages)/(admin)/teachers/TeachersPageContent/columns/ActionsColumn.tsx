@@ -4,14 +4,15 @@ import Icon from "@mui/material/Icon";
 import IconButton from "@mui/material/IconButton";
 import MenuList from "@mui/material/MenuList";
 import Popover from "@mui/material/Popover";
-import { MRT_ActionMenuItem } from "material-react-table";
+import { MRT_ActionMenuItem, MRT_RowData, MRT_TableInstance  } from "material-react-table";
 import { ReactNode, useState } from "react";
 import { Delete, Edit } from "@mui/icons-material";
 import useNavigate from "@hooks/useNavigate";
+import { UserType } from "../../_types";
 
-interface ActionsColumnProps {
-  row?: unknown;
-  table?: unknown;
+type ActionsColumnProps = {
+  row?: MRT_RowData;
+  table?: MRT_TableInstance<UserType>;
 }
 
 /**

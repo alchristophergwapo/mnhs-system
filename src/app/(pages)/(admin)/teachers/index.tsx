@@ -2,7 +2,7 @@
 
 import TeachersPageContent from "./TeachersPageContent";
 import { useGetTeachersQuery } from "./TeachersApi";
-import PageWrapper from "@components/PageCardedWrapper";
+import PageWrapper from "@components/layouts/PageCardedWrapper";
 import Headers from "./TeachersPageHeaders";
 import { useState } from "react";
 

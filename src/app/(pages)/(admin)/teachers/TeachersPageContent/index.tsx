@@ -3,8 +3,8 @@ import MaterialTable, { mrtTableInitialState } from "@components/table/MaterialT
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import ActionsColumn from "./columns/ActionsColumn";
 import { UserType } from "../_types";
-import { SharedPropsType } from "@components/PageCardedWrapper";
-import { MRT_PaginationState, MRT_TableState } from "material-react-table";
+import { SharedPropsType } from "@components/layouts/PageCardedWrapper";
+import { MRT_PaginationState, MRT_RowData, MRT_TableState } from "material-react-table";
 import TeacherTypeFilter from "./TeacherTypeFilter";
 import { GetTeachersApiArg } from "../TeachersApi";
 import GradeLevelFilter from "@components/Filters/GradeLevelFilter";
@@ -32,7 +32,7 @@ export default function TeachersPageContent(props: ContentProps) {
         size: 50,
         maxSize: 50,
         grow: false,
-        Cell: ({ row }: { row: unknown }) => (
+        Cell: ({ row }: { row: MRT_RowData }) => (
           <Avatar
             src={row.original?.avatar}
             alt="teacher's avatar"
@@ -121,7 +121,7 @@ export default function TeachersPageContent(props: ContentProps) {
       <MaterialTable
         tableColumns={columns}
         tableRows={data as UserType[]}
-        renderRowActions={(props) => <ActionsColumn {...props} />}
+        renderRowActions={(props) => <ActionsColumn {...props} /> }
         muiPaginationProps={{
           color: "primary",
           rowsPerPageOptions: [10, 20, 50, 100],

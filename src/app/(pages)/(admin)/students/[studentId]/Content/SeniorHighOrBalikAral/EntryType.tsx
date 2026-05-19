@@ -6,7 +6,7 @@ import z from "zod";
 import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 import LastGradeLevel from "./LastGradeLevel";
 import Input from "@components/ui/Input";
-import { StudentEntryType } from "@/prisma/generated/prisma";
+import { StudentEntryType } from "@/prisma/generated";
 
 function EntryType({ required }: { required: boolean }) {
   const form = useFormContext();

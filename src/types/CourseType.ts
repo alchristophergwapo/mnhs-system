@@ -1,4 +1,4 @@
-import { CourseType as CourseTypePrisma } from "@/prisma/generated/prisma";
+import { CourseType as CourseTypePrisma } from "@/prisma/generated";
 
 export type CourseType = {
     id?: number;

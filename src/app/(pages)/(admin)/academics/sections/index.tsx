@@ -1,6 +1,6 @@
 'use client';
 
-import PageWrapper from "@components/PageCardedWrapper";
+import PageWrapper from "@components/layouts/PageCardedWrapper";
 import Headers from "./Headers";
 import Content from "./Content";
 import { GetSectionsApiResponse, useGetSectionsQuery } from "./SectionsApi";

@@ -1,5 +1,5 @@
 import { apiService } from "@store/apiService";
-import { CourseType } from "@/src/types";
+import { CourseType } from "@types";
 
 export type GetCoursesApiResponse = CourseType[];
 export type GetCoursesApiArg = { track: string };

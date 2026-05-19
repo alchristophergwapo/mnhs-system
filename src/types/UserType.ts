@@ -1,4 +1,4 @@
-import { Gender, Role } from "@/prisma/generated/prisma";
+import { Gender, Role } from "@/prisma/generated";
 
 export type UserType = {
     id?: number;

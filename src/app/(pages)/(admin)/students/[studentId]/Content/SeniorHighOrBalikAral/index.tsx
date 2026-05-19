@@ -11,7 +11,7 @@ import { useGetCoursesQuery } from "@app/(pages)/(admin)/academics/courses/Cours
 import EntryType from "./EntryType";
 import { FieldAsyncValidateOrFn, UpdaterFn } from "@tanstack/react-form";
 import z from "zod";
-import { CourseType } from "@/prisma/generated/prisma";
+import { CourseType } from "@/prisma/generated";
 
 function SeniorHighOrBalikAral() {
   const form = useFormContext();

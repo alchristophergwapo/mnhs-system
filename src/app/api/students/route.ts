@@ -1,6 +1,6 @@
 import prisma from "@lib/prisma";
 import { createClient } from "@lib/supabase/server";
-import { EnrollmentStatus, FamilyRelationShip, Gender } from "@/prisma/generated/prisma";
+import { EnrollmentStatus, FamilyRelationShip, Gender } from "@/prisma/generated";
 import { AddressType, CitizenshipType, EnrollmentBackgroundType, EnrollmentType, FamilyType, GradeLevelType, StudentType, UserType } from "@types";
 import { generateSecurePassword } from "@utils/passwordHelper";
 import { generateUsername, normalizeAddressData } from "@utils/userDataHelper";
