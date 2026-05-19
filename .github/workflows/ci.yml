@@ -26,7 +26,7 @@ jobs:
         run: npm ci
 
       - name: Install Linux native binaries
-        run: npm install --cpu=x64 --os=linux lightningcss
+        run: npm install --cpu=x64 --os=linux lightningcss @tailwindcss/oxide
 
       - name: Generate Prisma client
         run: npm run prisma
