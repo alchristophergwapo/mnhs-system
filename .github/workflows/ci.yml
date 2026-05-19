@@ -44,3 +44,5 @@ jobs:
 
       - name: Build with Next.js
         run: npm run build
+        env:
+          DATABASE_URL: postgres://postgres:postres@localhost:5432/postgres?sslmode=require
